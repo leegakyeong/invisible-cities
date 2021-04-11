@@ -71,6 +71,7 @@ for (const [key, value] of Object.entries(menu)) {
 camera.position.z = 50;
 
 const controls = new TrackballControls(camera, renderer.domElement);
+controls.noZoom = true;
 
 function animate() {
 	requestAnimationFrame(animate);
