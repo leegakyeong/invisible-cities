@@ -6,39 +6,47 @@ const menu = {
   'title': {
     path: 'models/invisiblecities.gltf',
     pos: {},
+    mixer: null,
   },
   'INVISIBLE CITIES': {
     path: 'models/head.gltf',
     pos: {},
+    mixer: null,
   },
   'HABITANTS': {
     path: 'models/walkingman.gltf',
     pos: {},
+    mixer: null,
   },
   'ABOUT PROJECT': {
     path: 'models/knight.gltf',
     pos: {},
+    mixer: null,
   },
   'DATA SILO': {
     path: 'models/instagram.gltf',
     pos: {},
+    mixer: null,
   },
   'INSTAGRAM': {
     path: 'models/milk.gltf',
     pos: {},
+    mixer: null,
   },
   'CREDITS': {
     path: 'models/spoon.gltf',
     pos: {},
+    mixer: null,
   },
   'FACEBOOK': {
     path: 'models/hands.gltf',
     pos: {},
+    mixer: null,
   },
 };
 
 const clock = new THREE.Clock();
-let mixer;
+// let mixer;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -57,10 +65,10 @@ const loader = new GLTFLoader();
 for (const [key, value] of Object.entries(menu)) {
   loader.load(value.path, function(gltf) {
     scene.add(gltf.scene);
-    if (gltf.animations.length <= 0) {
-      mixer = new THREE.AnimationMixer(gltf.scene);
+    if (gltf.animations.length > 0) {
+      value.mixer = new THREE.AnimationMixer(gltf.scene);
       gltf.animations.forEach(function(clip) {
-        mixer.clipAction(clip).play();
+        value.mixer.clipAction(clip).play();
       });
     }
   }, undefined, function(err) {
@@ -75,7 +83,9 @@ controls.noZoom = true;
 
 function animate() {
 	requestAnimationFrame(animate);
-  if (mixer) mixer.update(clock.getDelta());
+  for (const [_, value] of Object.entries(menu)) {
+    if (value.mixer) value.mixer.update(clock.getDelta());
+  }
   controls.update();
 	renderer.render(scene, camera);
 }
