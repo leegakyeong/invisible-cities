@@ -1,5 +1,6 @@
 import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
+import { TrackballControls } from '../lib/TrackballControls.js';
 
 const clock = new THREE.Clock();
 let mixer;
@@ -30,9 +31,12 @@ loader.load('models/hands.gltf', function(gltf) {
 
 camera.position.z = 50;
 
+const controls = new TrackballControls(camera, renderer.domElement);
+
 function animate() {
 	requestAnimationFrame(animate);
   if (mixer) mixer.update(clock.getDelta());
+  controls.update();
 	renderer.render(scene, camera);
 }
 animate();
