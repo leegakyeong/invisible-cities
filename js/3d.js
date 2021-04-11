@@ -13,6 +13,9 @@ document.body.appendChild(renderer.domElement);
 
 scene.background = new THREE.Color(0xffffff);
 
+const light = new THREE.DirectionalLight();
+scene.add(light);
+
 const loader = new GLTFLoader();
 
 loader.load('models/hands.gltf', function(gltf) {
