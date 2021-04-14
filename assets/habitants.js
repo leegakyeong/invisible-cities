@@ -7,7 +7,11 @@ window.addEventListener("load", ()=>{
         habitant[i].addEventListener("click",
         function(){
             if(slidedown[i].classList.contains("hidden")){
-            slidedown[i].classList.remove("hidden");
+                for(let k =0; k<habitant.length; k++){
+                    slidedown[k].classList.add("hidden");
+                }
+                slidedown[i].classList.remove("hidden");
+            
             }else{
                 slidedown[i].classList.add("hidden");
             }
