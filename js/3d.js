@@ -1,6 +1,7 @@
 import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
 import { OrbitControls } from '../lib/OrbitControls.js';
+import { Interaction } from '../lib/three.interaction.module.js';
 
 const clock = new THREE.Clock();
 
@@ -18,6 +19,8 @@ scene.add(light);
 
 const loader = new GLTFLoader();
 
+const interaction = new Interaction(renderer, scene, camera);
+
 // title
 let invisiblecitiesMixer;
 loader.load('models/invisiblecities.gltf', function(gltf) {
@@ -31,6 +34,9 @@ loader.load('models/invisiblecities.gltf', function(gltf) {
       invisiblecitiesMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('click', function(e) {
+    console.log('clicked');
+  });
 }, undefined, function(err) {
   console.error(err);
 });
