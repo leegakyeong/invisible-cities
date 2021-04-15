@@ -1,6 +1,6 @@
 import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
-import { TrackballControls } from '../lib/TrackballControls.js';
+import { OrbitControls } from '../lib/OrbitControls.js';
 
 const menu = {
   'title': {
@@ -78,7 +78,7 @@ for (const [key, value] of Object.entries(menu)) {
 
 camera.position.z = 50;
 
-const controls = new TrackballControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.noZoom = true;
 
 function animate() {
