@@ -22,6 +22,9 @@ const loader = new GLTFLoader();
 let invisiblecitiesMixer;
 loader.load('models/invisiblecities.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(0.5, 0.5, 0.5);
+  gltf.scene.position.set(-20, 20, 0);
+  gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     invisiblecitiesMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -36,6 +39,9 @@ loader.load('models/invisiblecities.gltf', function(gltf) {
 let headMixer;
 loader.load('models/head.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(4, 4, 4);
+  gltf.scene.position.set(-60, 10, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     headMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -50,6 +56,9 @@ loader.load('models/head.gltf', function(gltf) {
 let walkingmanMixer;
 loader.load('models/walkingman.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(5, 5, 5);
+  gltf.scene.position.set(0, 0, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     walkingmanMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -64,6 +73,9 @@ loader.load('models/walkingman.gltf', function(gltf) {
 let knightMixer;
 loader.load('models/knight.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(0.5, 0.5, 0.5);
+  gltf.scene.position.set(20, 0, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     knightMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -78,6 +90,9 @@ loader.load('models/knight.gltf', function(gltf) {
 let instagramMixer;
 loader.load('models/instagram.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(0.5, 0.5, 0.5);
+  gltf.scene.position.set(-20, -20, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     instagramMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -92,6 +107,9 @@ loader.load('models/instagram.gltf', function(gltf) {
 let milkMixer;
 loader.load('models/milk.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(0.5, 0.5, 0.5);
+  gltf.scene.position.set(20, -20, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     milkMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -106,6 +124,9 @@ loader.load('models/milk.gltf', function(gltf) {
 let spoonMixer;
 loader.load('models/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
+  gltf.scene.scale.set(4, 4, 4);
+  gltf.scene.position.set(0, -10, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     spoonMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -120,6 +141,9 @@ loader.load('models/spoon.gltf', function(gltf) {
 let handsMixer;
 loader.load('models/hands.gltf', function(gltf) {
   scene.add(gltf.scene);
+  // gltf.scene.scale.set(0.5, 0.5, 0.5);
+  gltf.scene.position.set(30, 20, 0);
+  // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     handsMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
