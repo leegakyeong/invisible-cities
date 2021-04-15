@@ -255,3 +255,12 @@ body {
 .englishtext {
   padding-left: 1%;
 }
+
+.koreantitle {
+  text-decoration: underline;
+  font-size : 5vh;
+}
+
+.englishtext {
+  padding-left: 1%;
+}
