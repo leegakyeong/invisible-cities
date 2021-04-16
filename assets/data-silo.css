@@ -141,6 +141,7 @@ body {
   height: 40vh;
   justify-content: center;
   flex-direction: row;
+  padding-right: 5%;
 }
 
 .data-silo-photo {
