@@ -1,39 +1,29 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-variant: normal;
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
   margin: 0px;
 }
 
 .banner-wrapper {
   position: fixed;
-  top: 0;
-  background-color: rgb(139,255,145);
+  background-color: rgb(139, 255, 145);
   display: flex;
   height: 4.1vh;
-  justify-content: center;
-  align-items: center;
-  width: 105%;
-  margin-left: -5%;
-  margin-right: 0;
-  z-index: 1;
 }
 
 .banner {
-  font-size: 0.8vw;
-  margin-left: 5vw;
-  display: inline-block;
+  width: 100vw;
   animation-name: marquee;
-  animation-duration: 8s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  display: flex;
+  justify-content: space-around;
+  line-height: 48px;
+  font-size: 24px;
 }
 
 @keyframes marquee {
-  from {
-    transform: translate(100%)
-  }
-  to {
+  100% {
     transform: translate(-100%);
   }
 }
@@ -41,6 +31,5 @@ body {
 @media (max-width: 812px) {
   .banner-wrapper{
     height: 6vw;
-    width: 100%;
   }
 }

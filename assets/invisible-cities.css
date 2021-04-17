@@ -1,5 +1,37 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  font-style: normal; font-variant: normal;
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  margin: 0px;
+}
+
+.banner-wrapper {
+  position: fixed;
+  background-color: rgb(139, 255, 145);
+  display: flex;
+  height: 4.1vh;
+}
+
+.banner {
+  width: 100vw;
+  animation-name: marquee;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: flex;
+  justify-content: space-around;
+  line-height: 48px;
+  font-size: 24px;
+}
+
+@keyframes marquee {
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+@media (max-width: 812px) {
+  .banner-wrapper{
+    height: 6vw;
+  }
 }
 
 .container {
@@ -7,48 +39,6 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-
-.banner-wrapper {
-  position: fixed;
-  top :0;
-  background-color: rgb(139,255,145);
-  display: flex;
-  height: 5vh;
-  justify-content: center;
-  align-items: center;
-  align-content: space-between;
-  width: 200vw;
-  margin-left: -5%;
-  margin-right: 0;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.banner {
-  font-size: 1.5vh;
-  display: inline-block;
-  animation-name: marquee-banner;
-  animation-duration: 16s;
-  margin-right: 2%;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes marquee-banner {
-  from {
-    transform: translate(400%)
-  }
-  to {
-    transform: translate(-1500%);
-  }
-}
-
-/* @media (max-width : 812px) {
-  .banner-wrapper {
-      height: 6vw;
-      width: 100%;
-  }
-} */
 
 .content-wrapper {
   position: relative;
