@@ -1,6 +1,7 @@
 body {
   font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
   margin: 0px;
+  background: linear-gradient(to bottom, rgb(127, 84, 255), white, rgb(139, 255, 145));
 }
 
 .banner-wrapper {
