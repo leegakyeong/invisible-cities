@@ -21,6 +21,8 @@ const loader = new GLTFLoader();
 
 const interaction = new Interaction(renderer, scene, camera);
 
+let isDragging = false;
+
 // title
 let invisiblecitiesMixer;
 loader.load('models/invisiblecities.gltf', function(gltf) {
@@ -28,12 +30,33 @@ loader.load('models/invisiblecities.gltf', function(gltf) {
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, 20, 0);
   gltf.scene.rotateX(Math.PI / 2);
+
   if (gltf.animations.length > 0) {
     invisiblecitiesMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
       invisiblecitiesMixer.clipAction(clip).play();
     });
   }
+
+  // 화면 전체가 아니라 오브젝트만 회전시키기
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -70,7 +93,7 @@ loader.load('models/walkingman.gltf', function(gltf) {
       walkingmanMixer.clipAction(clip).play();
     });
   }
-  gltf.scene.on('mouseover', () => console.log('HABITANTS'));
+  gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
   gltf.scene.on('click', () => location.href = '/habitants.html');
 }, undefined, function(err) {
   console.error(err);
@@ -186,7 +209,10 @@ function animate() {
   if (milkMixer) milkMixer.update(clock.getDelta());
   if (spoonMixer) spoonMixer.update(clock.getDelta());
   if (handsMixer) handsMixer.update(clock.getDelta());
+
+  controls.enabled = isDragging ? false : true;
   controls.update();
+
 	renderer.render(scene, camera);
 }
 animate();
@@ -196,3 +222,7 @@ window.addEventListener('resize', function() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }, false);
+
+function rad(deg) {
+  return deg * Math.PI / 180;
+}
