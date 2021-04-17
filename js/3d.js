@@ -34,9 +34,6 @@ loader.load('models/invisiblecities.gltf', function(gltf) {
       invisiblecitiesMixer.clipAction(clip).play();
     });
   }
-  gltf.scene.on('click', function(e) {
-    console.log('clicked');
-  });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -54,6 +51,8 @@ loader.load('models/head.gltf', function(gltf) {
       headMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
+  gltf.scene.on('click', () => location.href = '/invisible-cities.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -71,6 +70,8 @@ loader.load('models/walkingman.gltf', function(gltf) {
       walkingmanMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('HABITANTS'));
+  gltf.scene.on('click', () => location.href = '/habitants.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -88,6 +89,8 @@ loader.load('models/knight.gltf', function(gltf) {
       knightMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
+  gltf.scene.on('click', () => location.href = '/about.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -105,6 +108,8 @@ loader.load('models/instagram.gltf', function(gltf) {
       instagramMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('DATA SILO'));
+  gltf.scene.on('click', () => location.href = '/data-silo.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -122,6 +127,8 @@ loader.load('models/milk.gltf', function(gltf) {
       milkMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
+  gltf.scene.on('click', () => location.href = 'https://instagram.com');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -139,6 +146,8 @@ loader.load('models/spoon.gltf', function(gltf) {
       spoonMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('CREDITS'));
+  gltf.scene.on('click', () => location.href = '/credits.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -156,6 +165,8 @@ loader.load('models/hands.gltf', function(gltf) {
       handsMixer.clipAction(clip).play();
     });
   }
+  gltf.scene.on('mouseover', () => console.log('FACEBOOK'));
+  gltf.scene.on('click', () => location.href = 'https://facebook.com');
 }, undefined, function(err) {
   console.error(err);
 });
