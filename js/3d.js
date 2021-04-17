@@ -28,7 +28,7 @@ let invisiblecitiesMixer;
 loader.load('models/invisiblecities.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(-20, 20, 0);
+  gltf.scene.position.set(-20, 20, -10);
   gltf.scene.rotateX(Math.PI / 2);
 
   if (gltf.animations.length > 0) {
@@ -104,8 +104,8 @@ loader.load('models/head.gltf', function(gltf) {
 let walkingmanMixer;
 loader.load('models/walkingman.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.scale.set(5, 5, 5);
-  gltf.scene.position.set(0, 0, 0);
+  gltf.scene.scale.set(10, 10, 10);
+  gltf.scene.position.set(-5, 0, 0);
   // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     walkingmanMixer = new THREE.AnimationMixer(gltf.scene);
@@ -256,8 +256,8 @@ loader.load('models/milk.gltf', function(gltf) {
 let spoonMixer;
 loader.load('models/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.scale.set(4, 4, 4);
-  gltf.scene.position.set(0, -10, 0);
+  gltf.scene.scale.set(8, 8, 8);
+  gltf.scene.position.set(5, -15, 0);
   // gltf.scene.rotateX(Math.PI / 2);
   if (gltf.animations.length > 0) {
     spoonMixer = new THREE.AnimationMixer(gltf.scene);
@@ -328,7 +328,7 @@ loader.load('models/hands.gltf', function(gltf) {
   console.error(err);
 });
 
-camera.position.z = 50;
+camera.position.z = 40;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.noZoom = true;
