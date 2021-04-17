@@ -68,6 +68,7 @@ loader.load('models/head.gltf', function(gltf) {
   gltf.scene.scale.set(4, 4, 4);
   gltf.scene.position.set(-60, 10, 0);
   // gltf.scene.rotateX(Math.PI / 2);
+
   if (gltf.animations.length > 0) {
     headMixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
@@ -76,6 +77,25 @@ loader.load('models/head.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
   gltf.scene.on('click', () => location.href = '/invisible-cities.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -95,6 +115,25 @@ loader.load('models/walkingman.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
   gltf.scene.on('click', () => location.href = '/habitants.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -114,6 +153,25 @@ loader.load('models/knight.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
   gltf.scene.on('click', () => location.href = '/about.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -133,6 +191,25 @@ loader.load('models/instagram.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('DATA SILO'));
   gltf.scene.on('click', () => location.href = '/data-silo.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -152,6 +229,25 @@ loader.load('models/milk.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -171,6 +267,25 @@ loader.load('models/spoon.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('CREDITS'));
   gltf.scene.on('click', () => location.href = '/credits.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -190,6 +305,25 @@ loader.load('models/hands.gltf', function(gltf) {
   }
   gltf.scene.on('mouseover', () => console.log('FACEBOOK'));
   gltf.scene.on('click', () => location.href = 'https://facebook.com');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    if (isDragging) {
+      dx = e.data.originalEvent.pageX - prevX;
+      dy = e.data.originalEvent.pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = e.data.originalEvent.pageX;
+    prevY = e.data.originalEvent.pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }, undefined, function(err) {
   console.error(err);
 });
