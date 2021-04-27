@@ -274,7 +274,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 camera.position.z = 1;
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.noZoom = true;
+controls.enableZoom = false;
 
 function animate() {
 	requestAnimationFrame(animate);
