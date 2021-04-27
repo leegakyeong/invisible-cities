@@ -79,8 +79,7 @@ let cloudPlane;
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(-20, 20, -10);
+  gltf.scene.position.set(0, 0, -50);
 
   createMixer(gltf);
 
@@ -94,51 +93,29 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   console.error(err);
 });
 
-// INVISIBLE CITIES
-loader.load('models/gltf/3d/head.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.scale.set(4, 4, 4);
-  gltf.scene.position.set(-60, 10, 0);
-
-  createMixer(gltf);
-
-  gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
-  gltf.scene.on('click', () => location.href = '/invisible-cities.html');
-
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
-}, undefined, function(err) {
-  console.error(err);
-});
-
 // HABITANTS
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.scale.set(10, 10, 10);
-  gltf.scene.position.set(-5, 0, 0);
+scene.add(gltf.scene);
+gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
 
-  createMixer(gltf);
+createMixer(gltf);
 
-  gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
-  gltf.scene.on('click', () => location.href = '/habitants.html');
+gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
+gltf.scene.on('click', () => location.href = '/habitants.html');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+let prevX = 0;
+let prevY = 0;
+let dx = 0;
+let dy = 0;
+enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
-  console.error(err);
+console.error(err);
 });
 
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(20, 0, 0);
+  gltf.scene.position.set(50, 0, 0);
 
   createMixer(gltf, 0.2);
 
@@ -167,8 +144,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   // gltf.scene.material = material;
 
   scene.add(gltf.scene);
-  gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(-20, -20, 0);
+  gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
 
   cloudPlane = gltf.scene;
 
@@ -224,8 +200,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   //   };
 
   scene.add(gltf.scene);
-  gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(20, -20, 0);
+  gltf.scene.position.set(0, 0, 50);
 
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
@@ -242,8 +217,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 // CREDITS
 loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.scale.set(8, 8, 8);
-  gltf.scene.position.set(5, -15, 0);
+  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
 
   createMixer(gltf);
 
@@ -262,8 +236,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 // FACEBOOK
 loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   scene.add(gltf.scene);
-  // gltf.scene.scale.set(0.5, 0.5, 0.5);
-  gltf.scene.position.set(30, 20, 0);
+  gltf.scene.position.set(-50, 0, 0);
 
   createMixer(gltf);
 
@@ -279,7 +252,26 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   console.error(err);
 });
 
-camera.position.z = 40;
+// INVISIBLE CITIES
+loader.load('models/gltf/3d/head.gltf', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+
+  createMixer(gltf);
+
+  gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
+  gltf.scene.on('click', () => location.href = '/invisible-cities.html');
+
+  let prevX = 0;
+  let prevY = 0;
+  let dx = 0;
+  let dy = 0;
+  enableRotation(gltf, prevX, prevY, dx, dy);
+}, undefined, function(err) {
+  console.error(err);
+});
+
+camera.position.z = 1;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.noZoom = true;
