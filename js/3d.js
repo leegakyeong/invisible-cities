@@ -39,20 +39,7 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -73,20 +60,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -107,20 +81,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -141,20 +102,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -173,20 +121,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -205,20 +140,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -239,20 +161,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -273,20 +182,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   let prevY = 0;
   let dx = 0;
   let dy = 0;
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('mousemove', (e) => {
-    if (isDragging) {
-      dx = e.data.originalEvent.pageX - prevX;
-      dy = e.data.originalEvent.pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = e.data.originalEvent.pageX;
-    prevY = e.data.originalEvent.pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -331,4 +227,24 @@ function createMixer(gltf) {
   } else {
     console.error('This gltf has no animation.');
   }
+}
+
+function enableRotation(gltf, prevX, prevY, dx, dy) {
+  gltf.scene.on('mousedown', () => isDragging = true)
+  .on('mousemove', (e) => {
+    const pageX = e.data.originalEvent.pageX;
+    const pageY = e.data.originalEvent.pageY;
+
+    if (isDragging) {
+      dx = pageX - prevX;
+      dy = pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = pageX;
+    prevY = pageY;
+  })
+  .on('mouseup', () => isDragging = false)
+  .on('mouseout', () => isDragging = false);
 }
