@@ -13,7 +13,43 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-scene.background = new THREE.Color('rgb(127, 84, 255)');
+// scene.background = new THREE.Color('rgb(127, 84, 255)');
+scene.background = new THREE.CubeTextureLoader()
+.setPath('models/desert/')
+.load([
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png',
+]);
+
+// const geometry = new THREE.BoxGeometry();
+// const material = new THREE.MeshBasicMaterial();
+// material.map = new THREE.CubeTextureLoader()
+// .setPath('models/desert/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+// material.alphaMap = new THREE.CubeTextureLoader()
+// .setPath('models/desert/opacity/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+// const bgCube = new THREE.Mesh(geometry, material);
+// // bgCube.scale.set(1000, 1000, 1000);
+// scene.add(bgCube);
 
 const envMap = new HDRCubeTextureLoader()
 .setPath('models/hdr/')
