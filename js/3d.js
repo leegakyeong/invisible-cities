@@ -23,20 +23,16 @@ const interaction = new Interaction(renderer, scene, camera);
 
 let isDragging = false;
 
+const mixers = [];
+
 // title
-let invisiblecitiesMixer;
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, 20, -10);
   gltf.scene.rotateX(Math.PI / 2);
 
-  if (gltf.animations.length > 0) {
-    invisiblecitiesMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      invisiblecitiesMixer.clipAction(clip).play();
-    });
-  }
+  createMixer(gltf);
 
   // 화면 전체가 아니라 오브젝트만 회전시키기
   let prevX = 0;
@@ -62,19 +58,14 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 });
 
 // INVISIBLE CITIES
-let headMixer;
 loader.load('models/gltf/3d/head.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(4, 4, 4);
   gltf.scene.position.set(-60, 10, 0);
   // gltf.scene.rotateX(Math.PI / 2);
 
-  if (gltf.animations.length > 0) {
-    headMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      headMixer.clipAction(clip).play();
-    });
-  }
+  createMixer(gltf);
+
   gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
   gltf.scene.on('click', () => location.href = '/invisible-cities.html');
 
@@ -101,18 +92,14 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 });
 
 // HABITANTS
-let walkingmanMixer;
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(10, 10, 10);
   gltf.scene.position.set(-5, 0, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    walkingmanMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      walkingmanMixer.clipAction(clip).play();
-    });
-  }
+
+  createMixer(gltf);
+
   gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
   gltf.scene.on('click', () => location.href = '/habitants.html');
 
@@ -139,18 +126,14 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 });
 
 // ABOUT PROJECT
-let knightMixer;
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, 0, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    knightMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      knightMixer.clipAction(clip).play();
-    });
-  }
+
+  createMixer(gltf);
+
   gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
   gltf.scene.on('click', () => location.href = '/about.html');
 
@@ -177,18 +160,12 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 });
 
 // DATA SILO
-let instagramMixer;
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, -20, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    instagramMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      instagramMixer.clipAction(clip).play();
-    });
-  }
+
   gltf.scene.on('mouseover', () => console.log('DATA SILO'));
   gltf.scene.on('click', () => location.href = '/data-silo.html');
 
@@ -215,18 +192,12 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 });
 
 // INSTAGRAM
-let milkMixer;
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, -20, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    milkMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      milkMixer.clipAction(clip).play();
-    });
-  }
+
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
 
@@ -253,18 +224,14 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 });
 
 // CREDITS
-let spoonMixer;
 loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(8, 8, 8);
   gltf.scene.position.set(5, -15, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    spoonMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      spoonMixer.clipAction(clip).play();
-    });
-  }
+
+  createMixer(gltf);
+
   gltf.scene.on('mouseover', () => console.log('CREDITS'));
   gltf.scene.on('click', () => location.href = '/credits.html');
 
@@ -291,18 +258,14 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 });
 
 // FACEBOOK
-let handsMixer;
 loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   scene.add(gltf.scene);
   // gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(30, 20, 0);
   // gltf.scene.rotateX(Math.PI / 2);
-  if (gltf.animations.length > 0) {
-    handsMixer = new THREE.AnimationMixer(gltf.scene);
-    gltf.animations.forEach(function(clip) {
-      handsMixer.clipAction(clip).play();
-    });
-  }
+
+  createMixer(gltf);
+
   gltf.scene.on('mouseover', () => console.log('FACEBOOK'));
   gltf.scene.on('click', () => location.href = 'https://facebook.com');
 
@@ -337,14 +300,9 @@ function animate() {
 	requestAnimationFrame(animate);
 
   const delta = clock.getDelta();
-  if (invisiblecitiesMixer) invisiblecitiesMixer.update(delta);
-  if (headMixer) headMixer.update(delta);
-  if (walkingmanMixer) walkingmanMixer.update(delta);
-  if (knightMixer) knightMixer.update(delta);
-  if (instagramMixer) instagramMixer.update(delta);
-  if (milkMixer) milkMixer.update(delta);
-  if (spoonMixer) spoonMixer.update(delta);
-  if (handsMixer) handsMixer.update(delta);
+  mixers.forEach(function(mixer) {
+    mixer.update(delta);
+  })
 
   controls.enabled = isDragging ? false : true;
   controls.update();
@@ -361,4 +319,16 @@ window.addEventListener('resize', function() {
 
 function rad(deg) {
   return deg * Math.PI / 180;
+}
+
+function createMixer(gltf) {
+  if (gltf.animations.length > 0) {
+    const mixer = new THREE.AnimationMixer(gltf.scene);
+    gltf.animations.forEach(function(clip) {
+      mixer.clipAction(clip).play();
+    });
+    mixers.push(mixer);
+  } else {
+    console.error('This gltf has no animation.');
+  }
 }
