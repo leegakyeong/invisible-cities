@@ -25,7 +25,7 @@ let isDragging = false;
 
 // title
 let invisiblecitiesMixer;
-loader.load('models/invisiblecities.gltf', function(gltf) {
+loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, 20, -10);
@@ -63,7 +63,7 @@ loader.load('models/invisiblecities.gltf', function(gltf) {
 
 // INVISIBLE CITIES
 let headMixer;
-loader.load('models/head.gltf', function(gltf) {
+loader.load('models/gltf/3d/head.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(4, 4, 4);
   gltf.scene.position.set(-60, 10, 0);
@@ -102,7 +102,7 @@ loader.load('models/head.gltf', function(gltf) {
 
 // HABITANTS
 let walkingmanMixer;
-loader.load('models/walkingman.gltf', function(gltf) {
+loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(10, 10, 10);
   gltf.scene.position.set(-5, 0, 0);
@@ -140,7 +140,7 @@ loader.load('models/walkingman.gltf', function(gltf) {
 
 // ABOUT PROJECT
 let knightMixer;
-loader.load('models/knight.gltf', function(gltf) {
+loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, 0, 0);
@@ -178,7 +178,7 @@ loader.load('models/knight.gltf', function(gltf) {
 
 // DATA SILO
 let instagramMixer;
-loader.load('models/instagram.gltf', function(gltf) {
+loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, -20, 0);
@@ -216,7 +216,7 @@ loader.load('models/instagram.gltf', function(gltf) {
 
 // INSTAGRAM
 let milkMixer;
-loader.load('models/milk.gltf', function(gltf) {
+loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, -20, 0);
@@ -254,7 +254,7 @@ loader.load('models/milk.gltf', function(gltf) {
 
 // CREDITS
 let spoonMixer;
-loader.load('models/spoon.gltf', function(gltf) {
+loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(8, 8, 8);
   gltf.scene.position.set(5, -15, 0);
@@ -292,7 +292,7 @@ loader.load('models/spoon.gltf', function(gltf) {
 
 // FACEBOOK
 let handsMixer;
-loader.load('models/hands.gltf', function(gltf) {
+loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   scene.add(gltf.scene);
   // gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(30, 20, 0);
