@@ -79,7 +79,7 @@ let cloudPlane;
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.position.set(0, 0, -50);
+  gltf.scene.position.set(0, 15, -40);
 
   createMixer(gltf);
 
@@ -96,7 +96,8 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 // HABITANTS
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 scene.add(gltf.scene);
-gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+gltf.scene.position.set(Math.cos(Math.PI/4)*50, -10, -Math.sin(Math.PI/4)*50);
+gltf.scene.scale.set(10, 10, 10);
 
 createMixer(gltf);
 
@@ -115,7 +116,8 @@ console.error(err);
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.position.set(50, 0, 0);
+  gltf.scene.position.set(50, -10, 0);
+  gltf.scene.scale.set(3, 3, 3);
 
   createMixer(gltf, 0.2);
 
@@ -145,6 +147,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
   scene.add(gltf.scene);
   gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
+  gltf.scene.scale.set(0.3, 0.3, 0.3);
 
   cloudPlane = gltf.scene;
 
@@ -200,7 +203,8 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   //   };
 
   scene.add(gltf.scene);
-  gltf.scene.position.set(0, 0, 50);
+  gltf.scene.position.set(0, -10, 50);
+  gltf.scene.scale.set(0.7, 0.7, 0.7);
 
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
@@ -217,7 +221,8 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 // CREDITS
 loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
+  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, -10, Math.sin(Math.PI/4)*50);
+  gltf.scene.scale.set(7, 7, 7);
 
   createMixer(gltf);
 
@@ -256,6 +261,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 loader.load('models/gltf/3d/head.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+  gltf.scene.scale.set(1.2, 1.2, 1.2);
 
   createMixer(gltf);
 
