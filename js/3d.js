@@ -176,6 +176,43 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
+  // gltf.scene.material.onBeforeCompile = (shader) => {
+  //   shader.uniforms.time = { value: 0 };
+  //   shader.uniforms.uLungSpeed = { value: 1.34 };
+  //   shader.uniforms.uLungDirection = { value: new THREE.Vector3(0.0,0.0,1.0) };
+  //   shader.uniforms.uLungPower = { value: 1.0 };
+  //   shader.uniforms.waveMulti = { value: 0.4 };
+  //   shader.vertexShader =  'uniform vec3  uLungDirection ;\n' + shader.vertexShader;
+  //   shader.vertexShader =  'uniform float time;\n' + shader.vertexShader;
+  //   shader.vertexShader =  'uniform float waveMulti ;\n' + shader.vertexShader;
+  //   shader.vertexShader =  'uniform float uLungSpeed ;\n' + shader.vertexShader;
+  //   shader.vertexShader =  'uniform float uLungPower ;\n' + shader.vertexShader;
+
+  //   shader.vertexShader = shader.vertexShader.replace(
+  //     '#include <begin_vertex>',
+  //     [
+  //       `float offset = sin( time*uLungSpeed + position.y*waveMulti  )*uLungPower;`,
+  //       `float offset2 = sin( time*uLungSpeed + (position.y+0.1)*waveMulti  )*uLungPower;`,
+  //       'vec3 v0 = uLungDirection*offset;',
+  //       'vec3 v1 = vec3(0.0,0.1,0.0);',
+  //       'vec3 v2 = uLungDirection*offset2+vec3(0.0,0.1,0.0);',
+  //       'float RotF = offset - offset2;',
+  //       `vec3 axis = vec3(0.0,0.0,1.0);`,
+  //       'float dotProduct = dot( v1, v2 );',
+  //       'float angleRadians = acos(dotProduct);',
+
+  //       'float sinA = sin( RotF*10.0*uLungPower );',
+  //       'float cosA = cos( RotF*10.0*uLungPower );',
+  //       'float oneMinusCosA = 1.0f - cosA;',
+  //       'mat3 rotator =  mat3( (axis.x * axis.x * oneMinusCosA) + cosA, (axis.y * axis.x * oneMinusCosA) - (sinA * axis.z),  (axis.z * axis.x * oneMinusCosA) + (sinA * axis.y), (axis.x * axis.y * oneMinusCosA) + (sinA * axis.z),  (axis.y * axis.y * oneMinusCosA) + cosA,(axis.z * axis.y * oneMinusCosA) - (sinA * axis.x),(axis.x * axis.z * oneMinusCosA) - (sinA * axis.y), (axis.y * axis.z * oneMinusCosA) + (sinA * axis.x),(axis.z * axis.z * oneMinusCosA) + cosA );',
+
+  //       'vNormal = rotator*vNormal  ;',
+  //       'vec3 transformed = vec3( position ) + uLungDirection* offset;',
+  //     ].join('\n')
+  //   );
+  //   gltf.scene.material.userData.shader = shader;
+  //   };
+
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, -20, 0);
