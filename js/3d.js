@@ -2,6 +2,7 @@ import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
 import { OrbitControls } from '../lib/OrbitControls.js';
 import { Interaction } from '../lib/three.interaction.module.js';
+import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 
 const clock = new THREE.Clock();
 
@@ -13,6 +14,18 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 scene.background = new THREE.Color('rgb(127, 84, 255)');
+
+const envMap = new HDRCubeTextureLoader()
+.setPath('models/hdr/')
+.load([
+  'px.hdr',
+  'nx.hdr',
+  'py.hdr',
+  'ny.hdr',
+  'pz.hdr',
+  'nz.hdr',
+]);
+scene.environment = envMap;
 
 const light = new THREE.DirectionalLight();
 scene.add(light);
