@@ -156,6 +156,16 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
 // DATA SILO
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
+  // const video = document.createElement('video');
+  // video.src = 'models/webm/Cloud.webm';
+  // video.loop = true;
+  // video.autoplay = true;
+  // const material = new THREE.MeshBasicMaterial({
+  //   map: new THREE.VideoTexture(video),
+  //   // transparent: true,
+  // });
+  // gltf.scene.material = material;
+
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, -20, 0);
