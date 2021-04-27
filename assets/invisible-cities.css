@@ -8,6 +8,7 @@ body {
   background-color: rgb(139, 255, 145);
   display: flex;
   height: 4.1vh;
+  overflow: hidden;
 }
 
 .banner {
@@ -20,6 +21,7 @@ body {
   justify-content: space-around;
   align-items: center;
   font-size: 24px;
+  flex-wrap: wrap;
 }
 
 @keyframes marquee {
