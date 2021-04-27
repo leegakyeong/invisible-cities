@@ -335,14 +335,16 @@ controls.noZoom = true;
 
 function animate() {
 	requestAnimationFrame(animate);
-  if (invisiblecitiesMixer) invisiblecitiesMixer.update(clock.getDelta());
-  if (headMixer) headMixer.update(clock.getDelta());
-  if (walkingmanMixer) walkingmanMixer.update(clock.getDelta());
-  if (knightMixer) knightMixer.update(clock.getDelta());
-  if (instagramMixer) instagramMixer.update(clock.getDelta());
-  if (milkMixer) milkMixer.update(clock.getDelta());
-  if (spoonMixer) spoonMixer.update(clock.getDelta());
-  if (handsMixer) handsMixer.update(clock.getDelta());
+
+  const delta = clock.getDelta();
+  if (invisiblecitiesMixer) invisiblecitiesMixer.update(delta);
+  if (headMixer) headMixer.update(delta);
+  if (walkingmanMixer) walkingmanMixer.update(delta);
+  if (knightMixer) knightMixer.update(delta);
+  if (instagramMixer) instagramMixer.update(delta);
+  if (milkMixer) milkMixer.update(delta);
+  if (spoonMixer) spoonMixer.update(delta);
+  if (handsMixer) handsMixer.update(delta);
 
   controls.enabled = isDragging ? false : true;
   controls.update();
