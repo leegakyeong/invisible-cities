@@ -19,18 +19,19 @@ scene.add(light);
 
 const loader = new GLTFLoader();
 
+const mixers = [];
+
 const interaction = new Interaction(renderer, scene, camera);
 
 let isDragging = false;
 
-const mixers = [];
+let cloudPlane;
 
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, 20, -10);
-  gltf.scene.rotateX(Math.PI / 2);
 
   createMixer(gltf);
 
@@ -49,7 +50,6 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(4, 4, 4);
   gltf.scene.position.set(-60, 10, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
   createMixer(gltf);
 
@@ -70,7 +70,6 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(10, 10, 10);
   gltf.scene.position.set(-5, 0, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
   createMixer(gltf);
 
@@ -91,9 +90,8 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, 0, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
-  createMixer(gltf);
+  createMixer(gltf, 0.2);
 
   gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
   gltf.scene.on('click', () => location.href = '/about.html');
@@ -112,7 +110,8 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(-20, -20, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
+
+  cloudPlane = gltf.scene;
 
   gltf.scene.on('mouseover', () => console.log('DATA SILO'));
   gltf.scene.on('click', () => location.href = '/data-silo.html');
@@ -131,7 +130,6 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(20, -20, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
@@ -150,7 +148,6 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.scale.set(8, 8, 8);
   gltf.scene.position.set(5, -15, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
   createMixer(gltf);
 
@@ -171,7 +168,6 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   scene.add(gltf.scene);
   // gltf.scene.scale.set(0.5, 0.5, 0.5);
   gltf.scene.position.set(30, 20, 0);
-  // gltf.scene.rotateX(Math.PI / 2);
 
   createMixer(gltf);
 
@@ -196,9 +192,15 @@ function animate() {
 	requestAnimationFrame(animate);
 
   const delta = clock.getDelta();
+
   mixers.forEach(function(mixer) {
     mixer.update(delta);
-  })
+  });
+
+  if (cloudPlane) {
+    cloudPlane.rotation.x += 0.01 * delta;
+    cloudPlane.rotation.z += -0.03 * delta;
+  }
 
   controls.enabled = isDragging ? false : true;
   controls.update();
@@ -217,11 +219,13 @@ function rad(deg) {
   return deg * Math.PI / 180;
 }
 
-function createMixer(gltf) {
+function createMixer(gltf, timeScale) {
   if (gltf.animations.length > 0) {
     const mixer = new THREE.AnimationMixer(gltf.scene);
     gltf.animations.forEach(function(clip) {
-      mixer.clipAction(clip).play();
+      const action = mixer.clipAction(clip);
+      if (timeScale) action.timeScale = timeScale;
+      action.play();
     });
     mixers.push(mixer);
   } else {
