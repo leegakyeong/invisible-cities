@@ -83,12 +83,11 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  // 화면 전체가 아니라 오브젝트만 회전시키기
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -104,11 +103,11 @@ createMixer(gltf);
 gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
 gltf.scene.on('click', () => location.href = '/habitants.html');
 
-let prevX = 0;
-let prevY = 0;
-let dx = 0;
-let dy = 0;
-enableRotation(gltf, prevX, prevY, dx, dy);
+// let prevX = 0;
+// let prevY = 0;
+// let dx = 0;
+// let dy = 0;
+// enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
 console.error(err);
 });
@@ -124,11 +123,11 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
   gltf.scene.on('click', () => location.href = '/about.html');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -155,19 +154,19 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('DATA SILO'));
   gltf.scene.on('click', () => location.href = '/data-silo.html');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
-  gltf.scene.material = new THREE.MeshBasicMaterial();
-  gltf.scene.material.onBeforeCompile = (shader) => {
+  const material = new THREE.MeshBasicMaterial();
+  material.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
     shader.uniforms.uLungSpeed = { value: 1.34 };
     shader.uniforms.uLungDirection = { value: new THREE.Vector3(0.0,0.0,1.0) };
@@ -201,8 +200,9 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
         'vec3 transformed = vec3( position ) + uLungDirection* offset;',
       ].join('\n')
     );
-    gltf.scene.material.userData.shader = shader;
-    };
+    material.userData.shader = shader;
+  };
+  gltf.scene.material = material;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(0, -10, 50);
@@ -211,11 +211,11 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
   gltf.scene.on('click', () => location.href = 'https://instagram.com');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -231,11 +231,11 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('CREDITS'));
   gltf.scene.on('click', () => location.href = '/credits.html');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -250,11 +250,11 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('FACEBOOK'));
   gltf.scene.on('click', () => location.href = 'https://facebook.com');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
@@ -270,11 +270,11 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
   gltf.scene.on('click', () => location.href = '/invisible-cities.html');
 
-  let prevX = 0;
-  let prevY = 0;
-  let dx = 0;
-  let dy = 0;
-  enableRotation(gltf, prevX, prevY, dx, dy);
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
 }, undefined, function(err) {
   console.error(err);
 });
