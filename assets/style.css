@@ -275,3 +275,23 @@ body {
   height: 100%;
   flex: 1;
 }
+
+.list-item.habitants-gradient {
+
+}
+
+.list-item-banner {
+  width: 100vw;
+  animation-name: marquee;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: flex;
+  align-items: center;
+  flex-wrap: keep;
+}
+
+.list-item-banner div {
+  min-width: 200px;
+  text-align: center;
+}
