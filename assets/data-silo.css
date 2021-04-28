@@ -8,6 +8,7 @@ body {
   background-color: rgb(139, 255, 145);
   display: flex;
   height: 4.1vh;
+  overflow: hidden;
 }
 
 .banner {
@@ -20,6 +21,7 @@ body {
   justify-content: space-around;
   align-items: center;
   font-size: 24px;
+  flex-wrap: wrap;
 }
 
 @keyframes marquee {
@@ -37,22 +39,19 @@ body {
 .container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  
 }
 
 .content-wrapper {
-  position: relative;
+  
   padding-top: 0%;
-  top: 3.3vh;
-  margin-left: -1%;
-  margin-right: -1%;
+  margin-left: 0%;
+  margin-right: 0%;
   grid-template-rows: 10vh 10vh 10vh 10vh;
-  height: 100vh;
+  height: 0px;
 }
 
-.content-wrapper.data-silos {
-  margin-left: -0.5%;
-}
+
 
 .nav-top {
   display: grid;
@@ -61,6 +60,9 @@ body {
   justify-content: space-between;
   padding-left: 2%;
   height: 10vh;
+  position: fixed;
+  top: 3.3vh;
+  width: 100%;
 }
 
 .nav-top.data-silos {
@@ -78,7 +80,10 @@ body {
 }
 
 .content {
+  position: relative;
+  top: 13.3vh;
   width: 100vw;
+  z-index: -1;
 }
 
 .content.data-silos {
