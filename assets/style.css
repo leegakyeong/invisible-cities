@@ -217,6 +217,10 @@ body {
   .english-text {
     padding-top: 0;
   }
+
+  .slidedown {
+    flex-direction: column;
+  }
 }
 
 /* temp */
