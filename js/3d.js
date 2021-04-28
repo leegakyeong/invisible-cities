@@ -366,6 +366,7 @@ function createMixer(gltf, timeScale) {
 
 function enableRotation(gltf, prevX, prevY, dx, dy) {
   gltf.scene.on('mousedown', () => isDragging = true)
+  .on('touchstart', () => isDragging = true)
   .on('mousemove', (e) => {
     const pageX = e.data.originalEvent.pageX;
     const pageY = e.data.originalEvent.pageY;
@@ -380,6 +381,21 @@ function enableRotation(gltf, prevX, prevY, dx, dy) {
     prevX = pageX;
     prevY = pageY;
   })
+  .on('touchmove', (e) => {
+    const pageX = e.data.originalEvent.pageX;
+    const pageY = e.data.originalEvent.pageY;
+
+    if (isDragging) {
+      dx = pageX - prevX;
+      dy = pageY - prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
+      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
+    }
+    prevX = pageX;
+    prevY = pageY;
+  })
   .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false);
+  .on('mouseout', () => isDragging = false)
+  .on('touchend', () => isDragging = false);
 }
