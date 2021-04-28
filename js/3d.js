@@ -148,6 +148,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
   gltf.scene.scale.set(0.3, 0.3, 0.3);
+  gltf.scene.rotation.y = -Math.PI/6;
 
   cloudPlane = gltf.scene;
 
@@ -274,6 +275,41 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   let dx = 0;
   let dy = 0;
   enableRotation(gltf, prevX, prevY, dx, dy);
+}, undefined, function(err) {
+  console.error(err);
+});
+
+loader.load('models/gltf/2d/check.glb', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(-Math.cos(Math.PI/3)*50-20, -10, -Math.sin(Math.PI/3)*5-40);
+  gltf.scene.scale.set(16, 16, 16);
+  gltf.scene.rotation.x = Math.PI;
+}, undefined, function(err) {
+  console.error(err);
+});
+
+loader.load('models/gltf/2d/card.glb', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(Math.cos(Math.PI/3)*50-10, 15, -Math.sin(Math.PI/3)*50-20);
+  gltf.scene.scale.set(15, 15, 15);
+}, undefined, function(err) {
+  console.error(err);
+});
+
+loader.load('models/gltf/2d/stairs.glb', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(Math.cos(Math.PI/3)*50, 10, Math.sin(Math.PI/3)*50);
+  gltf.scene.scale.set(10, 10, 10);
+  gltf.scene.rotation.y = Math.PI/6;
+}, undefined, function(err) {
+  console.error(err);
+});
+
+loader.load('models/gltf/2d/string.glb', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(-50, 0, 0);
+  gltf.scene.scale.set(10, 10, 10);
+  gltf.scene.rotation.y = Math.PI / 2;
 }, undefined, function(err) {
   console.error(err);
 });
