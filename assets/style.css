@@ -24,10 +24,16 @@ body {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
-  font-size: 24px;
-  flex-wrap: wrap;
+  font-size: 18px;
+  flex-wrap: keep;
+  letter-spacing: 2px;
+}
+
+.banner div {
+  min-width: 200px;
+  text-align: center;
 }
 
 @keyframes marquee {
@@ -57,7 +63,8 @@ body {
 
 .menu-title {
   text-align: center;
-  font-size: 4vh;
+  font-size: 30px;
+  letter-spacing: 4px;
 }
 
 .menu-exit {
@@ -127,16 +134,35 @@ body {
   flex: 1;
 }
 
-.korean-title, .english-title {
+.korean-title {
   text-decoration: underline;
-  font-size: 4vh;
+  font-size: 22px;
+  text-underline-position: under;
+  line-height: 36px;
+  word-break: keep-all;
 }
 
-.korean-content, .english-content {
-  padding-top: 2vh;
-  font-size: 2vh;
-  margin: 0;
+.english-title {
+  text-decoration: underline;
+  font-size: 24px;
+  text-underline-position: under;
+  line-height: 27px;
   word-break: keep-all;
+}
+
+.korean-content {
+  /* padding-top: 2vh; */
+  font-size: 15px;
+  /* margin: 0; */
+  word-break: keep-all;
+  line-height: 27px;
+}
+
+.english-content {
+  font-size: 16px;
+  /* margin: 0; */
+  word-break: keep-all;
+  line-height: 22px;
 }
 
 /* habitants & data silo */
@@ -151,11 +177,13 @@ body {
   flex-direction: row;
   border: black;
   overflow: hidden;
-  font-size: 3vh;
+  font-size: 30px;
+  letter-spacing: 1.5px;
 }
 
 .list-item-banner {
-  font-size: 3vh;
+  font-size: 30px;
+  letter-spacing: 4px;
   width: 100%;
   animation-name: marquee-habitant;
   animation-duration: 10s;
