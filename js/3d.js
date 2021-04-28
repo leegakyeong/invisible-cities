@@ -165,8 +165,8 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
-  gltf.scene.material = new THREE.MeshBasicMaterial();
-  gltf.scene.material.onBeforeCompile = (shader) => {
+  const material = new THREE.MeshBasicMaterial();
+  material.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
     shader.uniforms.uLungSpeed = { value: 1.34 };
     shader.uniforms.uLungDirection = { value: new THREE.Vector3(0.0,0.0,1.0) };
@@ -200,8 +200,9 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
         'vec3 transformed = vec3( position ) + uLungDirection* offset;',
       ].join('\n')
     );
-    gltf.scene.material.userData.shader = shader;
-    };
+    material.userData.shader = shader;
+  };
+  gltf.scene.material = material;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(0, -10, 50);
