@@ -11,10 +11,13 @@ body {
 
 .banner-wrapper {
   background-color: rgb(139, 255, 145);
+  position: fixed;
+  top:0;
   display: flex;
   width: 100vw;
   height: 4vh;
   overflow: hidden;
+  z-index: 2;
 }
 
 .banner {
@@ -51,10 +54,14 @@ body {
 }
 
 .nav-top {
-  height: 8vh;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 3.3vh;
+  z-index: 2;
 }
 
 .menu {
@@ -74,6 +81,8 @@ body {
 
 .content {
   flex: 1;
+  position: relative;
+  top: 13.3vh;
   display: flex;
 }
 
