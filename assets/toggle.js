@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const slidedown = document.getElementsByClassName('slidedown');
 
   for (let i = 0; i < items.length; i++) {
+
     items[i].addEventListener('click', function() {
       if (slidedown[i].classList.contains('hidden')) {
         for (let k = 0; k < items.length; k++) {
