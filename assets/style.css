@@ -20,8 +20,7 @@ body {
   z-index: 2;
 }
 
-.banner {
-  width: 100vw;
+.banner-1 {
   animation-name: marquee;
   animation-duration: 20s;
   animation-timing-function: linear;
@@ -32,9 +31,28 @@ body {
   font-size: 18px;
   flex-wrap: keep;
   letter-spacing: 2px;
+
 }
 
-.banner div {
+.banner-2 {
+  animation-name: marquee;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  flex-wrap: keep;
+  letter-spacing: 2px;
+
+}
+
+.banner-1 div {
+  min-width: 200px;
+  text-align: center;
+}
+
+.banner-2 div {
   min-width: 200px;
   text-align: center;
 }
@@ -190,7 +208,7 @@ body {
   letter-spacing: 1.5px;
 }
 
-.list-item-banner {
+/* .list-item-banner-1 {
   font-size: 30px;
   letter-spacing: 4px;
   width: 100%;
@@ -200,10 +218,18 @@ body {
   animation-iteration-count: infinite;
 }
 
+.list-item-banner-2 {
+  color: red;
+  font-size: 30px;
+  letter-spacing: 4px;
+  width: 100%;
+  animation-name: marquee-habitant;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+} */
+
 @keyframes marquee-habitant {
-  from {
-    transform: translate(1000%)
-  }
   to {
     transform: translate(-100%);
   }
@@ -280,8 +306,7 @@ body {
 
 }
 
-.list-item-banner {
-  width: 100vw;
+.list-item-banner-1 {
   animation-name: marquee;
   animation-duration: 20s;
   animation-timing-function: linear;
@@ -291,7 +316,24 @@ body {
   flex-wrap: keep;
 }
 
-.list-item-banner div {
+.list-item-banner-2 {
+  animation-name: marquee;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: flex;
+  align-items: center;
+  flex-wrap: keep;
+  letter-spacing: 2px;
+}
+
+.list-item-banner-1 div {
   min-width: 200px;
   text-align: center;
 }
+
+.list-item-banner-2 div {
+  min-width: 200px;
+  text-align: center;
+}
+
