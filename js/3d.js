@@ -16,17 +16,37 @@ document.body.appendChild(renderer.domElement);
 
 let milkMaterial;
 
-// scene.background = new THREE.Color('rgb(127, 84, 255)');
-scene.background = new THREE.CubeTextureLoader()
-.setPath('models/desert/')
-.load([
-  'px.png',
-  'nx.png',
-  'py.png',
-  'ny.png',
-  'pz.png',
-  'nz.png',
-]);
+const lightning1Video = document.getElementById('lightning1');
+lightning1Video.load();
+
+const lightning2Video = document.getElementById('lightning1');
+lightning2Video.load();
+
+const lightning3Video = document.getElementById('lightning1');
+lightning3Video.load();
+
+// // const lightning1Texture = new THREE.VideoTexture(lightning1Video);
+// const lightning2Texture = new THREE.VideoTexture(lightning2Video);
+// const lightning3Texture = new THREE.VideoTexture(lightning3Video);
+// // lightning1Texture.format = THREE.RGBAFormat;
+// lightning2Texture.format = THREE.RGBAFormat;
+// lightning3Texture.format = THREE.RGBAFormat;
+
+let lightning1Time = 0;
+let lightning2Time = -1;
+let lightning3Time = -2;
+
+scene.background = new THREE.Color('rgb(127, 84, 255)');
+// scene.background = new THREE.CubeTextureLoader()
+// .setPath('models/desert/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
 
 // const geometry = new THREE.BoxGeometry();
 // const material = new THREE.MeshBasicMaterial();
@@ -147,33 +167,31 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   // });
   // gltf.scene.material = material;
 
-  let cloudVideo = document.getElementById('video');//document.createElement('video');
+  const video = document.getElementById('cloud');//document.createElement('video');
   //cloudVideo.autoplay = true;
   //cloudVideo.src = "/ccloud.webm";
-  cloudVideo.muted = true;
 
-  cloudVideo.load();
-  cloudVideo.play();
+  video.load();
+  video.play();
 
-  const videoImageCanvas = document.createElement('canvas');
-  videoImageCanvas.width = 1280;
-  videoImageCanvas.height = 720;
+  // const videoImageCanvas = document.createElement('canvas');
+  // videoImageCanvas.width = 1280;
+  // videoImageCanvas.height = 720;
 
-  const videoImageContext = videoImageCanvas.getContext('2d');
-  videoImageContext.fillStyle = '#000000';
-  videoImageContext.fillRect(0, 0, videoImageCanvas.width, videoImageCanvas.height);
+  // const videoImageContext = videoImageCanvas.getContext('2d');
+  // videoImageContext.fillStyle = '#000000';
+  // videoImageContext.fillRect(0, 0, videoImageCanvas.width, videoImageCanvas.height);
 
-  const videoTexture = new THREE.Texture(videoImageCanvas);
-  videoTexture.format = THREE.RGBAFormat;
-  videoTexture.needsUpdate = true;
+  // const videoTexture = new THREE.Texture(videoImageCanvas);
+  // videoTexture.format = THREE.RGBAFormat;
+  // videoTexture.needsUpdate = true;
 
-  const texture2 = new THREE.VideoTexture(cloudVideo);
-  texture2.format =THREE.RGBAFormat;
+  const texture = new THREE.VideoTexture(video);
+  texture.format =THREE.RGBAFormat;
 
   // gltf.scene.material.transparent = true;
   // gltf.scene.material.map = texture2;
-  console.log(gltf.scene.children[0].material.map)
-  gltf.scene.children[0].material.map = texture2;
+  gltf.scene.children[0].material.map = texture;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
@@ -347,6 +365,66 @@ loader.load('models/gltf/2d/string.glb', function(gltf) {
   console.error(err);
 });
 
+// lightning 1
+loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) { console.log(gltf.scene.children)
+  const texture = new THREE.VideoTexture(lightning1Video);
+  texture.format = THREE.RGBAFormat;
+
+  // gltf.scene.children[0].material.transparent = true;
+  gltf.scene.children[0].material.map = texture;
+
+  gltf.scene.position.set(0, 0, 0);
+  // gltf.scene.scale.set(100, 100, 100);
+
+  // gltf.scene.rotation.x = -Math.PI / 2;
+  gltf.scene.children[0].material.map = texture;
+  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  gltf.scene.children[0].material.emissiveMap = texture;
+  gltf.scene.children[0].material.emissiveIntensity = 90;
+
+  scene.add(gltf.scene);
+});
+
+// lightning 2
+loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
+  const texture = new THREE.VideoTexture(lightning2Video);
+  texture.format = THREE.RGBAFormat;
+
+  gltf.scene.children[0].material.transparent = true;
+  gltf.scene.children[0].material.map = texture;
+
+  gltf.scene.position.set(0, 100, 0);
+  // gltf.scene.scale.set(30, 30, 30);
+  // gltf.scene.rotation.x = -Math.PI / 2;
+  // gltf.scene.rotation.z = -Math.PI / 4;
+  gltf.scene.children[0].material.map = texture;
+  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  gltf.scene.children[0].material.emissiveMap = texture;
+  gltf.scene.children[0].material.emissiveIntensity  = 90;
+
+  scene.add(gltf.scene);
+});
+
+// lightning 3
+loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
+  const texture = new THREE.VideoTexture(lightning3Video);
+  texture.format = THREE.RGBAFormat;
+
+  gltf.scene.children[0].material.transparent = true;
+  gltf.scene.children[0].material.map = texture;
+
+  gltf.scene.position.set(100, 0, 0);
+  // gltf.scene.scale.set(45, 45, 45);
+  // gltf.scene.rotation.x = -Math.PI / 2;
+  // gltf.scene.rotation.z = Math.PI / 4;
+  gltf.scene.children[0].material.map = texture;
+  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  gltf.scene.children[0].material.emissiveMap = texture;
+  gltf.scene.children[0].material.emissiveIntensity = 90;
+
+  scene.add(gltf.scene);
+});
+
 camera.position.z = 1;
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -368,6 +446,22 @@ function animate() {
 
   if (milkMaterial && milkMaterial.userData.shader) {
     milkMaterial.userData.shader.uniforms.time.value = performance.now() / 1000; // delta / 1000;
+  }
+
+  lightning1Time += delta;
+  lightning2Time += delta;
+  lightning3Time += delta;
+  if (lightning1Time > 3) {
+    lightning1Time = 0;
+    lightning1Video.play();
+  }
+  if (lightning2Time > 3) {
+    lightning2Time = 0;
+    lightning2Video.play();
+  }
+  if (lightning3Time > 3) {
+    lightning3Time = 0;
+    lightning3Video.play();
   }
 
   controls.enabled = isDragging ? false : true;
