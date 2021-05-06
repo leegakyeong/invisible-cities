@@ -10,6 +10,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -145,6 +146,34 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   //   // transparent: true,
   // });
   // gltf.scene.material = material;
+
+  let cloudVideo = document.getElementById('video');//document.createElement('video');
+  //cloudVideo.autoplay = true;
+  //cloudVideo.src = "/ccloud.webm";
+  cloudVideo.muted = true;
+
+  cloudVideo.load();
+  cloudVideo.play();
+
+  const videoImageCanvas = document.createElement('canvas');
+  videoImageCanvas.width = 1280;
+  videoImageCanvas.height = 720;
+
+  const videoImageContext = videoImageCanvas.getContext('2d');
+  videoImageContext.fillStyle = '#000000';
+  videoImageContext.fillRect(0, 0, videoImageCanvas.width, videoImageCanvas.height);
+
+  const videoTexture = new THREE.Texture(videoImageCanvas);
+  videoTexture.format = THREE.RGBAFormat;
+  videoTexture.needsUpdate = true;
+
+  const texture2 = new THREE.VideoTexture(cloudVideo);
+  texture2.format =THREE.RGBAFormat;
+
+  // gltf.scene.material.transparent = true;
+  // gltf.scene.material.map = texture2;
+  console.log(gltf.scene.children[0].material.map)
+  gltf.scene.children[0].material.map = texture2;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
