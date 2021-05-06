@@ -25,121 +25,11 @@ lightning2Video.load();
 const lightning3Video = document.getElementById('lightning1');
 lightning3Video.load();
 
-// // const lightning1Texture = new THREE.VideoTexture(lightning1Video);
-// const lightning2Texture = new THREE.VideoTexture(lightning2Video);
-// const lightning3Texture = new THREE.VideoTexture(lightning3Video);
-// // lightning1Texture.format = THREE.RGBAFormat;
-// lightning2Texture.format = THREE.RGBAFormat;
-// lightning3Texture.format = THREE.RGBAFormat;
-
 let lightning1Time = 0;
 let lightning2Time = -1;
 let lightning3Time = -2;
 
-// scene.background = new THREE.Color('rgb(127, 84, 255)');
-// scene.background = new THREE.CubeTextureLoader()
-// .setPath('models/desert/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-
-// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
-// const material = new THREE.MeshBasicMaterial();
-// material.map = new THREE.CubeTextureLoader()
-// .setPath('models/desert/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-// material.alphaMap = new THREE.CubeTextureLoader()
-// .setPath('models/desert/opacity/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-// const bgCube = new THREE.Mesh(geometry, material);
-// scene.add(bgCube);
-
-// ----------------------------
-
-// const map = new THREE.CubeTextureLoader()
-// .setPath('models/desert/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-// const alphaMap = new THREE.CubeTextureLoader()
-// .setPath('models/desert/opacity/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
-// const material = new THREE.MeshBasicMaterial({ map, alphaMap });
-// const bgCube = new THREE.Mesh(geometry, material);
-// scene.add(bgCube);
-
-// -----------------------------
-
-// const backgroundTexture = new THREE.CubeTextureLoader()
-// .setPath('models/desert/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-// // scene.background = backgroundTexture;
-
-// const backgroundAlphaMap = new THREE.CubeTextureLoader()
-// .setPath('models/desert/opacity/')
-// .load([
-//   'px.png',
-//   'nx.png',
-//   'py.png',
-//   'ny.png',
-//   'pz.png',
-//   'nz.png',
-// ]);
-
-// const backgroundMaterial = new THREE.MeshBasicMaterial();
-// backgroundMaterial.envMap = backgroundTexture;
-// backgroundMaterial.alphaMap = backgroundAlphaMap;
-// backgroundMaterial.transparent = true;
-
-// scene.background = backgroundMaterial;
-// console.log(scene.background)
-
-// backgroundMaterial.side = THREE.DoubleSide;
-
-// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
-// const bgCube = new THREE.Mesh(geometry, backgroundMaterial);
-// scene.add(bgCube);
-
-const bgMapUrls = [
+const skyUrls = [
   './models/sky/px.png',
   './models/sky/nx.png',
   './models/sky/py.png',
@@ -147,37 +37,36 @@ const bgMapUrls = [
   './models/sky/pz.png',
   './models/sky/nz.png',
 ];
-let bgmapLoader = new THREE.CubeTextureLoader();
-scene.background = bgmapLoader.load(bgMapUrls);
+const skyLoader = new THREE.CubeTextureLoader();
+scene.background = skyLoader.load(skyUrls);
 
-let materialArray = [];
-let texture_ft = new THREE.TextureLoader().load( './models/desert/px.png');
-let texture_bk = new THREE.TextureLoader().load( './models/desert/nx.png');
-let texture_up = new THREE.TextureLoader().load( './models/desert/py.png');
-let texture_dn = new THREE.TextureLoader().load( './models/desert/ny.png');
-let texture_rt = new THREE.TextureLoader().load( './models/desert/pz.png');
-let texture_lf = new THREE.TextureLoader().load( './models/desert/nz.png');
+const desertMaterialArray = []; // setPath 같은 걸로 한꺼번에 가져오면 오류가 나서..ㅜㅜ
+let mapTexturePX = new THREE.TextureLoader().load('./models/desert/px.png');
+let mapTextureNX = new THREE.TextureLoader().load('./models/desert/nx.png');
+let mapTexturePY = new THREE.TextureLoader().load('./models/desert/py.png');
+let mapTextureNY = new THREE.TextureLoader().load('./models/desert/ny.png');
+let mapTexturePZ = new THREE.TextureLoader().load('./models/desert/pz.png');
+let mapTextureNZ = new THREE.TextureLoader().load('./models/desert/nz.png');
 
-let atexture_ft = new THREE.TextureLoader().load( './models/desert/opacity/px.png');
-let atexture_bk = new THREE.TextureLoader().load( './models/desert/opacity/nx.png');
-let atexture_up = new THREE.TextureLoader().load( './models/desert/opacity/py.png');
-let atexture_dn = new THREE.TextureLoader().load( './models/desert/opacity/ny.png');
-let atexture_rt = new THREE.TextureLoader().load( './models/desert/opacity/pz.png');
-let atexture_lf = new THREE.TextureLoader().load( './models/desert/opacity/nz.png');
+let alphaMapTexturePX = new THREE.TextureLoader().load('./models/desert/opacity/px.png');
+let alphaMapTextureNX = new THREE.TextureLoader().load('./models/desert/opacity/nx.png');
+let alphaMapTexturePY = new THREE.TextureLoader().load('./models/desert/opacity/py.png');
+let alphaMapTextureNY = new THREE.TextureLoader().load('./models/desert/opacity/ny.png');
+let alphaMapTexturePZ = new THREE.TextureLoader().load('./models/desert/opacity/pz.png');
+let alphaMapTextureNZ = new THREE.TextureLoader().load('./models/desert/opacity/nz.png');
 
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft, alphaMap: atexture_ft ,transparent: true}));
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk, alphaMap:atexture_bk ,transparent: true}));
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up, alphaMap: atexture_up,transparent: true}));
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn, alphaMap:  atexture_dn ,transparent: true}));
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt, alphaMap: atexture_rt ,transparent: true}));
-materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf, alphaMap: atexture_lf ,transparent: true}));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTexturePX, alphaMap: alphaMapTexturePX, transparent: true }));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTextureNX, alphaMap: alphaMapTextureNX, transparent: true }));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTexturePY, alphaMap: alphaMapTexturePY, transparent: true }));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTextureNY, alphaMap: alphaMapTextureNY, transparent: true }));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTexturePZ, alphaMap: alphaMapTexturePZ, transparent: true }));
+desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTextureNZ, alphaMap: alphaMapTextureNZ, transparent: true }));
 
-for (let i = 0; i < 6; i++)
-materialArray[i].side = THREE.DoubleSide;
+for (let i = 0; i < 6; i++) desertMaterialArray[i].side = THREE.DoubleSide;
 
-let skyboxGeo = new THREE.BoxGeometry( 1000, 1000, 1000);
-let skybox = new THREE.Mesh( skyboxGeo, materialArray );
-scene.add( skybox );
+let desertGeometry = new THREE.BoxGeometry( 1000, 1000, 1000);
+let desert = new THREE.Mesh(desertGeometry, desertMaterialArray);
+scene.add(desert);
 
 const envMap = new HDRCubeTextureLoader()
 .setPath('models/hdr/')
@@ -262,40 +151,13 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
 // DATA SILO
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
-  // const video = document.createElement('video');
-  // video.src = 'models/webm/Cloud.webm';
-  // video.loop = true;
-  // video.autoplay = true;
-  // const material = new THREE.MeshBasicMaterial({
-  //   map: new THREE.VideoTexture(video),
-  //   // transparent: true,
-  // });
-  // gltf.scene.material = material;
-
-  const video = document.getElementById('cloud');//document.createElement('video');
-  //cloudVideo.autoplay = true;
-  //cloudVideo.src = "/ccloud.webm";
-
+  const video = document.getElementById('cloud');
   video.load();
   video.play();
-
-  // const videoImageCanvas = document.createElement('canvas');
-  // videoImageCanvas.width = 1280;
-  // videoImageCanvas.height = 720;
-
-  // const videoImageContext = videoImageCanvas.getContext('2d');
-  // videoImageContext.fillStyle = '#000000';
-  // videoImageContext.fillRect(0, 0, videoImageCanvas.width, videoImageCanvas.height);
-
-  // const videoTexture = new THREE.Texture(videoImageCanvas);
-  // videoTexture.format = THREE.RGBAFormat;
-  // videoTexture.needsUpdate = true;
 
   const texture = new THREE.VideoTexture(video);
   texture.format =THREE.RGBAFormat;
 
-  // gltf.scene.material.transparent = true;
-  // gltf.scene.material.map = texture2;
   gltf.scene.children[0].material.map = texture;
 
   scene.add(gltf.scene);
@@ -319,8 +181,6 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
-  // const material = new THREE.MeshBasicMaterial();
-  // gltf.scene.material.envMap = hdrCubeMap;
   milkMaterial = gltf.scene.children[0].material;
   milkMaterial.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
@@ -358,7 +218,6 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
     );
     milkMaterial.userData.shader = shader;
   };
-  // gltf.scene.material = material;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(0, -10, 50);
@@ -471,7 +330,7 @@ loader.load('models/gltf/2d/string.glb', function(gltf) {
 });
 
 // lightning 1
-loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) { console.log(gltf.scene.children)
+loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(lightning1Video);
   texture.format = THREE.RGBAFormat;
 
@@ -550,7 +409,7 @@ function animate() {
   }
 
   if (milkMaterial && milkMaterial.userData.shader) {
-    milkMaterial.userData.shader.uniforms.time.value = performance.now() / 1000; // delta / 1000;
+    milkMaterial.userData.shader.uniforms.time.value = performance.now() / 1000;
   }
 
   lightning1Time += delta;
