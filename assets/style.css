@@ -100,6 +100,7 @@ body {
 }
 
 .menu-exit {
+  transform: scale(1.2);
   text-align: center;
   margin-right: 1vw;
 }
