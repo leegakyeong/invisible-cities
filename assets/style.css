@@ -117,7 +117,8 @@ body {
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 /* color */
@@ -170,6 +171,11 @@ body {
   flex: 1;
 }
 
+.korean-text {
+  
+}
+
+
 .korean-title {
   text-decoration: underline;
   font-size: 22px;
@@ -184,7 +190,7 @@ body {
     line-height: 36px;
   text-decoration: underline;
   text-underline-position: under;
-  line-height: 27px;
+  line-height: 36px;
   word-break: keep-all;
 }
 
@@ -197,10 +203,10 @@ body {
 }
 
 .english-content {
-  font-size: 16px;
+  font-size: 15px;
   /* margin: 0; */
   word-break: keep-all;
-  line-height: 22px;
+  line-height: 27px;
 }
 
 /* habitants & data silo */
