@@ -13,6 +13,8 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+let milkMaterial;
+
 // scene.background = new THREE.Color('rgb(127, 84, 255)');
 scene.background = new THREE.CubeTextureLoader()
 .setPath('models/desert/')
@@ -165,8 +167,10 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
-  const material = new THREE.MeshBasicMaterial();
-  material.onBeforeCompile = (shader) => {
+  // const material = new THREE.MeshBasicMaterial();
+  // gltf.scene.material.envMap = hdrCubeMap;
+  milkMaterial = gltf.scene.children[0].material;
+  milkMaterial.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
     shader.uniforms.uLungSpeed = { value: 1.34 };
     shader.uniforms.uLungDirection = { value: new THREE.Vector3(0.0,0.0,1.0) };
@@ -200,9 +204,9 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
         'vec3 transformed = vec3( position ) + uLungDirection* offset;',
       ].join('\n')
     );
-    material.userData.shader = shader;
+    milkMaterial.userData.shader = shader;
   };
-  gltf.scene.material = material;
+  // gltf.scene.material = material;
 
   scene.add(gltf.scene);
   gltf.scene.position.set(0, -10, 50);
@@ -331,6 +335,10 @@ function animate() {
   if (cloudPlane) {
     cloudPlane.rotation.x += 0.01 * delta;
     cloudPlane.rotation.z += -0.03 * delta;
+  }
+
+  if (milkMaterial && milkMaterial.userData.shader) {
+    milkMaterial.userData.shader.uniforms.time.value = performance.now() / 1000; // delta / 1000;
   }
 
   controls.enabled = isDragging ? false : true;
