@@ -36,7 +36,7 @@ let lightning1Time = 0;
 let lightning2Time = -1;
 let lightning3Time = -2;
 
-scene.background = new THREE.Color('rgb(127, 84, 255)');
+// scene.background = new THREE.Color('rgb(127, 84, 255)');
 // scene.background = new THREE.CubeTextureLoader()
 // .setPath('models/desert/')
 // .load([
@@ -48,7 +48,7 @@ scene.background = new THREE.Color('rgb(127, 84, 255)');
 //   'nz.png',
 // ]);
 
-// const geometry = new THREE.BoxGeometry();
+// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
 // const material = new THREE.MeshBasicMaterial();
 // material.map = new THREE.CubeTextureLoader()
 // .setPath('models/desert/')
@@ -71,8 +71,113 @@ scene.background = new THREE.Color('rgb(127, 84, 255)');
 //   'nz.png',
 // ]);
 // const bgCube = new THREE.Mesh(geometry, material);
-// // bgCube.scale.set(1000, 1000, 1000);
 // scene.add(bgCube);
+
+// ----------------------------
+
+// const map = new THREE.CubeTextureLoader()
+// .setPath('models/desert/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+// const alphaMap = new THREE.CubeTextureLoader()
+// .setPath('models/desert/opacity/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
+// const material = new THREE.MeshBasicMaterial({ map, alphaMap });
+// const bgCube = new THREE.Mesh(geometry, material);
+// scene.add(bgCube);
+
+// -----------------------------
+
+// const backgroundTexture = new THREE.CubeTextureLoader()
+// .setPath('models/desert/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+// // scene.background = backgroundTexture;
+
+// const backgroundAlphaMap = new THREE.CubeTextureLoader()
+// .setPath('models/desert/opacity/')
+// .load([
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png',
+// ]);
+
+// const backgroundMaterial = new THREE.MeshBasicMaterial();
+// backgroundMaterial.envMap = backgroundTexture;
+// backgroundMaterial.alphaMap = backgroundAlphaMap;
+// backgroundMaterial.transparent = true;
+
+// scene.background = backgroundMaterial;
+// console.log(scene.background)
+
+// backgroundMaterial.side = THREE.DoubleSide;
+
+// const geometry = new THREE.BoxGeometry(1000, 1000, 1000);
+// const bgCube = new THREE.Mesh(geometry, backgroundMaterial);
+// scene.add(bgCube);
+
+const bgMapUrls = [
+  './models/sky/px.png',
+  './models/sky/nx.png',
+  './models/sky/py.png',
+  './models/sky/ny.png',
+  './models/sky/pz.png',
+  './models/sky/nz.png',
+];
+let bgmapLoader = new THREE.CubeTextureLoader();
+scene.background = bgmapLoader.load(bgMapUrls);
+
+let materialArray = [];
+let texture_ft = new THREE.TextureLoader().load( './models/desert/px.png');
+let texture_bk = new THREE.TextureLoader().load( './models/desert/nx.png');
+let texture_up = new THREE.TextureLoader().load( './models/desert/py.png');
+let texture_dn = new THREE.TextureLoader().load( './models/desert/ny.png');
+let texture_rt = new THREE.TextureLoader().load( './models/desert/pz.png');
+let texture_lf = new THREE.TextureLoader().load( './models/desert/nz.png');
+
+let atexture_ft = new THREE.TextureLoader().load( './models/desert/opacity/px.png');
+let atexture_bk = new THREE.TextureLoader().load( './models/desert/opacity/nx.png');
+let atexture_up = new THREE.TextureLoader().load( './models/desert/opacity/py.png');
+let atexture_dn = new THREE.TextureLoader().load( './models/desert/opacity/ny.png');
+let atexture_rt = new THREE.TextureLoader().load( './models/desert/opacity/pz.png');
+let atexture_lf = new THREE.TextureLoader().load( './models/desert/opacity/nz.png');
+
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft, alphaMap: atexture_ft ,transparent: true}));
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk, alphaMap:atexture_bk ,transparent: true}));
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up, alphaMap: atexture_up,transparent: true}));
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn, alphaMap:  atexture_dn ,transparent: true}));
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt, alphaMap: atexture_rt ,transparent: true}));
+materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf, alphaMap: atexture_lf ,transparent: true}));
+
+for (let i = 0; i < 6; i++)
+materialArray[i].side = THREE.DoubleSide;
+
+let skyboxGeo = new THREE.BoxGeometry( 1000, 1000, 1000);
+let skybox = new THREE.Mesh( skyboxGeo, materialArray );
+scene.add( skybox );
 
 const envMap = new HDRCubeTextureLoader()
 .setPath('models/hdr/')
