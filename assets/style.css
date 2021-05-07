@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'Gothic A1';
+  src: url(./GothicA1-Medium.ttf);
+  unicode-range: U+AC00–D7AF;
+}
+
 * {
-  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  font-family: Helvetica, "Helvetica Neue", "Gothic A1", Arial, sans-serif;
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -11,16 +17,14 @@ body {
 
 .banner-wrapper {
   background-color: rgb(139, 255, 145);
-  position: fixed;
-  top:0;
   display: flex;
   width: 100vw;
-  height: 40px;
+  min-height: 4vh;
   overflow: hidden;
-  z-index: 2;
 }
 
-.banner-1 {
+.banner-1, .banner-2 {
+  /* width: 100vw; */
   animation-name: marquee;
   animation-duration: 20s;
   animation-timing-function: linear;
@@ -28,34 +32,9 @@ body {
   display: flex;
   /* justify-content: space-around; */
   align-items: center;
-
   font-size: 18px;
   flex-wrap: keep;
   letter-spacing: 2px;
-
-}
-
-.banner-2 {
-  animation-name: marquee;
-  animation-duration: 20s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  flex-wrap: keep;
-  letter-spacing: 2px;
-
-}
-
-.banner-1 div {
-  min-width: 200px;
-  text-align: center;
-}
-
-.banner-2 div {
-  min-width: 200px;
-  text-align: center;
 }
 
 @keyframes marquee {
@@ -64,10 +43,9 @@ body {
   }
 }
 
-@keyframes marquee2 {
-  100% {
-    transform: translate(-50%);
-  }
+.banner-1 div, .banner-2 div {
+  min-width: 200px;
+  text-align: center;
 }
 
 /* layout */
@@ -79,36 +57,36 @@ body {
 }
 
 .nav-top {
-  height: 70px;
+  height: 8vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  width: 100%;
-  top: 40px;
-  z-index: 2;
 }
 
 .menu {
   margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .menu-title {
   text-align: center;
-  font-size: 30px;
-  letter-spacing: 4px;
+  font-size: 24px;
+  letter-spacing: 2px;
 }
 
 .menu-exit {
-  transform: scale(1.2);
   text-align: center;
   margin-right: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
   flex: 1;
-  position: relative;
-  top: 110px;
   display: flex;
 }
 
@@ -117,8 +95,7 @@ body {
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
 }
 
 /* color */
@@ -131,7 +108,7 @@ body {
   background: linear-gradient(to bottom, white, rgb(127, 84, 255));
 }
 
-.nav-top.data-silo {
+.data-silo {
   background-color: rgb(255, 0, 0);
 }
 
@@ -144,7 +121,6 @@ body {
 }
 
 .invisible-cities-gradient {
-  width: 20%;
   background: linear-gradient(to right, rgb(217, 255, 0), white);
 }
 
@@ -171,26 +147,20 @@ body {
   flex: 1;
 }
 
-.korean-text {
-  
-}
-
-
 .korean-title {
   text-decoration: underline;
-  font-size: 22px;
-    line-height: 36px;
+  font-size: 20px;
   text-underline-position: under;
   line-height: 36px;
   word-break: keep-all;
+  margin-bottom: -5px;
 }
 
 .english-title {
-  font-size: 22px;
-    line-height: 36px;
   text-decoration: underline;
+  font-size: 20px;
   text-underline-position: under;
-  line-height: 36px;
+  line-height: 27px;
   word-break: keep-all;
 }
 
@@ -199,21 +169,21 @@ body {
   font-size: 15px;
   /* margin: 0; */
   word-break: keep-all;
-  line-height: 27px;
+  line-height: 26px;
 }
 
 .english-content {
-  font-size: 15px;
+  font-size: 14px;
   /* margin: 0; */
   word-break: keep-all;
-  line-height: 27px;
+  line-height: 24px;
 }
 
 /* habitants & data silo */
 
 .list-item {
   width: 100%;
-  height: 70px;
+  height: 8vh;
   display:flex;
   justify-content: center;
   align-content: center;
@@ -221,14 +191,44 @@ body {
   flex-direction: row;
   border: black;
   overflow: hidden;
-  font-size: 30px;
-  letter-spacing: 1.5px;
+  font-size: 24px;
+  letter-spacing: 2px;
 }
 
+.list-item-banner-1, .list-item-banner-2 {
+  /* font-size: 3vh;
+  width: 100%;
+  animation-name: marquee-habitant;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; */
+  animation-name: marquee;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: flex;
+  align-items: center;
+  flex-wrap: keep;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.list-item-banner-1 div, .list-item-banner-2 div {
+  min-width: 200px;
+  text-align: center;
+}
+
+/* @keyframes marquee-habitant {
+  from {
+    transform: translate(1000%)
+  }
+  to {
+    transform: translate(-100%);
+  }
+} */
 
 .list-item:hover {
   background: rgb(139, 255, 145);
-
 }
 
 .slidedown {
@@ -249,7 +249,7 @@ body {
 
 @media (max-width: 812px) {
   .banner-wrapper{
-   
+    height: 6vw;
   }
 
   .content {
@@ -275,19 +275,24 @@ body {
   .slidedown {
     flex-direction: column;
   }
+}
 
-  .list-item-enlarge {
-    height: 140px;
-    text-align: center;
+@media (max-width: 812px){
+  .habitants-gradient:hover {
+    background: linear-gradient(to bottom, white, rgb(127, 84, 255));
+
+  }
+
+  .data-silo-gradient:hover{
+    background: linear-gradient(to bottom, white, rgb(255, 0, 0));
   }
 }
 
 /* temp */
 
-.content.invisible-cities {
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
+.content.invisible-cities .invisible-cities-gradient {
+  height: 100%;
+  flex: 1;
 }
 
 .content.credits {
@@ -298,50 +303,3 @@ body {
   height: 100%;
   flex: 1;
 }
-
-.list-item.habitants-gradient {
-
-}
-
-.list-item-banner-1 {
-  animation-name: marquee2;
-  animation-duration: 30s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  display: flex;
-  align-items: center;
-  flex-wrap: keep;
-}
-
-.list-item-banner-2 {
-  animation-name: marquee2;
-  animation-duration: 30s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  display: flex;
-  align-items: center;
-  flex-wrap: keep;
-  letter-spacing: 2px;
-}
-
-.list-item-banner-1 div {
-  min-width: 200px;
-  text-align: center;
-}
-
-.list-item-banner-2 div {
-  min-width: 200px;
-  text-align: center;
-}
-
-@media (max-width: 1000px){
-  .habitants-gradient:hover {
-    background:linear-gradient(to bottom, white, rgb(127, 84, 255));
-  
-  }
-
-  .data-silo-gradient:hover{
-    background: linear-gradient(to bottom, white, rgb(255, 0, 0));
-  }
-}
-
