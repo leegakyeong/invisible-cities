@@ -112,8 +112,9 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 // HABITANTS
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 scene.add(gltf.scene);
-gltf.scene.position.set(Math.cos(Math.PI/4)*50, -10, -Math.sin(Math.PI/4)*50);
-gltf.scene.scale.set(10, 10, 10);
+gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+gltf.scene.scale.set(15, 15, 15);
+gltf.scene.rotation.z = Math.PI;
 
 createMixer(gltf);
 
@@ -132,8 +133,8 @@ console.error(err);
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.position.set(50, -10, 0);
-  gltf.scene.scale.set(3, 3, 3);
+  gltf.scene.position.set(50, -30, 0);
+  gltf.scene.scale.set(6, 6, 6);
 
   createMixer(gltf, 0.2);
 
@@ -156,13 +157,13 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   video.play();
 
   const texture = new THREE.VideoTexture(video);
-  texture.format =THREE.RGBAFormat;
+  texture.format = THREE.RGBAFormat;
 
   gltf.scene.children[0].material.map = texture;
 
   scene.add(gltf.scene);
-  gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, Math.sin(Math.PI/4)*50);
-  gltf.scene.scale.set(0.3, 0.3, 0.3);
+  gltf.scene.position.set(Math.cos(Math.PI/4)*50, 20, Math.sin(Math.PI/4)*50);
+  gltf.scene.scale.set(0.4, 0.4, 0.4);
   gltf.scene.rotation.y = -Math.PI/6;
 
   cloudPlane = gltf.scene;
@@ -278,7 +279,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 loader.load('models/gltf/3d/head.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltf.scene.scale.set(1.2, 1.2, 1.2);
+  gltf.scene.scale.set(1.5, 1.5, 1.5);
 
   createMixer(gltf);
 
