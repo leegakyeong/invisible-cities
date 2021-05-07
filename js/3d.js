@@ -93,6 +93,8 @@ let isDragging = false;
 
 let cloudPlane;
 
+const labels = [];
+
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
@@ -126,6 +128,7 @@ gltf.scene.on('click', () => location.href = '/habitants.html');
 // let dx = 0;
 // let dy = 0;
 // enableRotation(gltf, prevX, prevY, dx, dy);
+createLabel(gltf, 'HABITANTS');
 }, undefined, function(err) {
 console.error(err);
 });
@@ -146,6 +149,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'ABOUT PROJECT');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -176,6 +180,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'DATA SILO');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -232,6 +237,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'INSTAGRAM');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -252,6 +258,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'CREDITS');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -271,6 +278,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'FACEBOOK');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -291,6 +299,8 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
+
+  createLabel(gltf, 'INVISIBLE CITIES');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -426,6 +436,8 @@ function animate() {
     lightning3Video.play();
   }
 
+  labels.forEach(label => updateLabelPos(label));
+
   controls.enabled = isDragging ? false : true;
   controls.update();
 
@@ -491,4 +503,38 @@ function enableRotation(gltf, prevX, prevY, dx, dy) {
   .on('mouseup', () => isDragging = false)
   .on('mouseout', () => isDragging = false)
   .on('touchend', () => isDragging = false);
+}
+
+function createLabel(gltf, text) {
+  const div = document.createElement('div');
+  div.style.fontFamily = 'Helvetica';
+  div.style.fontSize = '14px';
+  div.style.backgroundColor = 'white';
+  div.style.color = 'black';
+  div.style.padding = '4px 16px';
+  div.innerHTML = text;
+
+  div.style.position = 'absolute';
+
+  const label = { div, gltf };
+  updateLabelPos(label);
+
+  document.body.appendChild(div);
+
+  labels.push(label);
+}
+
+function updateLabelPos(label) {
+  // 3d position to 2d position
+  const vector = new THREE.Vector3();
+  const widthHalf = renderer.domElement.width / 2;
+  const heightHalf = renderer.domElement.height / 2;
+  label.gltf.scene.updateMatrixWorld();
+  vector.setFromMatrixPosition(label.gltf.scene.matrixWorld);
+  vector.project(camera);
+  vector.x = (vector.x * widthHalf) + widthHalf;
+  vector.y = -(vector.y * heightHalf) + heightHalf;
+
+  label.div.style.left = vector.x + 'px';
+  label.div.style.top = vector.y + 'px';
 }
