@@ -113,36 +113,40 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 
 // HABITANTS
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
-scene.add(gltf.scene);
-gltf.scene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-gltf.scene.scale.set(15, 15, 15);
-gltf.scene.rotation.z = Math.PI;
+  const gltfScene = gltf.scene;
 
-createMixer(gltf);
+  scene.add(gltfScene);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(15, 15, 15);
+  gltfScene.rotation.z = Math.PI;
 
-gltf.scene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
-gltf.scene.on('click', () => location.href = '/habitants.html');
+  createMixer(gltf);
 
-// let prevX = 0;
-// let prevY = 0;
-// let dx = 0;
-// let dy = 0;
-// enableRotation(gltf, prevX, prevY, dx, dy);
-createLabel(gltf, 'HABITANTS');
+  gltfScene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
+  gltfScene.on('click', () => location.href = '/habitants.html');
+
+  // let prevX = 0;
+  // let prevY = 0;
+  // let dx = 0;
+  // let dy = 0;
+  // enableRotation(gltf, prevX, prevY, dx, dy);
+  createLabel(gltf, 'HABITANTS');
 }, undefined, function(err) {
 console.error(err);
 });
 
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(50, -30, 0);
-  gltf.scene.scale.set(6, 6, 6);
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(50, -30, 0);
+  gltfScene.scale.set(6, 6, 6);
 
   createMixer(gltf, 0.2);
 
-  gltf.scene.on('mouseover', () => console.log('ABOUT PROJECT'));
-  gltf.scene.on('click', () => location.href = '/about.html');
+  gltfScene.on('mouseover', () => console.log('ABOUT PROJECT'));
+  gltfScene.on('click', () => location.href = '/about.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -163,17 +167,19 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(video);
   texture.format = THREE.RGBAFormat;
 
-  gltf.scene.children[0].material.map = texture;
+  const gltfScene = gltf.scene;
 
-  scene.add(gltf.scene);
-  gltf.scene.position.set(Math.cos(Math.PI/4)*50, 20, Math.sin(Math.PI/4)*50);
-  gltf.scene.scale.set(0.4, 0.4, 0.4);
-  gltf.scene.rotation.y = -Math.PI/6;
+  gltfScene.children[0].material.map = texture;
 
-  cloudPlane = gltf.scene;
+  scene.add(gltfScene);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 20, Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(0.4, 0.4, 0.4);
+  gltfScene.rotation.y = -Math.PI/6;
 
-  gltf.scene.on('mouseover', () => console.log('DATA SILO'));
-  gltf.scene.on('click', () => location.href = '/data-silo.html');
+  cloudPlane = gltfScene;
+
+  gltfScene.on('mouseover', () => console.log('DATA SILO'));
+  gltfScene.on('click', () => location.href = '/data-silo.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -187,7 +193,9 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.gltf', function(gltf) {
-  milkMaterial = gltf.scene.children[0].material;
+  const gltfScene = gltf.scene;
+
+  milkMaterial = gltfScene.children[0].material;
   milkMaterial.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
     shader.uniforms.uLungSpeed = { value: 1.34 };
@@ -225,12 +233,12 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
     milkMaterial.userData.shader = shader;
   };
 
-  scene.add(gltf.scene);
-  gltf.scene.position.set(0, -10, 50);
-  gltf.scene.scale.set(0.7, 0.7, 0.7);
+  scene.add(gltfScene);
+  gltfScene.position.set(0, -10, 50);
+  gltfScene.scale.set(0.7, 0.7, 0.7);
 
-  gltf.scene.on('mouseover', () => console.log('INSTAGRAM'));
-  gltf.scene.on('click', () => location.href = 'https://instagram.com');
+  gltfScene.on('mouseover', () => console.log('INSTAGRAM'));
+  gltfScene.on('click', () => location.href = 'https://instagram.com');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -244,14 +252,16 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 
 // CREDITS
 loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, -10, Math.sin(Math.PI/4)*50);
-  gltf.scene.scale.set(7, 7, 7);
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(-Math.cos(Math.PI/4)*50, -10, Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(7, 7, 7);
 
   createMixer(gltf);
 
-  gltf.scene.on('mouseover', () => console.log('CREDITS'));
-  gltf.scene.on('click', () => location.href = '/credits.html');
+  gltfScene.on('mouseover', () => console.log('CREDITS'));
+  gltfScene.on('click', () => location.href = '/credits.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -265,13 +275,15 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
 // FACEBOOK
 loader.load('models/gltf/3d/hands.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(-50, 0, 0);
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(-50, 0, 0);
 
   createMixer(gltf);
 
-  gltf.scene.on('mouseover', () => console.log('FACEBOOK'));
-  gltf.scene.on('click', () => location.href = 'https://facebook.com');
+  gltfScene.on('mouseover', () => console.log('FACEBOOK'));
+  gltfScene.on('click', () => location.href = 'https://facebook.com');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -285,14 +297,16 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
 // INVISIBLE CITIES
 loader.load('models/gltf/3d/head.gltf', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltf.scene.scale.set(1.5, 1.5, 1.5);
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(1.5, 1.5, 1.5);
 
   createMixer(gltf);
 
-  gltf.scene.on('mouseover', () => console.log('INVISIBLE CITIES'));
-  gltf.scene.on('click', () => location.href = '/invisible-cities.html');
+  gltfScene.on('mouseover', () => console.log('INVISIBLE CITIES'));
+  gltfScene.on('click', () => location.href = '/invisible-cities.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -306,36 +320,44 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 });
 
 loader.load('models/gltf/2d/check.glb', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(-Math.cos(Math.PI/3)*50-20, -10, -Math.sin(Math.PI/3)*5-40);
-  gltf.scene.scale.set(16, 16, 16);
-  gltf.scene.rotation.x = Math.PI;
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(-Math.cos(Math.PI/3)*50-20, -10, -Math.sin(Math.PI/3)*5-40);
+  gltfScene.scale.set(16, 16, 16);
+  gltfScene.rotation.x = Math.PI;
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/card.glb', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(Math.cos(Math.PI/3)*50-10, 15, -Math.sin(Math.PI/3)*50-20);
-  gltf.scene.scale.set(15, 15, 15);
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(Math.cos(Math.PI/3)*50-10, 15, -Math.sin(Math.PI/3)*50-20);
+  gltfScene.scale.set(15, 15, 15);
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/stairs.glb', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(Math.cos(Math.PI/3)*50, 10, Math.sin(Math.PI/3)*50);
-  gltf.scene.scale.set(10, 10, 10);
-  gltf.scene.rotation.y = Math.PI/6;
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(Math.cos(Math.PI/3)*50, 10, Math.sin(Math.PI/3)*50);
+  gltfScene.scale.set(10, 10, 10);
+  gltfScene.rotation.y = Math.PI/6;
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/string.glb', function(gltf) {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(-50, 0, 0);
-  gltf.scene.scale.set(10, 10, 10);
-  gltf.scene.rotation.y = Math.PI / 2;
+  const gltfScene = gltf.scene;
+
+  scene.add(gltfScene);
+  gltfScene.position.set(-50, 0, 0);
+  gltfScene.scale.set(10, 10, 10);
+  gltfScene.rotation.y = Math.PI / 2;
 }, undefined, function(err) {
   console.error(err);
 });
@@ -345,18 +367,20 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(lightning1Video);
   texture.format = THREE.RGBAFormat;
 
-  gltf.scene.children[0].material.map = texture;
+  const gltfScene = gltf.scene;
+  const material = gltfScene.children[0].material;
 
-  gltf.scene.position.set(0, 200, -500); // 앞
-  gltf.scene.scale.set(10, 10, 10);
-  gltf.scene.rotation.y = Math.PI / 2;
+  gltfScene.position.set(0, 200, -500); // 앞
+  gltfScene.scale.set(10, 10, 10);
+  gltfScene.rotation.y = Math.PI / 2;
 
-  gltf.scene.children[0].material.map = texture;
-  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
-  gltf.scene.children[0].material.emissiveMap = texture;
-  gltf.scene.children[0].material.emissiveIntensity = 90;
+  material.transparent = true;
+  material.map = texture;
+  material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  material.emissiveMap = texture;
+  material.emissiveIntensity = 90;
 
-  scene.add(gltf.scene);
+  scene.add(gltfScene);
 });
 
 // lightning 2
@@ -364,18 +388,19 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(lightning2Video);
   texture.format = THREE.RGBAFormat;
 
-  gltf.scene.children[0].material.transparent = true;
-  gltf.scene.children[0].material.map = texture;
+  const gltfScene = gltf.scene;
+  const material = gltfScene.children[0].material;
 
-  gltf.scene.position.set(-500, 200, 0); // 왼쪽
-  gltf.scene.scale.set(10, 10, 10);
+  gltfScene.position.set(-500, 200, 0); // 왼쪽
+  gltfScene.scale.set(10, 10, 10);
 
-  gltf.scene.children[0].material.map = texture;
-  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
-  gltf.scene.children[0].material.emissiveMap = texture;
-  gltf.scene.children[0].material.emissiveIntensity  = 90;
+  material.transparent = true;
+  material.map = texture;
+  material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  material.emissiveMap = texture;
+  material.emissiveIntensity  = 90;
 
-  scene.add(gltf.scene);
+  scene.add(gltfScene);
 });
 
 // lightning 3
@@ -383,18 +408,19 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(lightning3Video);
   texture.format = THREE.RGBAFormat;
 
-  gltf.scene.children[0].material.transparent = true;
-  gltf.scene.children[0].material.map = texture;
+  const gltfScene = gltf.scene;
+  const material = gltfScene.children[0].material;
 
-  gltf.scene.position.set(500, 200, 0); // 오른쪽
-  gltf.scene.scale.set(10, 10, 10);
+  gltfScene.position.set(500, 200, 0); // 오른쪽
+  gltfScene.scale.set(10, 10, 10);
 
-  gltf.scene.children[0].material.map = texture;
-  gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
-  gltf.scene.children[0].material.emissiveMap = texture;
-  gltf.scene.children[0].material.emissiveIntensity = 90;
+  material.transparent = true;
+  material.map = texture;
+  material.emissive = new THREE.Color('rgb(255, 255, 255)');
+  material.emissiveMap = texture;
+  material.emissiveIntensity = 90;
 
-  scene.add(gltf.scene);
+  scene.add(gltfScene);
 });
 
 camera.position.z = 1;
@@ -407,9 +433,7 @@ function animate() {
 
   const delta = clock.getDelta();
 
-  mixers.forEach(function(mixer) {
-    mixer.update(delta);
-  });
+  mixers.forEach((mixer) => mixer.update(delta));
 
   if (cloudPlane) {
     cloudPlane.rotation.x += 0.01 * delta;
@@ -436,7 +460,7 @@ function animate() {
     lightning3Video.play();
   }
 
-  labels.forEach(label => updateLabelPos(label));
+  labels.forEach((label) => updateLabelPos(label));
 
   controls.enabled = isDragging ? false : true;
   controls.update();
