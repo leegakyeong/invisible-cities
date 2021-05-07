@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Gothic A1';
+  src: url(./GothicA1-Medium.ttf);
+  unicode-range: U+AC00–D7AF;
+}
+
 * {
-  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  font-family: Helvetica, "Helvetica Neue", "Gothic A1", Arial, sans-serif;
 }
 
 body {
@@ -13,7 +19,7 @@ body {
   background-color: rgb(139, 255, 145);
   display: flex;
   width: 100vw;
-  height: 4vh;
+  min-height: 4vh;
   overflow: hidden;
 }
 
@@ -59,17 +65,24 @@ body {
 
 .menu {
   margin-left: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .menu-title {
   text-align: center;
-  font-size: 30px;
-  letter-spacing: 4px;
+  font-size: 24px;
+  letter-spacing: 2px;
 }
 
 .menu-exit {
   text-align: center;
   margin-right: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
@@ -136,15 +149,16 @@ body {
 
 .korean-title {
   text-decoration: underline;
-  font-size: 22px;
+  font-size: 20px;
   text-underline-position: under;
   line-height: 36px;
   word-break: keep-all;
+  margin-bottom: -5px;
 }
 
 .english-title {
   text-decoration: underline;
-  font-size: 24px;
+  font-size: 20px;
   text-underline-position: under;
   line-height: 27px;
   word-break: keep-all;
@@ -155,14 +169,14 @@ body {
   font-size: 15px;
   /* margin: 0; */
   word-break: keep-all;
-  line-height: 27px;
+  line-height: 26px;
 }
 
 .english-content {
-  font-size: 16px;
+  font-size: 14px;
   /* margin: 0; */
   word-break: keep-all;
-  line-height: 22px;
+  line-height: 24px;
 }
 
 /* habitants & data silo */
@@ -177,7 +191,7 @@ body {
   flex-direction: row;
   border: black;
   overflow: hidden;
-  font-size: 30px;
+  font-size: 24px;
   letter-spacing: 2px;
 }
 
@@ -195,7 +209,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: keep;
-  font-size: 30px;
+  font-size: 24px;
   letter-spacing: 2px;
 }
 
@@ -204,17 +218,17 @@ body {
   text-align: center;
 }
 
-@keyframes marquee-habitant {
-  /* from {
+/* @keyframes marquee-habitant {
+  from {
     transform: translate(1000%)
-  } */
+  }
   to {
     transform: translate(-100%);
   }
-}
+} */
 
 .list-item:hover {
-  background-color: rgb(139, 255, 145);
+  background: rgb(139, 255, 145);
 }
 
 .slidedown {
@@ -263,9 +277,9 @@ body {
   }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 812px){
   .habitants-gradient:hover {
-    background:linear-gradient(to bottom, white, rgb(127, 84, 255));
+    background: linear-gradient(to bottom, white, rgb(127, 84, 255));
 
   }
 
