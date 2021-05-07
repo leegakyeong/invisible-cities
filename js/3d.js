@@ -124,6 +124,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
   gltfScene.on('click', () => location.href = '/habitants.html');
+  gltfScene.on('touchend', () => location.href = '/habitants.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -147,6 +148,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('ABOUT PROJECT'));
   gltfScene.on('click', () => location.href = '/about.html');
+  gltfScene.on('touchend', () => location.href = '/about.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -180,6 +182,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('DATA SILO'));
   gltfScene.on('click', () => location.href = '/data-silo.html');
+  gltfScene.on('touchend', () => location.href = '/data-silo.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -239,6 +242,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('INSTAGRAM'));
   gltfScene.on('click', () => location.href = 'https://instagram.com');
+  gltfScene.on('touchend', () => location.href = 'https://instagram.com');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -262,6 +266,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('CREDITS'));
   gltfScene.on('click', () => location.href = '/credits.html');
+  gltfScene.on('touchend', () => location.href = '/credits.html');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -284,6 +289,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('FACEBOOK'));
   gltfScene.on('click', () => location.href = 'https://facebook.com');
+  gltfScene.on('touchend', () => location.href = 'https://facebook.com');
 
   // let prevX = 0;
   // let prevY = 0;
@@ -307,6 +313,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => console.log('INVISIBLE CITIES'));
   gltfScene.on('click', () => location.href = '/invisible-cities.html');
+  gltfScene.on('touchend', () => location.href = '/invisible-cities.html');
 
   // let prevX = 0;
   // let prevY = 0;
