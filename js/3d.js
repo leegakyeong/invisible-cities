@@ -19,10 +19,10 @@ let milkMaterial;
 const lightning1Video = document.getElementById('lightning1');
 lightning1Video.load();
 
-const lightning2Video = document.getElementById('lightning1');
+const lightning2Video = document.getElementById('lightning2');
 lightning2Video.load();
 
-const lightning3Video = document.getElementById('lightning1');
+const lightning3Video = document.getElementById('lightning3');
 lightning3Video.load();
 
 let lightning1Time = 0;
@@ -64,7 +64,7 @@ desertMaterialArray.push(new THREE.MeshBasicMaterial({ map: mapTextureNZ, alphaM
 
 for (let i = 0; i < 6; i++) desertMaterialArray[i].side = THREE.DoubleSide;
 
-let desertGeometry = new THREE.BoxGeometry( 1000, 1000, 1000);
+let desertGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
 let desert = new THREE.Mesh(desertGeometry, desertMaterialArray);
 scene.add(desert);
 
@@ -334,13 +334,12 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const texture = new THREE.VideoTexture(lightning1Video);
   texture.format = THREE.RGBAFormat;
 
-  // gltf.scene.children[0].material.transparent = true;
   gltf.scene.children[0].material.map = texture;
 
-  gltf.scene.position.set(0, 0, 0);
-  // gltf.scene.scale.set(100, 100, 100);
+  gltf.scene.position.set(0, 200, -500); // 앞
+  gltf.scene.scale.set(10, 10, 10);
+  gltf.scene.rotation.y = Math.PI / 2;
 
-  // gltf.scene.rotation.x = -Math.PI / 2;
   gltf.scene.children[0].material.map = texture;
   gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
   gltf.scene.children[0].material.emissiveMap = texture;
@@ -357,10 +356,9 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltf.scene.children[0].material.transparent = true;
   gltf.scene.children[0].material.map = texture;
 
-  gltf.scene.position.set(0, 100, 0);
-  // gltf.scene.scale.set(30, 30, 30);
-  // gltf.scene.rotation.x = -Math.PI / 2;
-  // gltf.scene.rotation.z = -Math.PI / 4;
+  gltf.scene.position.set(-500, 200, 0); // 왼쪽
+  gltf.scene.scale.set(10, 10, 10);
+
   gltf.scene.children[0].material.map = texture;
   gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
   gltf.scene.children[0].material.emissiveMap = texture;
@@ -377,10 +375,9 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltf.scene.children[0].material.transparent = true;
   gltf.scene.children[0].material.map = texture;
 
-  gltf.scene.position.set(100, 0, 0);
-  // gltf.scene.scale.set(45, 45, 45);
-  // gltf.scene.rotation.x = -Math.PI / 2;
-  // gltf.scene.rotation.z = Math.PI / 4;
+  gltf.scene.position.set(500, 200, 0); // 오른쪽
+  gltf.scene.scale.set(10, 10, 10);
+
   gltf.scene.children[0].material.map = texture;
   gltf.scene.children[0].material.emissive = new THREE.Color('rgb(255, 255, 255)');
   gltf.scene.children[0].material.emissiveMap = texture;
