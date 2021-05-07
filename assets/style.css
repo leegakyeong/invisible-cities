@@ -7,7 +7,6 @@ body {
   margin: 0px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .banner-wrapper {
@@ -178,7 +177,8 @@ body {
   flex-direction: row;
   border: black;
   overflow: hidden;
-  font-size: 3vh;
+  font-size: 30px;
+  letter-spacing: 2px;
 }
 
 .list-item-banner-1, .list-item-banner-2 {
@@ -195,9 +195,8 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: keep;
-  letter-spacing: 2px;
   font-size: 30px;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
 }
 
 .list-item-banner-1 div, .list-item-banner-2 div {
