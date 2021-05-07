@@ -7,6 +7,7 @@ body {
   margin: 0px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .banner-wrapper {
@@ -172,7 +173,7 @@ body {
 }
 
 .korean-text {
-  
+
 }
 
 
@@ -249,7 +250,7 @@ body {
 
 @media (max-width: 812px) {
   .banner-wrapper{
-   
+
   }
 
   .content {
@@ -337,11 +338,10 @@ body {
 @media (max-width: 1000px){
   .habitants-gradient:hover {
     background:linear-gradient(to bottom, white, rgb(127, 84, 255));
-  
+
   }
 
   .data-silo-gradient:hover{
     background: linear-gradient(to bottom, white, rgb(255, 0, 0));
   }
 }
-

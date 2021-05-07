@@ -130,7 +130,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'HABITANTS');
+  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -30 });
 }, undefined, function(err) {
 console.error(err);
 });
@@ -153,7 +153,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'ABOUT PROJECT');
+  createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -186,7 +186,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'DATA SILO');
+  createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -245,7 +245,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'INSTAGRAM');
+  createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -268,7 +268,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'CREDITS');
+  createLabel(gltf, 'CREDITS', { x: 0, y: -32 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -290,7 +290,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'FACEBOOK');
+  createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -314,7 +314,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
 
-  createLabel(gltf, 'INVISIBLE CITIES');
+  createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 });
 }, undefined, function(err) {
   console.error(err);
 });
@@ -529,18 +529,22 @@ function enableRotation(gltf, prevX, prevY, dx, dy) {
   .on('touchend', () => isDragging = false);
 }
 
-function createLabel(gltf, text) {
+function createLabel(gltf, text, margin) {
   const div = document.createElement('div');
   div.style.fontFamily = 'Helvetica';
   div.style.fontSize = '14px';
   div.style.backgroundColor = 'white';
   div.style.color = 'black';
   div.style.padding = '4px 16px';
+  div.style.whiteSpace = 'nowrap';
   div.innerHTML = text;
 
   div.style.position = 'absolute';
 
-  const label = { div, gltf };
+  const vector = gltf.scene.position.clone();
+  vector.project(camera);
+
+  const label = { div, gltf, vector, margin };
   updateLabelPos(label);
 
   document.body.appendChild(div);
@@ -548,17 +552,31 @@ function createLabel(gltf, text) {
   labels.push(label);
 }
 
-function updateLabelPos(label) {
+function updateLabelPos({ div, gltf, vector, margin }) {
   // 3d position to 2d position
-  const vector = new THREE.Vector3();
-  const widthHalf = renderer.domElement.width / 2;
-  const heightHalf = renderer.domElement.height / 2;
-  label.gltf.scene.updateMatrixWorld();
-  vector.setFromMatrixPosition(label.gltf.scene.matrixWorld);
+  // const vector = new THREE.Vector3();
+  // const widthHalf = renderer.domElement.width / 2;
+  // const heightHalf = renderer.domElement.height / 2;
+  const widthHalf = window.innerWidth / 2;
+  const heightHalf = window.innerHeight / 2;
+  // label.gltf.scene.updateMatrixWorld();
+  // vector.setFromMatrixPosition(label.gltf.scene.matrixWorld);
+  vector = gltf.scene.position.clone();
+  if (margin.x) vector.x += margin.x;
+  if (margin.y) vector.y += margin.y;
+  if (margin.z) vector.z += margin.z;
   vector.project(camera);
-  vector.x = (vector.x * widthHalf) + widthHalf;
-  vector.y = -(vector.y * heightHalf) + heightHalf;
-
-  label.div.style.left = vector.x + 'px';
-  label.div.style.top = vector.y + 'px';
+  if (vector.z <= 1) {
+    div.style.display = '';
+    vector.x = (vector.x * widthHalf) + widthHalf;
+    vector.y = -(vector.y * heightHalf) + heightHalf;
+    div.style.left = vector.x + 'px';
+    div.style.top = vector.y + 'px';
+  } else {
+    div.style.display = 'none';
+  }
+  // vector.x = (vector.x * widthHalf) + widthHalf;
+  // vector.y = -(vector.y * heightHalf) + heightHalf;
+  // div.style.left = vector.x + 'px';
+  // div.style.top = vector.y + 'px';
 }
