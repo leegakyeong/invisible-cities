@@ -122,7 +122,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer'); // 이건 왜 안 뜨지..??
   gltfScene.on('click', () => location.href = '/habitants.html');
 
   // let prevX = 0;
@@ -145,7 +145,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
   createMixer(gltf, 0.2);
 
-  gltfScene.on('mouseover', () => console.log('ABOUT PROJECT'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/about.html');
 
   // let prevX = 0;
@@ -178,7 +178,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
   cloudPlane = gltfScene;
 
-  gltfScene.on('mouseover', () => console.log('DATA SILO'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/data-silo.html');
 
   // let prevX = 0;
@@ -237,7 +237,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   gltfScene.position.set(0, -10, 50);
   gltfScene.scale.set(0.7, 0.7, 0.7);
 
-  gltfScene.on('mouseover', () => console.log('INSTAGRAM'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = 'https://instagram.com');
 
   // let prevX = 0;
@@ -260,7 +260,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('CREDITS'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/credits.html');
 
   // let prevX = 0;
@@ -282,7 +282,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('FACEBOOK'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = 'https://facebook.com');
 
   // let prevX = 0;
@@ -305,7 +305,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('INVISIBLE CITIES'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/invisible-cities.html');
 
   // let prevX = 0;
