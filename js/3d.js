@@ -160,16 +160,16 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
 // DATA SILO
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
-  const video = document.getElementById('cloud');
-  video.load();
-  video.play();
-
-  const texture = new THREE.VideoTexture(video);
-  texture.format = THREE.RGBAFormat;
-
   const gltfScene = gltf.scene;
 
-  gltfScene.children[0].material.map = texture;
+  const texture = new THREE.TextureLoader().load('models/img/cloud.png');
+  texture.format = THREE.RGBAFormat;
+
+  gltfScene.children[0].material = new THREE.MeshBasicMaterial({
+    map: texture,
+    side: THREE.DoubleSide,
+    transparent: true,
+  });
 
   scene.add(gltfScene);
   gltfScene.position.set(Math.cos(Math.PI/4)*50, 20, Math.sin(Math.PI/4)*50);
