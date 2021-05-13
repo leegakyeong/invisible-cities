@@ -319,8 +319,12 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   console.error(err);
 });
 
+// material for 2d objects
+const plainWhiteMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff)});
+
 loader.load('models/gltf/2d/check.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
   gltfScene.position.set(-Math.cos(Math.PI/3)*50-20, -10, -Math.sin(Math.PI/3)*5-40);
@@ -332,6 +336,7 @@ loader.load('models/gltf/2d/check.glb', function(gltf) {
 
 loader.load('models/gltf/2d/card.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
   gltfScene.position.set(Math.cos(Math.PI/3)*50-10, 15, -Math.sin(Math.PI/3)*50-20);
@@ -342,6 +347,7 @@ loader.load('models/gltf/2d/card.glb', function(gltf) {
 
 loader.load('models/gltf/2d/stairs.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
   gltfScene.position.set(Math.cos(Math.PI/3)*50, 10, Math.sin(Math.PI/3)*50);
@@ -353,6 +359,7 @@ loader.load('models/gltf/2d/stairs.glb', function(gltf) {
 
 loader.load('models/gltf/2d/string.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
   gltfScene.position.set(-50, 0, 0);
