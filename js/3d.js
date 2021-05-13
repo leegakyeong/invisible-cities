@@ -116,8 +116,8 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltfScene.scale.set(15, 15, 15);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 12, -Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(20, 20, 20);
   gltfScene.rotation.z = Math.PI;
 
   createMixer(gltf);
@@ -130,7 +130,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -30 });
+  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 });
 }, undefined, function(err) {
 console.error(err);
 });
@@ -301,7 +301,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   scene.add(gltfScene);
   gltfScene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltfScene.scale.set(1.5, 1.5, 1.5);
+  gltfScene.scale.set(1.7, 1.7, 1.7);
 
   createMixer(gltf);
 
