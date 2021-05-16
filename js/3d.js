@@ -5,10 +5,13 @@ import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 
 const manager = new THREE.LoadingManager();
-
-manager.onLoad = function() {
-  const loading = document.getElementById('loading');
+const loading = document.getElementById('loading');
+loading.addEventListener('animationend', () => {
   document.body.removeChild(loading);
+});
+
+manager.onLoad = () => {
+  loading.classList.add('fadeout');
 }
 
 const clock = new THREE.Clock();

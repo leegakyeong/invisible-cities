@@ -64,6 +64,19 @@ body {
   margin-top: 100px;
 }
 
+.fadeout {
+  animation: fadeout 0.5s;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 /* layout */
 
 .content-wrapper {
