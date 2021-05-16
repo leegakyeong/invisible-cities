@@ -110,6 +110,7 @@ const labels = [];
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
   gltf.scene.position.set(0, 15, -40);
+  gltf.scene.children[0].material.color = new THREE.Color(0xffffff);
 
   createMixer(gltf);
 
