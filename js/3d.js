@@ -4,6 +4,13 @@ import { OrbitControls } from '../lib/OrbitControls.js';
 import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 
+const manager = new THREE.LoadingManager();
+
+manager.onLoad = function() {
+  const loading = document.getElementById('loading');
+  document.body.removeChild(loading);
+}
+
 const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
@@ -78,12 +85,13 @@ const envMap = new HDRCubeTextureLoader()
   'pz.hdr',
   'nz.hdr',
 ]);
+envMap.rotation = Math.PI;
 scene.environment = envMap;
 
 const light = new THREE.DirectionalLight();
 scene.add(light);
 
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(manager);
 
 const mixers = [];
 

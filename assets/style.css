@@ -48,6 +48,22 @@ body {
   text-align: center;
 }
 
+#loading {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgb(127, 84, 255), white, rgb(139, 255, 145));
+  text-align: center;
+}
+
+#loading div {
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  margin-top: 100px;
+}
+
 /* layout */
 
 .content-wrapper {
