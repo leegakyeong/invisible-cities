@@ -4,10 +4,21 @@ import { OrbitControls } from '../lib/OrbitControls.js';
 import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 
+const manager = new THREE.LoadingManager();
+const loading = document.getElementById('loading');
+loading.addEventListener('animationend', () => {
+  document.body.removeChild(loading);
+});
+
+manager.onLoad = () => {
+  loading.classList.add('fadeout');
+}
+
 const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 1);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -78,12 +89,13 @@ const envMap = new HDRCubeTextureLoader()
   'pz.hdr',
   'nz.hdr',
 ]);
+envMap.rotation = Math.PI;
 scene.environment = envMap;
 
 const light = new THREE.DirectionalLight();
 scene.add(light);
 
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(manager);
 
 const mixers = [];
 
@@ -98,7 +110,8 @@ const labels = [];
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
-  gltf.scene.position.set(0, 15, -40);
+  gltf.scene.position.set(0, 35, -40);
+  gltf.scene.children[0].material.color = new THREE.Color(0xffffff);
 
   createMixer(gltf);
 
@@ -116,13 +129,13 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltfScene.scale.set(15, 15, 15);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 32, -Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(20, 20, 20);
   gltfScene.rotation.z = Math.PI;
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('HABITANTS')); // 이건 왜 안 뜨지..??
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer'); // 이건 왜 안 뜨지..??
   gltfScene.on('click', () => location.href = '/habitants.html');
   gltfScene.on('touchend', () => location.href = '/habitants.html');
 
@@ -131,7 +144,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -30 });
+  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 });
 }, undefined, function(err) {
 console.error(err);
 });
@@ -141,12 +154,12 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(50, -30, 0);
+  gltfScene.position.set(50, -10, 0);
   gltfScene.scale.set(6, 6, 6);
 
   createMixer(gltf, 0.2);
 
-  gltfScene.on('mouseover', () => console.log('ABOUT PROJECT'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/about.html');
   gltfScene.on('touchend', () => location.href = '/about.html');
 
@@ -162,25 +175,25 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
 // DATA SILO
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
-  const video = document.getElementById('cloud');
-  video.load();
-  video.play();
-
-  const texture = new THREE.VideoTexture(video);
-  texture.format = THREE.RGBAFormat;
-
   const gltfScene = gltf.scene;
 
-  gltfScene.children[0].material.map = texture;
+  const texture = new THREE.TextureLoader().load('models/img/cloud.png');
+  texture.format = THREE.RGBAFormat;
+
+  gltfScene.children[0].material = new THREE.MeshBasicMaterial({
+    map: texture,
+    side: THREE.DoubleSide,
+    transparent: true,
+  });
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/4)*50, 20, Math.sin(Math.PI/4)*50);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 40, Math.sin(Math.PI/4)*50);
   gltfScene.scale.set(0.4, 0.4, 0.4);
   gltfScene.rotation.y = -Math.PI/6;
 
   cloudPlane = gltfScene;
 
-  gltfScene.on('mouseover', () => console.log('DATA SILO'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/data-silo.html');
   gltfScene.on('touchend', () => location.href = '/data-silo.html');
 
@@ -237,10 +250,10 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   };
 
   scene.add(gltfScene);
-  gltfScene.position.set(0, -10, 50);
+  gltfScene.position.set(0, 10, 50);
   gltfScene.scale.set(0.7, 0.7, 0.7);
 
-  gltfScene.on('mouseover', () => console.log('INSTAGRAM'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = 'https://instagram.com');
   gltfScene.on('touchend', () => location.href = 'https://instagram.com');
 
@@ -259,12 +272,12 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-Math.cos(Math.PI/4)*50, -10, Math.sin(Math.PI/4)*50);
+  gltfScene.position.set(-Math.cos(Math.PI/4)*50, 10, Math.sin(Math.PI/4)*50);
   gltfScene.scale.set(7, 7, 7);
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('CREDITS'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/credits.html');
   gltfScene.on('touchend', () => location.href = '/credits.html');
 
@@ -283,11 +296,12 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-50, 0, 0);
+  gltfScene.position.set(-50, 10, 0);
+  // gltfScene.rotation.y = -Math.PI / 4;
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('FACEBOOK'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = 'https://facebook.com');
   gltfScene.on('touchend', () => location.href = 'https://facebook.com');
 
@@ -306,12 +320,12 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-Math.cos(Math.PI/4)*50, 0, -Math.sin(Math.PI/4)*50);
-  gltfScene.scale.set(1.5, 1.5, 1.5);
+  gltfScene.position.set(-Math.cos(Math.PI/4)*50, 20, -Math.sin(Math.PI/4)*50);
+  gltfScene.scale.set(1.7, 1.7, 1.7);
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => console.log('INVISIBLE CITIES'));
+  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/invisible-cities.html');
   gltfScene.on('touchend', () => location.href = '/invisible-cities.html');
 
@@ -326,45 +340,56 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   console.error(err);
 });
 
+// material for 2d objects
+const plainWhiteMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff)});
+
 loader.load('models/gltf/2d/check.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-Math.cos(Math.PI/3)*50-20, -10, -Math.sin(Math.PI/3)*5-40);
-  gltfScene.scale.set(16, 16, 16);
+  gltfScene.position.set(-Math.cos(Math.PI/3)*50-20, 30, -Math.sin(Math.PI/3)*5-60);
+  gltfScene.scale.set(30, 30, 30);
   gltfScene.rotation.x = Math.PI;
+  gltfScene.rotation.y = -Math.PI / 8;
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/card.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/3)*50-10, 15, -Math.sin(Math.PI/3)*50-20);
-  gltfScene.scale.set(15, 15, 15);
+  gltfScene.position.set(Math.cos(Math.PI/3)*50-10, 35, -Math.sin(Math.PI/3)*50-20);
+  gltfScene.scale.set(20, 20, 20);
+  gltfScene.rotation.y = Math.PI;
+  gltfScene.rotation.x = Math.PI / 8;
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/stairs.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/3)*50, 10, Math.sin(Math.PI/3)*50);
-  gltfScene.scale.set(10, 10, 10);
-  gltfScene.rotation.y = Math.PI/6;
+  gltfScene.position.set(Math.cos(Math.PI/3)*50+30, 80, Math.sin(Math.PI/3)*50+60);
+  gltfScene.scale.set(24, 24, 24);
+  gltfScene.rotation.y = Math.PI / 4;
 }, undefined, function(err) {
   console.error(err);
 });
 
 loader.load('models/gltf/2d/string.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  gltfScene.children[4].material = plainWhiteMaterial;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-50, 0, 0);
-  gltfScene.scale.set(10, 10, 10);
-  gltfScene.rotation.y = Math.PI / 2;
+  gltfScene.position.set(-50, 20, 10);
+  gltfScene.scale.set(15, 15, 15);
+  gltfScene.rotation.y = -Math.PI / 2;
+  gltfScene.rotation.z = Math.PI;
 }, undefined, function(err) {
   console.error(err);
 });
@@ -377,8 +402,8 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const gltfScene = gltf.scene;
   const material = gltfScene.children[0].material;
 
-  gltfScene.position.set(0, 200, -500); // 앞
-  gltfScene.scale.set(10, 10, 10);
+  gltfScene.position.set(0, 300, -500); // 앞
+  gltfScene.scale.set(12, 12, 12);
   gltfScene.rotation.y = Math.PI / 2;
 
   material.transparent = true;
@@ -398,8 +423,8 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const gltfScene = gltf.scene;
   const material = gltfScene.children[0].material;
 
-  gltfScene.position.set(-500, 200, 0); // 왼쪽
-  gltfScene.scale.set(10, 10, 10);
+  gltfScene.position.set(-500, 300, 0); // 왼쪽
+  gltfScene.scale.set(12, 12, 12);
 
   material.transparent = true;
   material.map = texture;
@@ -418,8 +443,8 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const gltfScene = gltf.scene;
   const material = gltfScene.children[0].material;
 
-  gltfScene.position.set(500, 200, 0); // 오른쪽
-  gltfScene.scale.set(10, 10, 10);
+  gltfScene.position.set(500, 300, 0); // 오른쪽
+  gltfScene.scale.set(12, 12, 12);
 
   material.transparent = true;
   material.map = texture;
@@ -430,10 +455,10 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltfScene);
 });
 
-camera.position.z = 1;
-
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
+// controls.target = new THREE.Vector3(0, 15, -40); // controls를 쓰면 camera.lookAt() 대신 controls.target을 조작해야 한다고 함..!!
+controls.target = new THREE.Vector3(0, 0.8, -1); // 절댓값이 아니라 x, y, z 간의 상대적인 차이가 중요한 듯 (약분(?) 가능)
 
 function animate() {
 	requestAnimationFrame(animate);

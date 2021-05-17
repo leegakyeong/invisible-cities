@@ -51,6 +51,35 @@ body {
   text-align: center;
 }
 
+#loading {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgb(127, 84, 255), white, rgb(139, 255, 145));
+  text-align: center;
+}
+
+#loading div {
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  margin-top: 100px;
+}
+
+.fadeout {
+  animation: fadeout 0.5s;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 /* layout */
 
 .content-wrapper {
