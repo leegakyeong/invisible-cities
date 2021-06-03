@@ -23,7 +23,7 @@ body {
   width: 100vw;
   min-height: 4vh;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
 }
 
 .banner-1, .banner-2 {
@@ -213,6 +213,7 @@ body {
   line-height: 36px;
   word-break: keep-all;
   margin-bottom: -5px;
+  text-align: center;
 }
 
 .english-title {
@@ -221,6 +222,7 @@ body {
   text-underline-position: under;
   line-height: 27px;
   word-break: keep-all;
+  text-align: center;
 }
 
 .korean-content {
@@ -297,7 +299,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* media queries */
@@ -411,4 +413,45 @@ body {
 a:link{
   color: black;
   text-decoration: none;
+}
+
+.menu-popup{
+  height: 100vh;
+  width: 300px;
+  background-color: white;
+  font-size: 24px;
+  color: black;
+  position: fixed;
+  z-index: 1;
+}
+
+.menu-text{
+  position: relative;
+  top: 130px;
+  left: 35px;
+  line-height: 40px;
+}
+
+.mt:hover{
+  text-decoration: underline;
+}
+
+.menu-sns{
+  position: absolute;
+  left: 35px;
+  bottom: 5%;
+  display: flex;
+  height: 27px;
+  width: 80px;
+  justify-content: space-around;
+}
+
+.logo.facebook{
+  width: 27px;
+  height: auto;
+}
+
+.logo.instagram{
+  width: 27px;
+  height: auto;
 }
