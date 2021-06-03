@@ -396,14 +396,14 @@ body {
 
 
 .footer-item-data{
-  z-index: 3;
+  z-index: 0;
   background: linear-gradient(to bottom, white, rgb(255, 0, 0));
   height: 20vh;
   width: 100%;
 }
 
 .footer-item-habitants{
-  z-index: 3;
+  z-index: 0;
   background: linear-gradient(to bottom, white,rgb(127, 84, 255));
   height: 80vh;
   width: 100%;
@@ -454,4 +454,8 @@ a:link{
 .logo.instagram{
   width: 27px;
   height: auto;
+}
+
+a:visited{
+  color: black;
 }
