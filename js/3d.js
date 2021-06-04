@@ -17,7 +17,7 @@ manager.onLoad = () => {
 const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
 camera.position.set(0, 0, 1);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -127,6 +127,10 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 // HABITANTS
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const gltfScene = gltf.scene;
+
+  gltfScene.traverse(function(object) {
+    object.frustumCulled = false;
+  });
 
   scene.add(gltfScene);
   gltfScene.position.set(Math.cos(Math.PI/4)*50, 32, -Math.sin(Math.PI/4)*50);
