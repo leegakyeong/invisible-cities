@@ -107,6 +107,7 @@ let dragObject;
 
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
+  // gltf.scene.children[0].geometry.center();
   scene.add(gltf.scene);
   gltf.scene.position.set(0, 35, -40);
   gltf.scene.children[0].material.color = new THREE.Color(0xffffff);
@@ -128,6 +129,7 @@ let actualObjectToRotate; // fakePlane을 만지면 이게 돌아감
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const gltfScene = gltf.scene;
   actualObjectToRotate = gltfScene;
+  console.log(gltfScene)
 
   gltfScene.traverse(function(object) {
     object.frustumCulled = false;
@@ -653,7 +655,37 @@ window.addEventListener('pointermove', (e) => {
     dragObject.userData.dx = pageX - dragObject.userData.prevX;
     dragObject.userData.dy = pageY - dragObject.userData.prevY;
 
-    const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dx), rad(dragObject.userData.dy), 0));
+    // deltaQuat 계산을 각각 다르게 해 줘야 함. 내가 애초에 배치를 좀 체계적으로 안 하고 너무 주먹구구식으로 해서 그런 듯...
+    let deltaQuat;
+    switch (dragObject.children[0].name) {
+      case 'Curve': // 제목
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+        break;
+      case 'Rotator': // 머리
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+        break;
+      case 'Bip001': // 손
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), -rad(dragObject.userData.dy)));
+        break;
+      case 'justNull': // 숟가락
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+        break;
+      case 'Milk': // 우유
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+        break;
+      case 'CloudPlane': // 평면
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
+        break;
+      case 'Light': // 원자 기둥
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
+        break;
+      case 'Armature': // 걷는 사람
+        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+        break;
+      default:
+        break;
+    }
+
     dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
 
     dragObject.userData.prevX = pageX;
