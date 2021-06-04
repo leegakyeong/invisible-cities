@@ -148,7 +148,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 });
+  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 }, '/habitants.html');
 }, undefined, function(err) {
 console.error(err);
 });
@@ -172,7 +172,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 });
+  createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 }, '/about.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -206,7 +206,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 });
+  createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 }, '/data-silo.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -266,7 +266,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 });
+  createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 }, 'https://instagram.com');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -290,7 +290,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'CREDITS', { x: 0, y: -32 });
+  createLabel(gltf, 'CREDITS', { x: 0, y: -32 }, '/credits.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -314,7 +314,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   // let dx = 0;
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
-  createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 });
+  createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 }, 'https://facebook.com');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -339,7 +339,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   // let dy = 0;
   // enableRotation(gltf, prevX, prevY, dx, dy);
 
-  createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 });
+  createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 }, '/invisible-cities.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -565,17 +565,19 @@ function enableRotation(gltf, prevX, prevY, dx, dy) {
   .on('touchend', () => isDragging = false);
 }
 
-function createLabel(gltf, text, margin) {
+function createLabel(gltf, text, margin, url) {
   const div = document.createElement('div');
+  div.innerHTML = text;
   div.style.fontFamily = 'Helvetica';
   div.style.fontSize = '14px';
   div.style.backgroundColor = 'white';
   div.style.color = 'black';
   div.style.padding = '4px 16px';
   div.style.whiteSpace = 'nowrap';
-  div.innerHTML = text;
-
   div.style.position = 'absolute';
+  div.style.cursor = 'pointer';
+
+  div.onclick = () => location.href = url;
 
   const vector = gltf.scene.position.clone();
   vector.project(camera);
