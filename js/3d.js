@@ -662,3 +662,44 @@ window.addEventListener('pointermove', (e) => {
 }, false);
 
 window.addEventListener('pointerup', () => dragObject = undefined, false);
+
+// mobile events
+// https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events#best_practices
+renderer.domElement.addEventListener('touchstart', (e) => {
+  mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(scene.children, true);
+
+  const parentName = intersects[0].object.parent.name;
+  const objectName = intersects[0].object.name;
+  if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
+    dragObject = intersects[0].object.parent.parent;
+  } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
+    dragObject = intersects[0].object.parent;
+  } else if (parentName === 'Knight012') {
+    dragObject = intersects[0].object.parent.parent.parent;
+  } else if (objectName === 'fakePlane') {
+    dragObject = actualObjectToRotate;
+  }
+
+  renderer.domElement.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if (dragObject) {
+      const pageX = t.pageX;
+      const pageY = t.pageY;
+
+      dragObject.userData.dx = pageX - dragObject.userData.prevX;
+      dragObject.userData.dy = pageY - dragObject.userData.prevY;
+
+      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dx), rad(dragObject.userData.dy), 0));
+      dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
+
+      dragObject.userData.prevX = pageX;
+      dragObject.userData.prevY = pageY;
+    }
+  }, false);
+
+  window.addEventListener('touchend', () => dragObject = undefined, false);
+}, false);
