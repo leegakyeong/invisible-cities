@@ -137,10 +137,6 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer'); // 이건 왜 안 뜨지..??
-  gltfScene.on('click', () => location.href = '/habitants.html');
-  gltfScene.on('touchend', () => location.href = '/habitants.html');
-
   // let prevX = 0;
   // let prevY = 0;
   // let dx = 0;
@@ -150,6 +146,19 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 }, undefined, function(err) {
 console.error(err);
 });
+
+// habitants 대신 마우스 이벤트를 받을 투명한 판
+// habitants가 클릭이 안 돼서...
+const fakePlane = new THREE.Mesh(
+  new THREE.PlaneGeometry(12, 36),
+  new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff), transparent: true, side: THREE.DoubleSide, opacity: 0, depthWrite: false })
+);
+scene.add(fakePlane);
+fakePlane.position.set(Math.cos(Math.PI/4)*50-5, 15, -Math.sin(Math.PI/4)*50+5);
+fakePlane.rotation.y = -Math.PI / 8;
+fakePlane.on('mouseover', () => fakePlane.cursor = 'pointer');
+fakePlane.on('click', () => location.href = '/habitants.html');
+fakePlane.on('touchend', () => location.href = '/habitants.html');
 
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
