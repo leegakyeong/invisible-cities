@@ -103,8 +103,6 @@ const interaction = new Interaction(renderer, scene, camera);
 
 let isDragging = false;
 
-let cloudPlane;
-
 const labels = [];
 
 // title
@@ -194,8 +192,6 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltfScene.position.set(Math.cos(Math.PI/4)*50, 40, Math.sin(Math.PI/4)*50);
   gltfScene.scale.set(0.4, 0.4, 0.4);
   gltfScene.rotation.y = -Math.PI/6;
-
-  cloudPlane = gltfScene;
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => location.href = '/data-silo.html');
@@ -470,11 +466,6 @@ function animate() {
   const delta = clock.getDelta();
 
   mixers.forEach((mixer) => mixer.update(delta));
-
-  if (cloudPlane) {
-    cloudPlane.rotation.x += 0.01 * delta;
-    cloudPlane.rotation.z += -0.03 * delta;
-  }
 
   if (milkMaterial && milkMaterial.userData.shader) {
     milkMaterial.userData.shader.uniforms.time.value = performance.now() / 1000;
