@@ -187,7 +187,6 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
     dy: 0,
   };
 
-
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
     if (!dragObject) location.href = '/about.html';
@@ -544,7 +543,6 @@ function animate() {
 
   labels.forEach((label) => updateLabelPos(label));
 
-  // controls.enabled = isDragging ? false : true;
   controls.enabled = dragObject ? false : true;
   controls.update();
 
@@ -576,42 +574,6 @@ function createMixer(gltf, timeScale) {
   }
 }
 
-function enableRotation(gltf, prevX, prevY, dx, dy) {
-  gltf.scene.on('mousedown', () => isDragging = true)
-  .on('touchstart', () => isDragging = true)
-  .on('mousemove', (e) => {
-    const pageX = e.data.originalEvent.pageX;
-    const pageY = e.data.originalEvent.pageY;
-
-    if (isDragging) {
-      dx = pageX - prevX;
-      dy = pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = pageX;
-    prevY = pageY;
-  })
-  .on('touchmove', (e) => {
-    const pageX = e.data.originalEvent.pageX;
-    const pageY = e.data.originalEvent.pageY;
-
-    if (isDragging) {
-      dx = pageX - prevX;
-      dy = pageY - prevY;
-
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dx), rad(dy), 0));
-      gltf.scene.quaternion.multiplyQuaternions(deltaQuat, gltf.scene.quaternion);
-    }
-    prevX = pageX;
-    prevY = pageY;
-  })
-  .on('mouseup', () => isDragging = false)
-  .on('mouseout', () => isDragging = false)
-  .on('touchend', () => isDragging = false);
-}
-
 function createLabel(gltf, text, margin, url) {
   const div = document.createElement('div');
   div.innerHTML = text;
@@ -637,15 +599,11 @@ function createLabel(gltf, text, margin, url) {
   labels.push(label);
 }
 
+// 3d position to 2d position
 function updateLabelPos({ div, gltf, vector, margin }) {
-  // 3d position to 2d position
-  // const vector = new THREE.Vector3();
-  // const widthHalf = renderer.domElement.width / 2;
-  // const heightHalf = renderer.domElement.height / 2;
   const widthHalf = window.innerWidth / 2;
   const heightHalf = window.innerHeight / 2;
-  // label.gltf.scene.updateMatrixWorld();
-  // vector.setFromMatrixPosition(label.gltf.scene.matrixWorld);
+
   vector = gltf.scene.position.clone();
   if (margin.x) vector.x += margin.x;
   if (margin.y) vector.y += margin.y;
@@ -660,10 +618,6 @@ function updateLabelPos({ div, gltf, vector, margin }) {
   } else {
     div.style.display = 'none';
   }
-  // vector.x = (vector.x * widthHalf) + widthHalf;
-  // vector.y = -(vector.y * heightHalf) + heightHalf;
-  // div.style.left = vector.x + 'px';
-  // div.style.top = vector.y + 'px';
 }
 
 // for dragging
