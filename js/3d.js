@@ -105,6 +105,8 @@ const labels = [];
 
 let dragObject;
 
+let clickStart = 0;
+
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   // gltf.scene.children[0].geometry.center();
@@ -165,10 +167,10 @@ fakePlane.position.set(Math.cos(Math.PI/4)*50-5, 15, -Math.sin(Math.PI/4)*50+5);
 fakePlane.rotation.y = -Math.PI / 8;
 fakePlane.on('mouseover', () => fakePlane.cursor = 'pointer');
 fakePlane.on('click', () => {
-  if (!dragObject) location.href = '/habitants.html';
+  if (!dragObject && isClick()) location.href = '/habitants.html';
 });
 fakePlane.on('touchend', () => {
-  if (!dragObject) location.href = '/habitants.html';
+  if (!dragObject && isClick()) location.href = '/habitants.html';
 });
 fakePlane.name = 'fakePlane';
 
@@ -191,10 +193,10 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = '/about.html';
+    if (!dragObject && isClick()) location.href = '/about.html';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = '/about.html';
+    if (!dragObject && isClick()) location.href = '/about.html';
   });
 
   createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 }, '/about.html');
@@ -230,10 +232,10 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = '/data-silo.html';
+    if (!dragObject && isClick()) location.href = '/data-silo.html';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = '/data-silo.html';
+    if (!dragObject && isClick()) location.href = '/data-silo.html';
   });
 
   createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 }, '/data-silo.html');
@@ -296,10 +298,10 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = 'https://instagram.com';
+    if (!dragObject && isClick()) location.href = 'https://instagram.com';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = 'https://instagram.com';
+    if (!dragObject && isClick()) location.href = 'https://instagram.com';
   });
 
   createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 }, 'https://instagram.com');
@@ -326,10 +328,10 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = '/credits.html';
+    if (!dragObject && isClick()) location.href = '/credits.html';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = '/credits.html';
+    if (!dragObject && isClick()) location.href = '/credits.html';
   });
 
   createLabel(gltf, 'CREDITS', { x: 0, y: -32 }, '/credits.html');
@@ -356,10 +358,10 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = 'https://facebook.com';
+    if (!dragObject && isClick()) location.href = 'https://facebook.com';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = 'https://facebook.com';
+    if (!dragObject && isClick()) location.href = 'https://facebook.com';
   });
 
   createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 }, 'https://facebook.com');
@@ -386,10 +388,10 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
-    if (!dragObject) location.href = '/invisible-cities.html';
+    if (!dragObject && isClick()) location.href = '/invisible-cities.html';
   });
   gltfScene.on('touchend', () => {
-    if (!dragObject) location.href = '/invisible-cities.html';
+    if (!dragObject && isClick()) location.href = '/invisible-cities.html';
   });
 
   createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 }, '/invisible-cities.html');
@@ -645,6 +647,8 @@ window.addEventListener('pointerdown', (e) => {
   } else if (objectName === 'fakePlane') {
     dragObject = actualObjectToRotate;
   }
+
+  if (dragObject) clickStart = Date.now();
 }, false);
 
 window.addEventListener('pointermove', (e) => {
@@ -735,3 +739,14 @@ renderer.domElement.addEventListener('touchstart', (e) => {
 
   window.addEventListener('touchend', () => dragObject = undefined, false);
 }, false);
+
+function isClick() {
+  const clickEnd = Date.now();
+  if (clickEnd - clickStart > 0 && clickEnd - clickStart < 300) { // click
+    clickStart = 0;
+    return true;
+  } else { // drag
+    clickStart = 0;
+    return false;
+  }
+}
