@@ -5,7 +5,7 @@
 }
 
 * {
-  font-family: Helvetica, "Helvetica Neue", "Gothic A1", Arial, sans-serif;
+  font-family: Helvetica, "Helvetica Neue", "Gothic A1", Arial, sans-serif !important;
 }
 
 body {
@@ -538,4 +538,5 @@ margin-bottom: 20px;
 .invisible-cities-content{
   margin: 80px;
   line-height: 30px;
+  font-size: 15px !important;
 }
