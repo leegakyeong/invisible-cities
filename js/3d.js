@@ -107,9 +107,13 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.target = new THREE.Vector3(0, 0.8, -1); // 절댓값이 아니라 x, y, z 간의 상대적인 차이가 중요한 듯 (약분(?) 가능)
 
+const targets = []; // 여기 닿으면 커서를 포인터로 설정
+
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   scene.add(gltf.scene);
+  targets.push(gltf.scene);
+
   gltf.scene.position.set(0, 35, -40);
   gltf.scene.children[0].material.color = new THREE.Color(0xffffff);
 
@@ -125,21 +129,10 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   console.error(err);
 });
 
-// 방법 1
-// const box = new THREE.Mesh(
-//   new THREE.BoxGeometry(10, 10, 10),
-//   new THREE.MeshBasicMaterial({ color: 0xffff00 })
-// );
-// scene.add(box)
-
-// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-// const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-// const mesh = new THREE.Mesh( geometry, material );
-// scene.add( mesh );
-
 // HABITANTS
 loader.load('models/gltf/3d/Walk.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   gltfScene.traverse(function(object) {
     object.frustumCulled = false;
@@ -149,44 +142,6 @@ loader.load('models/gltf/3d/Walk.glb', function(gltf) {
   gltfScene.position.set(Math.cos(Math.PI/4)*50, 12, -Math.sin(Math.PI/4)*50);
   gltfScene.scale.set(20, 20, 20);
   gltfScene.rotation.z = Math.PI;
-
-  // 방법 2 - 자꾸 사원수 값이 NaN이 나옴....
-  // name이 똑같은 박스를 만들어서 원래 돌릴 오브제 대신 이걸 돌리게 하는 것.
-  // 원래 돌리려던 오브제는 박스의 자식으로 집어넣고
-  // const geometry = new THREE.BoxGeometry(1, 1, 1);
-  // const material = new THREE.MeshBasicMaterial({
-  //   color: 0xffff00,
-  //   transparent: true,
-  //   side: THREE.DoubleSide,
-  //   opacity: 0.5,
-  //   // depthWrite: false
-  // });
-  // const bbox = new THREE.Mesh( geometry, material );
-  // gltfScene.add( bbox );
-  // bbox.name = 'Armature';
-  // bbox.position.set(0, 1, 0);
-  // bbox.geometry.center();
-  // bbox.attach(gltfScene.children[0]);
-  // actualObjectToRotate = bbox;
-
-  // 방법 3
-  // const box = new THREE.Box3().setFromObject(gltfScene); // gltfScene.children[0]
-  // box.center(gltfScene);
-  // gltfScene.position.multiplyScalar(-1);
-
-  // 방법 4 - 오브젝트가 해체됨(?)
-  // 이것도 이상하네....
-  // https://stackoverflow.com/questions/28848863/threejs-how-to-rotate-around-objects-own-center-instead-of-world-center
-  // const bbox = new THREE.Box3().setFromObject(gltfScene);
-  // const bboxCenter = bbox.getCenter().clone();
-  // bboxCenter.multiplyScalar(-1);
-  // gltfScene.traverse((child) => {
-  //   if (child instanceof THREE.Mesh) { console.log(1, child.geometry)
-  //     child.geometry.attributes.position.needsUpdate = true;
-  //     child.geometry.translate(bboxCenter.x, bboxCenter.y, bboxCenter.z);
-  //   } console.log(2, child.geometry)
-  // });
-  // bbox.setFromObject(gltfScene);
 
   createMixer(gltf);
 
@@ -209,6 +164,7 @@ console.error(err);
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   scene.add(gltfScene);
   gltfScene.position.set(50, 12, 0);
@@ -237,6 +193,7 @@ loader.load('models/gltf/3d/AtomLikeSub.glb', function(gltf) {
 // DATA SILO
 loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   const texture = new THREE.TextureLoader().load('models/img/cloud.png');
   texture.format = THREE.RGBAFormat;
@@ -272,6 +229,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 // INSTAGRAM
 loader.load('models/gltf/3d/milk.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   milkMaterial = gltfScene.children[2].material;
   milkMaterial.onBeforeCompile = (shader) => {
@@ -334,6 +292,7 @@ loader.load('models/gltf/3d/milk.glb', function(gltf) {
 // CREDITS
 loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   scene.add(gltfScene);
   gltfScene.position.set(-Math.cos(Math.PI/4)*50, 10, Math.sin(Math.PI/4)*50);
@@ -360,6 +319,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 // FACEBOOK
 loader.load('models/gltf/3d/hands.glb', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   scene.add(gltfScene);
   gltfScene.position.set(-50, 20, 0);
@@ -385,6 +345,7 @@ loader.load('models/gltf/3d/hands.glb', function(gltf) {
 // INVISIBLE CITIES
 loader.load('models/gltf/3d/head.gltf', function(gltf) {
   const gltfScene = gltf.scene;
+  targets.push(gltfScene);
 
   scene.add(gltfScene);
   gltfScene.position.set(-Math.cos(Math.PI/4)*50, 20, -Math.sin(Math.PI/4)*50);
@@ -647,6 +608,18 @@ window.addEventListener('pointermove', (e) => {
 	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(scene.children);
-  // console.log(intersects)
+  const intersects = raycaster.intersectObjects(targets, true);
+  if (intersects.length) {
+    renderer.domElement.style.cursor = 'pointer';
+  } else {
+    renderer.domElement.style.cursor = 'auto';
+  }
+
+  // const target = intersects[0].object.parent.parent.parent;
+  // console.log(intersects[0])
+  // if (target && target instanceof TransformControls) {
+  //   renderer.domElement.style.cursor = 'pointer';
+  // } else {
+  //   renderer.domElement.style.cursor = 'auto';
+  // }
 });
