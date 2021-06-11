@@ -198,18 +198,14 @@ body {
 
 .photo, .korean-text, .english-text {
   padding: 4vh 4vw;
-  flex: 1;
+
 }
 
-.photo{
-  width: 100%;
-  height: 100%;
-}
 
 
 .photo>img{
   padding-top: 49px;
-  width: 100%;
+  width: 70%;
   height: auto;
 
 }
@@ -228,6 +224,7 @@ body {
   word-break: keep-all;
   margin-bottom: -5px;
   text-align: center;
+
 }
 
 .english-title {
@@ -237,14 +234,16 @@ body {
   line-height: 27px;
   word-break: keep-all;
   text-align: center;
+
 }
 
 .korean-content {
   /* padding-top: 2vh; */
   font-size: 15px;
   /* margin: 0; */
-  word-break: keep-all;
+  word-break: normal;
   line-height: 26px;
+
 }
 
 .english-content {
@@ -252,6 +251,7 @@ body {
   /* margin: 0; */
   word-break: keep-all;
   line-height: 24px;
+
 }
 
 /* habitants & data silo */
@@ -285,7 +285,7 @@ body {
 }
 
 .list-item-banner-1 div, .list-item-banner-2 div {
-  min-width: 160px;
+  min-width: 280px;
   text-align: center;
 }
 
@@ -304,12 +304,16 @@ body {
 
 .slidedown {
   background: linear-gradient(to bottom, white, rgb(139, 255, 145));
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.5fr 3fr 3fr;
   width: 100%;
 }
 
 .photo {
-  width: 33vw;
+  width: 15vw;
+  display: flex;
+  align-items: start;
+  justify-content: start;
 }
 
 .hidden {
@@ -336,16 +340,16 @@ body {
   }
 
   .korean-text {
+    width: 30vw;
     padding-bottom: 0;
   }
 
   .english-text {
+    width: 30vw;
     padding-top: 0;
   }
 
-  .slidedown {
-    flex-direction: column;
-  }
+
 
   .photo{
     padding: 0%;
@@ -353,11 +357,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:100%;
+    width:10vw;
   }
   .photo>img{
     padding-top: 49px;
-    width: 80%;
+    width: 70%;
     height: auto;
   
   }
@@ -430,7 +434,7 @@ body {
 .footer-item-habitants{
   z-index: 0;
   background: linear-gradient(to bottom, white,rgb(127, 84, 255));
-  height: 80vh;
+  height: 20vh;
   width: 100%;
 }
 
