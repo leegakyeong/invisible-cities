@@ -3,6 +3,7 @@ import { GLTFLoader } from '../lib/GLTFLoader.js';
 import { OrbitControls } from '../lib/OrbitControls.js';
 import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
+import { TransformControls } from '../lib/TransformControls.js';
 
 const manager = new THREE.LoadingManager();
 const loading = document.getElementById('loading');
@@ -116,22 +117,39 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltf.scene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltf.scene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  // rotator.addEventListener('change', animate);
+  // rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.setMode('rotate');
+  rotator.attach(gltf.scene);
+  scene.add(rotator);
 }, undefined, function(err) {
   console.error(err);
 });
 
+// 방법 1
+// const box = new THREE.Mesh(
+//   new THREE.BoxGeometry(10, 10, 10),
+//   new THREE.MeshBasicMaterial({ color: 0xffff00 })
+// );
+// scene.add(box)
+
+// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+// const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+// const mesh = new THREE.Mesh( geometry, material );
+// scene.add( mesh );
 // HABITANTS
 let actualObjectToRotate; // fakePlane을 만지면 이게 돌아감
 loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const gltfScene = gltf.scene;
   actualObjectToRotate = gltfScene;
-  console.log(gltfScene)
 
   gltfScene.traverse(function(object) {
     object.frustumCulled = false;
@@ -142,14 +160,56 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   gltfScene.scale.set(20, 20, 20);
   gltfScene.rotation.z = Math.PI;
 
+  // 방법 2 - 자꾸 사원수 값이 NaN이 나옴....
+  // name이 똑같은 박스를 만들어서 원래 돌릴 오브제 대신 이걸 돌리게 하는 것.
+  // 원래 돌리려던 오브제는 박스의 자식으로 집어넣고
+  // const geometry = new THREE.BoxGeometry(1, 1, 1);
+  // const material = new THREE.MeshBasicMaterial({
+  //   color: 0xffff00,
+  //   transparent: true,
+  //   side: THREE.DoubleSide,
+  //   opacity: 0.5,
+  //   // depthWrite: false
+  // });
+  // const bbox = new THREE.Mesh( geometry, material );
+  // gltfScene.add( bbox );
+  // bbox.name = 'Armature';
+  // bbox.position.set(0, 1, 0);
+  // bbox.geometry.center();
+  // bbox.attach(gltfScene.children[0]);
+  // actualObjectToRotate = bbox;
+
+  // 방법 3
+  // const box = new THREE.Box3().setFromObject(gltfScene); // gltfScene.children[0]
+  // box.center(gltfScene);
+  // gltfScene.position.multiplyScalar(-1);
+
+  // 방법 4 - 오브젝트가 해체됨(?)
+  // 이것도 이상하네....
+  // https://stackoverflow.com/questions/28848863/threejs-how-to-rotate-around-objects-own-center-instead-of-world-center
+  // const bbox = new THREE.Box3().setFromObject(gltfScene); // gltfScene으로 해야 하나?
+  // const bboxCenter = bbox.getCenter().clone(); console.log(bboxCenter, gltfScene.position)
+  // bboxCenter.multiplyScalar(-1);
+  // gltfScene.traverse((child) => {
+  //   if (child instanceof THREE.Mesh) {
+  //     child.geometry.translate(bboxCenter.x, bboxCenter.y, bboxCenter.z);
+  //   }
+  // });
+  // bbox.setFromObject(gltfScene);
+
   createMixer(gltf);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 }, '/habitants.html');
 }, undefined, function(err) {
@@ -184,12 +244,17 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
 
   createMixer(gltf, 0.2);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -223,12 +288,17 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltfScene.scale.set(0.4, 0.4, 0.4);
   gltfScene.rotation.y = -Math.PI/6;
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -289,12 +359,17 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   gltfScene.position.set(0, 10, 50);
   gltfScene.scale.set(0.7, 0.7, 0.7);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -319,12 +394,17 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -349,12 +429,17 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -379,12 +464,17 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  gltfScene.userData = {
-    prevX: 0,
-    prevY: 0,
-    dx: 0,
-    dy: 0,
-  };
+  // gltfScene.userData = {
+  //   prevX: 0,
+  //   prevY: 0,
+  //   dx: 0,
+  //   dy: 0,
+  // };
+
+  const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setMode('rotate');
+  rotator.attach(gltfScene);
+  scene.add(rotator);
 
   gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
   gltfScene.on('click', () => {
@@ -651,51 +741,52 @@ window.addEventListener('pointerdown', (e) => {
   if (dragObject) clickStart = Date.now();
 }, false);
 
-window.addEventListener('pointermove', (e) => {
-  if (dragObject) {
-    const pageX = e.pageX;
-    const pageY = e.pageY;
+// window.addEventListener('pointermove', (e) => {
+//   if (dragObject) {
+//     const pageX = e.pageX;
+//     const pageY = e.pageY;
 
-    dragObject.userData.dx = pageX - dragObject.userData.prevX;
-    dragObject.userData.dy = pageY - dragObject.userData.prevY;
+//     dragObject.userData.dx = pageX - dragObject.userData.prevX;
+//     dragObject.userData.dy = pageY - dragObject.userData.prevY;
 
-    // deltaQuat 계산을 각각 다르게 해 줘야 함. 내가 애초에 배치를 좀 체계적으로 안 하고 너무 주먹구구식으로 해서 그런 듯...
-    let deltaQuat;
-    switch (dragObject.children[0].name) {
-      case 'Curve': // 제목
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-        break;
-      case 'Rotator': // 머리
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-        break;
-      case 'Bip001': // 손
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), -rad(dragObject.userData.dy)));
-        break;
-      case 'justNull': // 숟가락
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-        break;
-      case 'Milk': // 우유
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-        break;
-      case 'CloudPlane': // 평면
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
-        break;
-      case 'Light': // 원자 기둥
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
-        break;
-      case 'Armature': // 걷는 사람
-        deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-        break;
-      default:
-        break;
-    }
+//     // deltaQuat 계산을 각각 다르게 해 줘야 함. 내가 애초에 배치를 좀 체계적으로 안 하고 너무 주먹구구식으로 해서 그런 듯...
+//     let deltaQuat;
+//     switch (dragObject.children[0].name) {
+//       case 'Curve': // 제목
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+//         break;
+//       case 'Rotator': // 머리
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+//         break;
+//       case 'Bip001': // 손
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), -rad(dragObject.userData.dy)));
+//         break;
+//       case 'justNull': // 숟가락
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+//         break;
+//       case 'Milk': // 우유
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+//         break;
+//       case 'CloudPlane': // 평면
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
+//         break;
+//       case 'Light': // 원자 기둥
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
+//         break;
+//       case 'Armature': // 걷는 사람
+//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
+//         break;
+//       default:
+//         break;
+//     }
 
-    dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
+//     // bbox가 있는 Armature의 경우에 이 값이 왜 nan이 되는지....????????ㅠㅠ
+//     dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
 
-    dragObject.userData.prevX = pageX;
-    dragObject.userData.prevY = pageY;
-  }
-}, false);
+//     dragObject.userData.prevX = pageX;
+//     dragObject.userData.prevY = pageY;
+//   }
+// }, false);
 
 window.addEventListener('pointerup', () => dragObject = undefined, false);
 
