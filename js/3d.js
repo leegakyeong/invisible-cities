@@ -1,7 +1,6 @@
 import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
 import { OrbitControls } from '../lib/OrbitControls.js';
-// import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 import { TransformControls } from '../lib/TransformControls.js';
 
@@ -100,11 +99,7 @@ const loader = new GLTFLoader(manager);
 
 const mixers = [];
 
-// const interaction = new Interaction(renderer, scene, camera);
-
 const labels = [];
-
-let dragObject;
 
 let clickStart = 0;
 
@@ -114,19 +109,11 @@ controls.target = new THREE.Vector3(0, 0.8, -1); // 절댓값이 아니라 x, y,
 
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
-  // gltf.scene.children[0].geometry.center();
   scene.add(gltf.scene);
   gltf.scene.position.set(0, 35, -40);
   gltf.scene.children[0].material.color = new THREE.Color(0xffffff);
 
   createMixer(gltf);
-
-  // gltf.scene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
@@ -202,13 +189,6 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
-
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
@@ -224,24 +204,6 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 console.error(err);
 });
 
-// habitants 대신 마우스 이벤트를 받을 투명한 판
-// habitants가 클릭이 안 돼서...
-// const fakePlane = new THREE.Mesh(
-//   new THREE.PlaneGeometry(12, 36),
-//   new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff), transparent: true, side: THREE.DoubleSide, opacity: 0, depthWrite: false })
-// );
-// scene.add(fakePlane);
-// fakePlane.position.set(Math.cos(Math.PI/4)*50-5, 15, -Math.sin(Math.PI/4)*50+5);
-// fakePlane.rotation.y = -Math.PI / 8;
-// fakePlane.on('mouseover', () => fakePlane.cursor = 'pointer');
-// fakePlane.on('click', () => {
-//   if (!dragObject && isClick()) location.href = '/habitants.html';
-// });
-// fakePlane.on('touchend', () => {
-//   if (!dragObject && isClick()) location.href = '/habitants.html';
-// });
-// fakePlane.name = 'fakePlane';
-
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   const gltfScene = gltf.scene;
@@ -251,13 +213,6 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   gltfScene.scale.set(6, 6, 6);
 
   createMixer(gltf, 0.2);
-
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
@@ -270,14 +225,6 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
     if (isClick()) location.href = '/about.html';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = '/about.html';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = '/about.html';
-  // });
 
   createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 }, '/about.html');
 }, undefined, function(err) {
@@ -303,13 +250,6 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltfScene.scale.set(0.4, 0.4, 0.4);
   gltfScene.rotation.y = -Math.PI/6;
 
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
-
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
@@ -319,14 +259,6 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
     if (isClick()) location.href = '/data-silo.html';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = '/data-silo.html';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = '/data-silo.html';
-  // });
 
   createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 }, '/data-silo.html');
 }, undefined, function(err) {
@@ -379,13 +311,6 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   gltfScene.position.set(0, 10, 50);
   gltfScene.scale.set(0.7, 0.7, 0.7);
 
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
-
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
@@ -395,14 +320,6 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
     if (isClick()) location.href = 'https://instagram.com';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = 'https://instagram.com';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = 'https://instagram.com';
-  // });
 
   createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 }, 'https://instagram.com');
 }, undefined, function(err) {
@@ -419,13 +336,6 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
-
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
@@ -435,14 +345,6 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
     if (isClick()) location.href = '/credits.html';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = '/credits.html';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = '/credits.html';
-  // });
 
   createLabel(gltf, 'CREDITS', { x: 0, y: -32 }, '/credits.html');
 }, undefined, function(err) {
@@ -455,16 +357,8 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
 
   scene.add(gltfScene);
   gltfScene.position.set(-50, 10, 0);
-  // gltfScene.rotation.y = -Math.PI / 4;
 
   createMixer(gltf);
-
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
@@ -475,14 +369,6 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
     if (isClick()) location.href = 'https://facebook.com';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = 'https://facebook.com';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = 'https://facebook.com';
-  // });
 
   createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 }, 'https://facebook.com');
 }, undefined, function(err) {
@@ -499,13 +385,6 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
 
   createMixer(gltf);
 
-  // gltfScene.userData = {
-  //   prevX: 0,
-  //   prevY: 0,
-  //   dx: 0,
-  //   dy: 0,
-  // };
-
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
@@ -515,14 +394,6 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
     if (isClick()) location.href = '/invisible-cities.html';
   });
   scene.add(rotator);
-
-  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  // gltfScene.on('click', () => {
-  //   if (!dragObject && isClick()) location.href = '/invisible-cities.html';
-  // });
-  // gltfScene.on('touchend', () => {
-  //   if (!dragObject && isClick()) location.href = '/invisible-cities.html';
-  // });
 
   createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 }, '/invisible-cities.html');
 }, undefined, function(err) {
@@ -749,123 +620,6 @@ function updateLabelPos({ div, gltf, vector, margin }) {
   }
 }
 
-// for dragging
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-// https://discourse.threejs.org/t/mousedown-event-is-not-getting-triggered/18685
-// window.addEventListener('pointerdown', (e) => {
-//   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-// 	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-//   raycaster.setFromCamera(mouse, camera);
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-
-//   const parentName = intersects[0].object.parent.name;
-//   const objectName = intersects[0].object.name;
-//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
-//     dragObject = intersects[0].object.parent.parent;
-//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
-//     dragObject = intersects[0].object.parent;
-//   } else if (parentName === 'Knight012') {
-//     dragObject = intersects[0].object.parent.parent.parent;
-//   } else if (objectName === 'fakePlane') {
-//     dragObject = actualObjectToRotate;
-//   }
-
-//   if (dragObject) clickStart = Date.now();
-// }, false);
-
-// window.addEventListener('pointermove', (e) => {
-//   if (dragObject) {
-//     const pageX = e.pageX;
-//     const pageY = e.pageY;
-
-//     dragObject.userData.dx = pageX - dragObject.userData.prevX;
-//     dragObject.userData.dy = pageY - dragObject.userData.prevY;
-
-//     // deltaQuat 계산을 각각 다르게 해 줘야 함. 내가 애초에 배치를 좀 체계적으로 안 하고 너무 주먹구구식으로 해서 그런 듯...
-//     let deltaQuat;
-//     switch (dragObject.children[0].name) {
-//       case 'Curve': // 제목
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-//         break;
-//       case 'Rotator': // 머리
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-//         break;
-//       case 'Bip001': // 손
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), -rad(dragObject.userData.dy)));
-//         break;
-//       case 'justNull': // 숟가락
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-//         break;
-//       case 'Milk': // 우유
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-//         break;
-//       case 'CloudPlane': // 평면
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
-//         break;
-//       case 'Light': // 원자 기둥
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rad(dragObject.userData.dx), rad(dragObject.userData.dy)));
-//         break;
-//       case 'Armature': // 걷는 사람
-//         deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dy), rad(dragObject.userData.dx), 0));
-//         break;
-//       default:
-//         break;
-//     }
-
-//     // bbox가 있는 Armature의 경우에 이 값이 왜 nan이 되는지....????????ㅠㅠ
-//     dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
-
-//     dragObject.userData.prevX = pageX;
-//     dragObject.userData.prevY = pageY;
-//   }
-// }, false);
-
-// window.addEventListener('pointerup', () => dragObject = undefined, false);
-
-// mobile events
-// https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events#best_practices
-// window.addEventListener('touchstart', (e) => {
-//   mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
-// 	mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
-
-//   raycaster.setFromCamera(mouse, camera);
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-
-//   const parentName = intersects[0].object.parent.name;
-//   const objectName = intersects[0].object.name;
-//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
-//     dragObject = intersects[0].object.parent.parent;
-//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
-//     dragObject = intersects[0].object.parent;
-//   } else if (parentName === 'Knight012') {
-//     dragObject = intersects[0].object.parent.parent.parent;
-//   } else if (objectName === 'fakePlane') {
-//     dragObject = actualObjectToRotate;
-//   }
-
-//   window.addEventListener('touchmove', (e) => {
-//     const t = e.touches[0];
-//     if (dragObject) {
-//       const pageX = t.pageX;
-//       const pageY = t.pageY;
-
-//       dragObject.userData.dx = pageX - dragObject.userData.prevX;
-//       dragObject.userData.dy = pageY - dragObject.userData.prevY;
-
-//       const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dx), rad(dragObject.userData.dy), 0));
-//       dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
-
-//       dragObject.userData.prevX = pageX;
-//       dragObject.userData.prevY = pageY;
-//     }
-//   }, false);
-
-//   window.addEventListener('touchend', () => dragObject = undefined, false);
-// }, false);
-
 function isClick() {
   const clickEnd = Date.now();
   if (clickEnd - clickStart > 0 && clickEnd - clickStart < 300) { // click
@@ -877,29 +631,8 @@ function isClick() {
   }
 }
 
-// const canvas = renderer.domElement;
-// window.addEventListener('pointermove', (e) => {
-//   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-// 	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-//   raycaster.setFromCamera(mouse, camera);
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-//   // console.log(intersects.filter(x => x.))
-
-//   const parentName = intersects[0].object.parent.name;
-//   const objectName = intersects[0].object.name;
-//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
-//     canvas.style.cursor = 'pointer';
-//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
-//     canvas.style.cursor = 'pointer'; console.log(88)
-//   } else if (parentName === 'Knight012') {
-//     canvas.style.cursor = 'pointer';
-//   } else if (objectName === 'fakePlane') {
-//     canvas.style.cursor = 'pointer';
-//   } else {
-//     canvas.style.cursor = 'auto';
-//   }
-// });
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
 window.addEventListener('pointermove', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
