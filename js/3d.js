@@ -117,6 +117,7 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
+  rotator.setSize(1.2);
   rotator.attach(gltf.scene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
   scene.add(rotator);
@@ -135,18 +136,17 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
 // const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 // const mesh = new THREE.Mesh( geometry, material );
 // scene.add( mesh );
+
 // HABITANTS
-let actualObjectToRotate; // fakePlane을 만지면 이게 돌아감
-loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
+loader.load('models/gltf/3d/Walk.glb', function(gltf) {
   const gltfScene = gltf.scene;
-  actualObjectToRotate = gltfScene;
 
   gltfScene.traverse(function(object) {
     object.frustumCulled = false;
   });
 
   scene.add(gltfScene);
-  gltfScene.position.set(Math.cos(Math.PI/4)*50, 32, -Math.sin(Math.PI/4)*50);
+  gltfScene.position.set(Math.cos(Math.PI/4)*50, 12, -Math.sin(Math.PI/4)*50);
   gltfScene.scale.set(20, 20, 20);
   gltfScene.rotation.z = Math.PI;
 
@@ -177,13 +177,14 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   // 방법 4 - 오브젝트가 해체됨(?)
   // 이것도 이상하네....
   // https://stackoverflow.com/questions/28848863/threejs-how-to-rotate-around-objects-own-center-instead-of-world-center
-  // const bbox = new THREE.Box3().setFromObject(gltfScene); // gltfScene으로 해야 하나?
-  // const bboxCenter = bbox.getCenter().clone(); console.log(bboxCenter, gltfScene.position)
+  // const bbox = new THREE.Box3().setFromObject(gltfScene);
+  // const bboxCenter = bbox.getCenter().clone();
   // bboxCenter.multiplyScalar(-1);
   // gltfScene.traverse((child) => {
-  //   if (child instanceof THREE.Mesh) {
+  //   if (child instanceof THREE.Mesh) { console.log(1, child.geometry)
+  //     child.geometry.attributes.position.needsUpdate = true;
   //     child.geometry.translate(bboxCenter.x, bboxCenter.y, bboxCenter.z);
-  //   }
+  //   } console.log(2, child.geometry)
   // });
   // bbox.setFromObject(gltfScene);
 
@@ -191,6 +192,7 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
+  rotator.setSize(1.5);
   rotator.attach(gltfScene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
   rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
@@ -199,23 +201,24 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   });
   scene.add(rotator);
 
-  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 }, '/habitants.html');
+  createLabel(gltf, 'HABITANTS', { x: -5.5, y: -20 }, '/habitants.html');
 }, undefined, function(err) {
 console.error(err);
 });
 
 // ABOUT PROJECT
-loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
+loader.load('models/gltf/3d/AtomLikeSub.glb', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(50, -10, 0);
+  gltfScene.position.set(50, 12, 0);
   gltfScene.scale.set(6, 6, 6);
 
   createMixer(gltf, 0.2);
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
+  rotator.setSize(1.8);
   rotator.attach(gltfScene);
   rotator.showX = false;
   rotator.showZ = false;
@@ -226,7 +229,7 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   });
   scene.add(rotator);
 
-  createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 }, '/about.html');
+  createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -24, z: -8 }, '/about.html');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -251,6 +254,7 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   gltfScene.rotation.y = -Math.PI/6;
 
   const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setSize(1.4);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
@@ -266,10 +270,10 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
 });
 
 // INSTAGRAM
-loader.load('models/gltf/3d/milk.gltf', function(gltf) {
+loader.load('models/gltf/3d/milk.glb', function(gltf) {
   const gltfScene = gltf.scene;
 
-  milkMaterial = gltfScene.children[0].material;
+  milkMaterial = gltfScene.children[2].material;
   milkMaterial.onBeforeCompile = (shader) => {
     shader.uniforms.time = { value: 0 };
     shader.uniforms.uLungSpeed = { value: 1.34 };
@@ -313,6 +317,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
 
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
+  rotator.setSize(1.1);
   rotator.attach(gltfScene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
   rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
@@ -321,7 +326,7 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   });
   scene.add(rotator);
 
-  createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 }, 'https://instagram.com');
+  createLabel(gltf, 'INSTAGRAM', { x: 10, y: -16, z: 10 }, 'https://instagram.com');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -337,6 +342,7 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   createMixer(gltf);
 
   const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setSize(1.4);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
@@ -352,11 +358,12 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
 });
 
 // FACEBOOK
-loader.load('models/gltf/3d/hands.gltf', function(gltf) {
+loader.load('models/gltf/3d/hands.glb', function(gltf) {
   const gltfScene = gltf.scene;
 
   scene.add(gltfScene);
-  gltfScene.position.set(-50, 10, 0);
+  gltfScene.position.set(-50, 20, 0);
+  gltfScene.scale.set(1.5, 1.5, 1.5);
 
   createMixer(gltf);
 
@@ -370,7 +377,7 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   });
   scene.add(rotator);
 
-  createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 }, 'https://facebook.com');
+  createLabel(gltf, 'FACEBOOK', { x: 0, y: -12, z: 7 }, 'https://facebook.com');
 }, undefined, function(err) {
   console.error(err);
 });
@@ -386,6 +393,7 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   createMixer(gltf);
 
   const rotator = new TransformControls(camera, renderer.domElement);
+  rotator.setSize(1.2);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
   rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
