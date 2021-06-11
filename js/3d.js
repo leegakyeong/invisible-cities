@@ -1,7 +1,7 @@
 import * as THREE from '../lib/three.module.js';
 import { GLTFLoader } from '../lib/GLTFLoader.js';
 import { OrbitControls } from '../lib/OrbitControls.js';
-import { Interaction } from '../lib/three.interaction.module.js';
+// import { Interaction } from '../lib/three.interaction.module.js';
 import { HDRCubeTextureLoader } from '../lib/HDRCubeTextureLoader.js';
 import { TransformControls } from '../lib/TransformControls.js';
 
@@ -100,13 +100,17 @@ const loader = new GLTFLoader(manager);
 
 const mixers = [];
 
-const interaction = new Interaction(renderer, scene, camera);
+// const interaction = new Interaction(renderer, scene, camera);
 
 const labels = [];
 
 let dragObject;
 
 let clickStart = 0;
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
+controls.target = new THREE.Vector3(0, 0.8, -1); // 절댓값이 아니라 x, y, z 간의 상대적인 차이가 중요한 듯 (약분(?) 가능)
 
 // title
 loader.load('models/gltf/3d/IC.gltf', function(gltf) {
@@ -125,10 +129,9 @@ loader.load('models/gltf/3d/IC.gltf', function(gltf) {
   // };
 
   const rotator = new TransformControls(camera, renderer.domElement);
-  // rotator.addEventListener('change', animate);
-  // rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
   rotator.setMode('rotate');
   rotator.attach(gltf.scene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
   scene.add(rotator);
 }, undefined, function(err) {
   console.error(err);
@@ -209,6 +212,11 @@ loader.load('models/gltf/3d/Walk.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = '/habitants.html';
+  });
   scene.add(rotator);
 
   createLabel(gltf, 'HABITANTS', { x: -5.5, y: -40 }, '/habitants.html');
@@ -218,21 +226,21 @@ console.error(err);
 
 // habitants 대신 마우스 이벤트를 받을 투명한 판
 // habitants가 클릭이 안 돼서...
-const fakePlane = new THREE.Mesh(
-  new THREE.PlaneGeometry(12, 36),
-  new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff), transparent: true, side: THREE.DoubleSide, opacity: 0, depthWrite: false })
-);
-scene.add(fakePlane);
-fakePlane.position.set(Math.cos(Math.PI/4)*50-5, 15, -Math.sin(Math.PI/4)*50+5);
-fakePlane.rotation.y = -Math.PI / 8;
-fakePlane.on('mouseover', () => fakePlane.cursor = 'pointer');
-fakePlane.on('click', () => {
-  if (!dragObject && isClick()) location.href = '/habitants.html';
-});
-fakePlane.on('touchend', () => {
-  if (!dragObject && isClick()) location.href = '/habitants.html';
-});
-fakePlane.name = 'fakePlane';
+// const fakePlane = new THREE.Mesh(
+//   new THREE.PlaneGeometry(12, 36),
+//   new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff), transparent: true, side: THREE.DoubleSide, opacity: 0, depthWrite: false })
+// );
+// scene.add(fakePlane);
+// fakePlane.position.set(Math.cos(Math.PI/4)*50-5, 15, -Math.sin(Math.PI/4)*50+5);
+// fakePlane.rotation.y = -Math.PI / 8;
+// fakePlane.on('mouseover', () => fakePlane.cursor = 'pointer');
+// fakePlane.on('click', () => {
+//   if (!dragObject && isClick()) location.href = '/habitants.html';
+// });
+// fakePlane.on('touchend', () => {
+//   if (!dragObject && isClick()) location.href = '/habitants.html';
+// });
+// fakePlane.name = 'fakePlane';
 
 // ABOUT PROJECT
 loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
@@ -254,15 +262,22 @@ loader.load('models/gltf/3d/AtomLikeSub.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.showX = false;
+  rotator.showZ = false;
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = '/about.html';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = '/about.html';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = '/about.html';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = '/about.html';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = '/about.html';
+  // });
 
   createLabel(gltf, 'ABOUT PROJECT', { x: -3, y: -8, z: -10 }, '/about.html');
 }, undefined, function(err) {
@@ -298,15 +313,20 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = '/data-silo.html';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = '/data-silo.html';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = '/data-silo.html';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = '/data-silo.html';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = '/data-silo.html';
+  // });
 
   createLabel(gltf, 'DATA SILO', { x: 20, y: -16, z: 5 }, '/data-silo.html');
 }, undefined, function(err) {
@@ -369,15 +389,20 @@ loader.load('models/gltf/3d/milk.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = 'https://instagram.com';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = 'https://instagram.com';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = 'https://instagram.com';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = 'https://instagram.com';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = 'https://instagram.com';
+  // });
 
   createLabel(gltf, 'INSTAGRAM', { x: 20, y: -14, z: 10 }, 'https://instagram.com');
 }, undefined, function(err) {
@@ -404,15 +429,20 @@ loader.load('models/gltf/3d/spoon.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = '/credits.html';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = '/credits.html';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = '/credits.html';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = '/credits.html';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = '/credits.html';
+  // });
 
   createLabel(gltf, 'CREDITS', { x: 0, y: -32 }, '/credits.html');
 }, undefined, function(err) {
@@ -439,15 +469,20 @@ loader.load('models/gltf/3d/hands.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = 'https://facebook.com';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = 'https://facebook.com';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = 'https://facebook.com';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = 'https://facebook.com';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = 'https://facebook.com';
+  // });
 
   createLabel(gltf, 'FACEBOOK', { x: 0, y: 8 }, 'https://facebook.com');
 }, undefined, function(err) {
@@ -474,15 +509,20 @@ loader.load('models/gltf/3d/head.gltf', function(gltf) {
   const rotator = new TransformControls(camera, renderer.domElement);
   rotator.setMode('rotate');
   rotator.attach(gltfScene);
+  rotator.addEventListener('dragging-changed', (e) => controls.enabled = !e.value);
+  rotator.addEventListener('mouseDown', (e) => clickStart = Date.now());
+  rotator.addEventListener('mouseUp', (e) => {
+    if (isClick()) location.href = '/invisible-cities.html';
+  });
   scene.add(rotator);
 
-  gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
-  gltfScene.on('click', () => {
-    if (!dragObject && isClick()) location.href = '/invisible-cities.html';
-  });
-  gltfScene.on('touchend', () => {
-    if (!dragObject && isClick()) location.href = '/invisible-cities.html';
-  });
+  // gltfScene.on('mouseover', () => gltfScene.cursor = 'pointer');
+  // gltfScene.on('click', () => {
+  //   if (!dragObject && isClick()) location.href = '/invisible-cities.html';
+  // });
+  // gltfScene.on('touchend', () => {
+  //   if (!dragObject && isClick()) location.href = '/invisible-cities.html';
+  // });
 
   createLabel(gltf, 'INVISIBLE CITIES', { x: -10, y: -18 }, '/invisible-cities.html');
 }, undefined, function(err) {
@@ -604,10 +644,6 @@ loader.load('models/gltf/3d/CloudPlane.gltf', function(gltf) {
   scene.add(gltfScene);
 });
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableZoom = false;
-controls.target = new THREE.Vector3(0, 0.8, -1); // 절댓값이 아니라 x, y, z 간의 상대적인 차이가 중요한 듯 (약분(?) 가능)
-
 function animate() {
 	requestAnimationFrame(animate);
 
@@ -637,7 +673,6 @@ function animate() {
 
   labels.forEach((label) => updateLabelPos(label));
 
-  controls.enabled = dragObject ? false : true;
   controls.update();
 
 	renderer.render(scene, camera);
@@ -719,27 +754,27 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 // https://discourse.threejs.org/t/mousedown-event-is-not-getting-triggered/18685
-window.addEventListener('pointerdown', (e) => {
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+// window.addEventListener('pointerdown', (e) => {
+//   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+// 	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(scene.children, true);
+//   raycaster.setFromCamera(mouse, camera);
+//   const intersects = raycaster.intersectObjects(scene.children, true);
 
-  const parentName = intersects[0].object.parent.name;
-  const objectName = intersects[0].object.name;
-  if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
-    dragObject = intersects[0].object.parent.parent;
-  } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
-    dragObject = intersects[0].object.parent;
-  } else if (parentName === 'Knight012') {
-    dragObject = intersects[0].object.parent.parent.parent;
-  } else if (objectName === 'fakePlane') {
-    dragObject = actualObjectToRotate;
-  }
+//   const parentName = intersects[0].object.parent.name;
+//   const objectName = intersects[0].object.name;
+//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
+//     dragObject = intersects[0].object.parent.parent;
+//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
+//     dragObject = intersects[0].object.parent;
+//   } else if (parentName === 'Knight012') {
+//     dragObject = intersects[0].object.parent.parent.parent;
+//   } else if (objectName === 'fakePlane') {
+//     dragObject = actualObjectToRotate;
+//   }
 
-  if (dragObject) clickStart = Date.now();
-}, false);
+//   if (dragObject) clickStart = Date.now();
+// }, false);
 
 // window.addEventListener('pointermove', (e) => {
 //   if (dragObject) {
@@ -788,48 +823,48 @@ window.addEventListener('pointerdown', (e) => {
 //   }
 // }, false);
 
-window.addEventListener('pointerup', () => dragObject = undefined, false);
+// window.addEventListener('pointerup', () => dragObject = undefined, false);
 
 // mobile events
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events#best_practices
-renderer.domElement.addEventListener('touchstart', (e) => {
-  mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
-	mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+// window.addEventListener('touchstart', (e) => {
+//   mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+// 	mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
 
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(scene.children, true);
+//   raycaster.setFromCamera(mouse, camera);
+//   const intersects = raycaster.intersectObjects(scene.children, true);
 
-  const parentName = intersects[0].object.parent.name;
-  const objectName = intersects[0].object.name;
-  if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
-    dragObject = intersects[0].object.parent.parent;
-  } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
-    dragObject = intersects[0].object.parent;
-  } else if (parentName === 'Knight012') {
-    dragObject = intersects[0].object.parent.parent.parent;
-  } else if (objectName === 'fakePlane') {
-    dragObject = actualObjectToRotate;
-  }
+//   const parentName = intersects[0].object.parent.name;
+//   const objectName = intersects[0].object.name;
+//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
+//     dragObject = intersects[0].object.parent.parent;
+//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
+//     dragObject = intersects[0].object.parent;
+//   } else if (parentName === 'Knight012') {
+//     dragObject = intersects[0].object.parent.parent.parent;
+//   } else if (objectName === 'fakePlane') {
+//     dragObject = actualObjectToRotate;
+//   }
 
-  renderer.domElement.addEventListener('touchmove', (e) => {
-    const t = e.touches[0];
-    if (dragObject) {
-      const pageX = t.pageX;
-      const pageY = t.pageY;
+//   window.addEventListener('touchmove', (e) => {
+//     const t = e.touches[0];
+//     if (dragObject) {
+//       const pageX = t.pageX;
+//       const pageY = t.pageY;
 
-      dragObject.userData.dx = pageX - dragObject.userData.prevX;
-      dragObject.userData.dy = pageY - dragObject.userData.prevY;
+//       dragObject.userData.dx = pageX - dragObject.userData.prevX;
+//       dragObject.userData.dy = pageY - dragObject.userData.prevY;
 
-      const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dx), rad(dragObject.userData.dy), 0));
-      dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
+//       const deltaQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(rad(dragObject.userData.dx), rad(dragObject.userData.dy), 0));
+//       dragObject.quaternion.multiplyQuaternions(deltaQuat, dragObject.quaternion);
 
-      dragObject.userData.prevX = pageX;
-      dragObject.userData.prevY = pageY;
-    }
-  }, false);
+//       dragObject.userData.prevX = pageX;
+//       dragObject.userData.prevY = pageY;
+//     }
+//   }, false);
 
-  window.addEventListener('touchend', () => dragObject = undefined, false);
-}, false);
+//   window.addEventListener('touchend', () => dragObject = undefined, false);
+// }, false);
 
 function isClick() {
   const clickEnd = Date.now();
@@ -841,3 +876,36 @@ function isClick() {
     return false;
   }
 }
+
+// const canvas = renderer.domElement;
+// window.addEventListener('pointermove', (e) => {
+//   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+// 	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+//   raycaster.setFromCamera(mouse, camera);
+//   const intersects = raycaster.intersectObjects(scene.children, true);
+//   // console.log(intersects.filter(x => x.))
+
+//   const parentName = intersects[0].object.parent.name;
+//   const objectName = intersects[0].object.name;
+//   if (parentName === 'justNull' || parentName === 'Bip001' || parentName === 'Rotator') {
+//     canvas.style.cursor = 'pointer';
+//   } else if (objectName === 'Curve' || objectName === 'CloudPlane' || objectName === 'Milk') {
+//     canvas.style.cursor = 'pointer'; console.log(88)
+//   } else if (parentName === 'Knight012') {
+//     canvas.style.cursor = 'pointer';
+//   } else if (objectName === 'fakePlane') {
+//     canvas.style.cursor = 'pointer';
+//   } else {
+//     canvas.style.cursor = 'auto';
+//   }
+// });
+
+window.addEventListener('pointermove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(scene.children);
+  // console.log(intersects)
+});
