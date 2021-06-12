@@ -23,7 +23,7 @@ body {
   width: 100vw;
   min-height: 4vh;
   overflow: hidden;
-  z-index: 2;
+  z-index: 3;
 }
 
 .banner-1, .banner-2 {
@@ -197,7 +197,8 @@ body {
 
 
 .photo, .korean-text, .english-text {
-  padding: 4vh 4vw;
+  /* padding: 4vh 3vw; */
+  flex: 1;
 
 }
 
@@ -207,6 +208,8 @@ body {
   padding-top: 49px;
   width: 70%;
   height: auto;
+  position: relative;
+  left: 25%;
 
 }
 
@@ -340,12 +343,12 @@ body {
   }
 
   .korean-text {
-    width: 30vw;
+    width: 100%;
     padding-bottom: 0;
   }
 
   .english-text {
-    width: 30vw;
+    width: 100%;
     padding-top: 0;
   }
 
@@ -360,6 +363,7 @@ body {
     width:10vw;
   }
   .photo>img{
+    position: relative;
     padding-top: 49px;
     width: 70%;
     height: auto;
@@ -393,6 +397,22 @@ body {
   .list-item-enlarge{
     text-align: center;
     font-size: 10px;
+  }
+
+  .slidedown{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photo {
+    left: 0%;
+    width: 100vw;
+    transform: scale(0.8);
+  }
+
+  .photo>img{
+    left: 0%;
+    padding: 0;
   }
 }
 
@@ -451,7 +471,8 @@ a:link{
   font-size: 24px;
   color: black;
   position: fixed;
-  z-index: 1;
+  top: 20px;
+  z-index: 2;
 }
 
 .menu-text{
@@ -505,9 +526,10 @@ a:visited{
 }
 
 .invisible-cities-each-exit{
-  position: absolute;
-  right: 18px;
-  top: 20px;
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  z-index: 4;
 }
 
 .invisible-cities-each-text{
@@ -543,4 +565,39 @@ margin-bottom: 20px;
   margin: 80px;
   line-height: 30px;
   font-size: 15px !important;
+}
+
+@media (max-width:400px){
+  .invisible-cities-each-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .invisible-cities-each-text{
+    width: 100vw;
+  }
+
+  .invisible-cities-content{
+    margin: 10vw;
+  }
+
+  .invisible-cities-each-text{
+    background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
+  }
+
+  .invisible-cities-each-exit{
+    right: 5px;
+    top: 120px;
+  }
+
+}
+
+.korean-content, .english-content{
+
+  padding: 20px;
+
+}
+
+.korean-text, .english-text{
+  padding-top: 20px;
 }
