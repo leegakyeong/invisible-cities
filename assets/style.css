@@ -528,7 +528,7 @@ a:visited{
 .invisible-cities-each-exit{
   position: fixed;
   right: 20px;
-  top: 120px;
+  top: 14vh;
   z-index: 4;
 }
 
