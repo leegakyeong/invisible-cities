@@ -252,7 +252,7 @@ body {
   /* padding-top: 2vh; */
   font-size: 15px;
   /* margin: 0; */
-  word-break: normal;
+  word-break: keep-all;
   line-height: 26px;
 
 }
