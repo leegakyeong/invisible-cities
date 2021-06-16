@@ -114,7 +114,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.menu:hover {
+  cursor: pointer;
 }
 
 .menu-title {
@@ -178,6 +181,7 @@ body {
 
 .invisible-cities-gradient:hover{
   background: rgb(139, 255, 145);
+  cursor: pointer;
 }
 
 .about {
@@ -275,6 +279,10 @@ body {
   overflow: hidden;
   font-size: 24px;
   letter-spacing: 2px;
+}
+
+.list-item:hover {
+  cursor: pointer;
 }
 
 .list-item-banner-1, .list-item-banner-2 {
@@ -534,6 +542,10 @@ a:visited{
   right: 20px;
   top: 14vh;
   z-index: 4;
+}
+
+.invisible-cities-each-exit:hover {
+  cursor: pointer;
 }
 
 .invisible-cities-each-text{
