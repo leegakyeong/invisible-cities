@@ -80,6 +80,10 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* layout */
 
 .content-wrapper {
@@ -367,9 +371,9 @@ body {
     padding-top: 49px;
     width: 70%;
     height: auto;
-  
+
   }
-  
+
   .photo-caption{
     padding-top: 5vh;
     width: 100%;
