@@ -10,7 +10,7 @@ const author = document.getElementsByClassName("invisible-cities-gradient")
 
 for(var i=0; i<author.length ; i++){
     author[i].addEventListener("click", event=> {
-        var id = event.target.id
+        var id = event.target.id || event.target.parentNode.id;
         var index = parseInt(id.substr(3,1)) -1
         opencontent(index)
     })
