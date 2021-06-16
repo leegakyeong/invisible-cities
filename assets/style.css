@@ -478,7 +478,7 @@ a:link{
 
 .menu-popup{
   height: 100vh;
-  width: 300px;
+  width: 330px;
   background-color: white;
   font-size: 24px;
   color: black;
@@ -489,23 +489,25 @@ a:link{
 
 .menu-text{
   position: relative;
-  top: 130px;
-  left: 35px;
+  top: 85px;
+  left: 25px;
   line-height: 40px;
+  letter-spacing: 2px;
 }
 
 .mt:hover{
   text-decoration: underline;
+  text-underline-position: under;
 }
 
 .menu-sns{
   position: absolute;
-  left: 35px;
-  bottom: 5%;
+  left: 25px;
+  bottom: 50px;
   display: flex;
   height: 27px;
-  width: 80px;
-  justify-content: space-around;
+  width: 70px;
+  justify-content: space-between;
 }
 
 .logo.facebook{
