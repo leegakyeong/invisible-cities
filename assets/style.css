@@ -213,11 +213,11 @@ body {
 
 
 .photo>img{
-  padding-top: 49px;
+  /* padding-top: 49px; */
   width: 70%;
   height: auto;
-  position: relative;
-  left: 25%;
+  /* position: relative; */
+  /* left: 25%; */
 
 }
 
@@ -234,7 +234,7 @@ body {
   line-height: 36px;
   word-break: keep-all;
   margin-bottom: -5px;
-  text-align: center;
+  /* text-align: center; */
 
 }
 
@@ -244,7 +244,7 @@ body {
   text-underline-position: under;
   line-height: 27px;
   word-break: keep-all;
-  text-align: center;
+  /* text-align: center; */
 
 }
 
@@ -320,15 +320,28 @@ body {
 .slidedown {
   background: linear-gradient(to bottom, white, rgb(139, 255, 145));
   display: grid;
-  grid-template-columns: 0.5fr 3fr 3fr;
-  width: 100%;
+  grid-template-columns: 1fr 2fr 2fr;
+  /* width: 100%; */
+  column-gap: 40px;
+  padding: 0px 40px;
 }
 
 .photo {
-  width: 15vw;
+  /* width: 15vw; */
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: start;
+  flex-direction: column;
+}
+
+.photo:before {
+  content: "숨김";
+  text-decoration: underline;
+  text-underline-position: under;
+  font-size: 20px;
+  line-height: 36px;
+  margin: 20px 0px;
+  visibility: hidden;
 }
 
 .hidden {
@@ -376,8 +389,8 @@ body {
   }
   .photo>img{
     position: relative;
-    padding-top: 49px;
-    width: 70%;
+    /* padding-top: 49px; */
+    /* width: 70%; */
     height: auto;
 
   }
@@ -613,7 +626,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 }
 
 .korean-content, .english-content{
-  padding: 20px 30px;
+  margin: 20px 0px;
 }
 
 .korean-text, .english-text{
