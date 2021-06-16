@@ -454,16 +454,13 @@ body {
   }
 
   .invisible-cities-each-text{
-    width: 100vw;
-  }
-
-  .invisible-cities-content{
-    margin: 10vw;
-  }
-
-  .invisible-cities-each-text{
+    width: 100vw !important;
     background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
   }
+
+  /* .invisible-cities-content{
+    margin: 10vw;
+  } */
 
 
   .slidedown {
@@ -625,7 +622,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 }
 
 .invisible-cities-content{
-  margin: 80px;
+  margin: 40px;
   line-height: 24px;
   font-size: 15px !important;
 }
@@ -669,8 +666,8 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 } */
 
 .korean-text.about-gradient, .english-text.about-gradient {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .korean-text.about-gradient > .korean-title {
