@@ -177,6 +177,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  letter-spacing: 2px;
 }
 
 .invisible-cities-gradient:hover{
@@ -253,6 +254,7 @@ body {
   font-size: 14px;
   /* margin: 0; */
   word-break: keep-all;
+  word-wrap: break-word;
   line-height: 26px;
 
 }
@@ -350,10 +352,10 @@ body {
 
 /* media queries */
 
-@media (max-width: 400px) {
-  .banner-wrapper{
+@media only screen and (orientation: portrait) {
+  /* .banner-wrapper{
     height: 6vw;
-  }
+  } */
 
   .content {
     flex-direction: column;
@@ -368,12 +370,12 @@ body {
   }
 
   .korean-text {
-    width: 100%;
+    /* width: 100%; */
     padding-bottom: 0;
   }
 
   .english-text {
-    width: 100%;
+    /* width: 100%; */
     padding-top: 0;
   }
 
@@ -400,9 +402,9 @@ body {
     width: 100%;
     text-align: center;
   }
-}
+/* } */
 
-@media (max-width: 812px){
+/* @media (max-width: 812px){ */
   .habitants-gradient:hover {
     background: linear-gradient(to bottom, white, rgb(127, 84, 255));
 
@@ -416,9 +418,9 @@ body {
     text-align: center;
     font-size: 2vw;
   }
-}
+/* } */
 
-@media (max-width: 600px){
+/* @media (max-width: 600px){ */
   .list-item-enlarge{
     text-align: center;
     font-size: 10px;
@@ -438,6 +440,42 @@ body {
   .photo>img{
     left: 0%;
     padding: 0;
+  }
+
+
+  .menu-popup{
+    width: 100vw;
+  }
+
+
+  .invisible-cities-each-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .invisible-cities-each-text{
+    width: 100vw;
+  }
+
+  .invisible-cities-content{
+    margin: 10vw;
+  }
+
+  .invisible-cities-each-text{
+    background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
+  }
+
+
+  .slidedown {
+    padding: 0;
+  }
+
+  .korean-text, .english-text {
+    margin: 0px 20px;
+  }
+
+  .korean-text.about-gradient, .english-text.about-gradient {
+    margin: 0px;
   }
 }
 
@@ -537,12 +575,12 @@ a:visited{
   color: black;
 }
 
-@media (max-width: 400px){
+/* @media (max-width: 400px){
   .menu-popup{
     width: 100vw;
   }
 
-}
+} */
 
 .invisible-cities-each-wrapper{
   top: 12vh;
@@ -592,7 +630,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
   font-size: 15px !important;
 }
 
-@media (max-width:812px){
+/* @media (max-width:812px){
   .invisible-cities-each-wrapper{
     display: flex;
     flex-direction: column;
@@ -610,7 +648,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
     background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
   }
 
-}
+} */
 
 .korean-content, .english-content{
   margin: 20px 0px;
@@ -618,4 +656,27 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 
 .korean-text, .english-text{
   padding-top: 20px;
+}
+
+/* @media (max-width: 600px) {
+  .slidedown {
+    padding: 0;
+  }
+
+  .korean-text, .english-text {
+    margin: 0px 20px;
+  }
+} */
+
+.korean-text.about-gradient, .english-text.about-gradient {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.korean-text.about-gradient > .korean-title {
+  text-align: center;
+}
+
+.english-text.about-gradient > .english-title {
+  text-align: center;
 }
