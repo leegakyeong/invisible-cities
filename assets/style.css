@@ -350,7 +350,7 @@ body {
 
 /* media queries */
 
-@media (max-width: 812px) {
+@media (max-width: 400px) {
   .banner-wrapper{
     height: 6vw;
   }
@@ -554,7 +554,7 @@ a:visited{
 
 .invisible-cities-each-exit{
   position: fixed;
-  right: 20px;
+  right: 1vw;
   top: 14vh;
   z-index: 4;
 }
@@ -568,14 +568,6 @@ width: 50vw;
 min-height: 100vh;
 height: auto;
 background: linear-gradient(to right, rgb(217, 255, 0), white);
-}
-
-.invisible-cities-each-exit{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
 }
 
 .invisible-cities-title{
@@ -600,7 +592,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
   font-size: 15px !important;
 }
 
-@media (max-width:400px){
+@media (max-width:812px){
   .invisible-cities-each-wrapper{
     display: flex;
     flex-direction: column;
@@ -616,11 +608,6 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 
   .invisible-cities-each-text{
     background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
-  }
-
-  .invisible-cities-each-exit{
-    right: 5px;
-    top: 120px;
   }
 
 }
