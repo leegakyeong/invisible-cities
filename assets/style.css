@@ -567,21 +567,23 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 
 .invisible-cities-title{
   text-align: center;
-text-decoration: underline;
-font-size: 24px;
-margin-top: 50px;
-margin-bottom: 20px;
+  text-decoration: underline;
+  font-size: 24px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-underline-position: under;
 }
 
 .invisible-cities-name{
   text-align: center;
   font-size: 24px;
   text-decoration: underline;
+  text-underline-position: under;
 }
 
 .invisible-cities-content{
   margin: 80px;
-  line-height: 30px;
+  line-height: 24px;
   font-size: 15px !important;
 }
 
