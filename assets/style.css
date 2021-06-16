@@ -80,6 +80,10 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* layout */
 
 .content-wrapper {
@@ -110,7 +114,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.menu:hover {
+  cursor: pointer;
 }
 
 .menu-title {
@@ -170,10 +177,12 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  letter-spacing: 2px;
 }
 
 .invisible-cities-gradient:hover{
   background: rgb(139, 255, 145);
+  cursor: pointer;
 }
 
 .about {
@@ -205,11 +214,11 @@ body {
 
 
 .photo>img{
-  padding-top: 49px;
+  /* padding-top: 49px; */
   width: 70%;
   height: auto;
-  position: relative;
-  left: 25%;
+  /* position: relative; */
+  /* left: 25%; */
 
 }
 
@@ -226,7 +235,7 @@ body {
   line-height: 36px;
   word-break: keep-all;
   margin-bottom: -5px;
-  text-align: center;
+  /* text-align: center; */
 
 }
 
@@ -236,7 +245,7 @@ body {
   text-underline-position: under;
   line-height: 27px;
   word-break: keep-all;
-  text-align: center;
+  /* text-align: center; */
 
 }
 
@@ -244,13 +253,14 @@ body {
   /* padding-top: 2vh; */
   font-size: 15px;
   /* margin: 0; */
-  word-break: normal;
+  word-break: keep-all;
+  word-wrap: break-word;
   line-height: 26px;
 
 }
 
 .english-content {
-  font-size: 14px;
+  font-size: 16px;
   /* margin: 0; */
   word-break: keep-all;
   line-height: 24px;
@@ -273,8 +283,11 @@ body {
   letter-spacing: 2px;
 }
 
-.list-item-banner-1, .list-item-banner-2 {
+.list-item:hover {
+  cursor: pointer;
+}
 
+.list-item-banner-1, .list-item-banner-2 {
   animation-name: marquee;
   animation-duration: 20s;
   animation-timing-function: linear;
@@ -288,8 +301,9 @@ body {
 }
 
 .list-item-banner-1 div, .list-item-banner-2 div {
-  min-width: 280px;
+  width: -webkit-max-content;
   text-align: center;
+  margin: 0px 16px;
 }
 
 /* @keyframes marquee-habitant {
@@ -308,15 +322,28 @@ body {
 .slidedown {
   background: linear-gradient(to bottom, white, rgb(139, 255, 145));
   display: grid;
-  grid-template-columns: 0.5fr 3fr 3fr;
-  width: 100%;
+  grid-template-columns: 1fr 2fr 2fr;
+  /* width: 100%; */
+  column-gap: 40px;
+  padding: 0px 40px;
 }
 
 .photo {
-  width: 15vw;
+  /* width: 15vw; */
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: start;
+  flex-direction: column;
+}
+
+.photo:before {
+  content: "숨김";
+  text-decoration: underline;
+  text-underline-position: under;
+  font-size: 20px;
+  line-height: 36px;
+  margin: 20px 0px;
+  visibility: hidden;
 }
 
 .hidden {
@@ -325,10 +352,10 @@ body {
 
 /* media queries */
 
-@media (max-width: 812px) {
-  .banner-wrapper{
+@media only screen and (orientation: portrait) {
+  /* .banner-wrapper{
     height: 6vw;
-  }
+  } */
 
   .content {
     flex-direction: column;
@@ -343,12 +370,12 @@ body {
   }
 
   .korean-text {
-    width: 100%;
+    /* width: 100%; */
     padding-bottom: 0;
   }
 
   .english-text {
-    width: 100%;
+    /* width: 100%; */
     padding-top: 0;
   }
 
@@ -364,20 +391,20 @@ body {
   }
   .photo>img{
     position: relative;
-    padding-top: 49px;
-    width: 70%;
+    /* padding-top: 49px; */
+    /* width: 70%; */
     height: auto;
-  
+
   }
-  
+
   .photo-caption{
     padding-top: 5vh;
     width: 100%;
     text-align: center;
   }
-}
+/* } */
 
-@media (max-width: 812px){
+/* @media (max-width: 812px){ */
   .habitants-gradient:hover {
     background: linear-gradient(to bottom, white, rgb(127, 84, 255));
 
@@ -391,9 +418,9 @@ body {
     text-align: center;
     font-size: 2vw;
   }
-}
+/* } */
 
-@media (max-width: 600px){
+/* @media (max-width: 600px){ */
   .list-item-enlarge{
     text-align: center;
     font-size: 10px;
@@ -413,6 +440,39 @@ body {
   .photo>img{
     left: 0%;
     padding: 0;
+  }
+
+
+  .menu-popup{
+    width: 100vw !important;
+  }
+
+
+  .invisible-cities-each-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .invisible-cities-each-text{
+    width: 100vw !important;
+    background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
+  }
+
+  /* .invisible-cities-content{
+    margin: 10vw;
+  } */
+
+
+  .slidedown {
+    padding: 0;
+  }
+
+  .korean-text, .english-text {
+    margin: 0px 20px;
+  }
+
+  .korean-text.about-gradient, .english-text.about-gradient {
+    margin: 0px;
   }
 }
 
@@ -466,7 +526,7 @@ a:link{
 
 .menu-popup{
   height: 100vh;
-  width: 300px;
+  width: 330px;
   background-color: white;
   font-size: 24px;
   color: black;
@@ -477,23 +537,25 @@ a:link{
 
 .menu-text{
   position: relative;
-  top: 130px;
-  left: 35px;
+  top: 85px;
+  left: 25px;
   line-height: 40px;
+  letter-spacing: 2px;
 }
 
 .mt:hover{
   text-decoration: underline;
+  text-underline-position: under;
 }
 
 .menu-sns{
   position: absolute;
-  left: 35px;
-  bottom: 5%;
+  left: 25px;
+  bottom: 50px;
   display: flex;
   height: 27px;
-  width: 80px;
-  justify-content: space-around;
+  width: 70px;
+  justify-content: space-between;
 }
 
 .logo.facebook{
@@ -510,12 +572,12 @@ a:visited{
   color: black;
 }
 
-@media (max-width: 400px){
+/* @media (max-width: 400px){
   .menu-popup{
     width: 100vw;
   }
 
-}
+} */
 
 .invisible-cities-each-wrapper{
   top: 12vh;
@@ -527,9 +589,13 @@ a:visited{
 
 .invisible-cities-each-exit{
   position: fixed;
-  right: 20px;
+  right: 1vw;
   top: 14vh;
   z-index: 4;
+}
+
+.invisible-cities-each-exit:hover {
+  cursor: pointer;
 }
 
 .invisible-cities-each-text{
@@ -539,35 +605,29 @@ height: auto;
 background: linear-gradient(to right, rgb(217, 255, 0), white);
 }
 
-.invisible-cities-each-exit{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-}
-
 .invisible-cities-title{
   text-align: center;
-text-decoration: underline;
-font-size: 24px;
-margin-top: 50px;
-margin-bottom: 20px;
+  text-decoration: underline;
+  font-size: 24px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-underline-position: under;
 }
 
 .invisible-cities-name{
   text-align: center;
   font-size: 24px;
   text-decoration: underline;
+  text-underline-position: under;
 }
 
 .invisible-cities-content{
-  margin: 80px;
-  line-height: 30px;
+  margin: 40px;
+  line-height: 24px;
   font-size: 15px !important;
 }
 
-@media (max-width:400px){
+/* @media (max-width:812px){
   .invisible-cities-each-wrapper{
     display: flex;
     flex-direction: column;
@@ -585,19 +645,35 @@ margin-bottom: 20px;
     background: linear-gradient(to right,  rgb(217, 255, 0), white 50%, rgb(217, 255, 0) 50%,white);
   }
 
-  .invisible-cities-each-exit{
-    right: 5px;
-    top: 120px;
-  }
-
-}
+} */
 
 .korean-content, .english-content{
-
-  padding: 20px;
-
+  margin: 20px 0px;
 }
 
 .korean-text, .english-text{
   padding-top: 20px;
+}
+
+/* @media (max-width: 600px) {
+  .slidedown {
+    padding: 0;
+  }
+
+  .korean-text, .english-text {
+    margin: 0px 20px;
+  }
+} */
+
+.korean-text.about-gradient, .english-text.about-gradient {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.korean-text.about-gradient > .korean-title {
+  text-align: center;
+}
+
+.english-text.about-gradient > .english-title {
+  text-align: center;
 }
