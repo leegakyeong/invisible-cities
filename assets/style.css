@@ -286,7 +286,6 @@ body {
 }
 
 .list-item-banner-1, .list-item-banner-2 {
-
   animation-name: marquee;
   animation-duration: 20s;
   animation-timing-function: linear;
@@ -300,8 +299,9 @@ body {
 }
 
 .list-item-banner-1 div, .list-item-banner-2 div {
-  min-width: 280px;
+  width: -webkit-max-content;
   text-align: center;
+  margin: 0px 16px;
 }
 
 /* @keyframes marquee-habitant {
