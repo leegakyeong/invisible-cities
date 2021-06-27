@@ -570,8 +570,12 @@ function createLabel(gltf, text, margin, url) {
 
 // 3d position to 2d position
 function updateLabelPos({ div, gltf, vector, margin }) {
-  const widthHalf = window.innerWidth / 2;
-  const heightHalf = window.innerHeight / 2;
+  let widthHalf = window.innerWidth / 2;
+  let heightHalf = window.innerHeight / 2;
+  if (navigator.userAgent.toLowerCase().indexOf('android') > -1) { // 근데 innerWidth로 했을 때랑 약간 다르긴 함 ㅜㅜ
+    widthHalf = screen.width / 2;
+    heightHalf = screen.height / 2;
+  }
 
   vector = gltf.scene.position.clone();
   if (margin.x) vector.x += margin.x;
