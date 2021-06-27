@@ -8,8 +8,8 @@
   font-family: Helvetica, "Helvetica Neue", "Gothic A1", Arial, sans-serif !important;
 }
 
-body {
-  height: 100vh;
+html, body {
+  min-height: 100%;
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -525,7 +525,7 @@ a:link{
 }
 
 .menu-popup{
-  height: 100vh;
+  height: 100%;
   width: 330px;
   background-color: white;
   font-size: 24px;
@@ -684,5 +684,3 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 .english-text.about-gradient > .english-title {
   text-align: center;
 }
-
-
