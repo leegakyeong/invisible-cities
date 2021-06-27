@@ -259,7 +259,7 @@ loader.load('models/gltf/3d/milk.glb', function(gltf) {
 
         'float sinA = sin( RotF*10.0*uLungPower );',
         'float cosA = cos( RotF*10.0*uLungPower );',
-        'float oneMinusCosA = 1.0f - cosA;',
+        'float oneMinusCosA = 1.0 - cosA;',
         'mat3 rotator =  mat3( (axis.x * axis.x * oneMinusCosA) + cosA, (axis.y * axis.x * oneMinusCosA) - (sinA * axis.z),  (axis.z * axis.x * oneMinusCosA) + (sinA * axis.y), (axis.x * axis.y * oneMinusCosA) + (sinA * axis.z),  (axis.y * axis.y * oneMinusCosA) + cosA,(axis.z * axis.y * oneMinusCosA) - (sinA * axis.x),(axis.x * axis.z * oneMinusCosA) - (sinA * axis.y), (axis.y * axis.z * oneMinusCosA) + (sinA * axis.x),(axis.z * axis.z * oneMinusCosA) + cosA );',
 
         'vNormal = rotator*vNormal  ;',
