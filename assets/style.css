@@ -627,6 +627,13 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
   font-size: 15px !important;
 }
 
+.invisible-cities-content.textrule{
+  word-break: keep-all !important;
+  word-wrap: break-word;
+  white-space: pre;
+  text-overflow:clip;
+}
+
 /* @media (max-width:812px){
   .invisible-cities-each-wrapper{
     display: flex;
@@ -677,3 +684,5 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 .english-text.about-gradient > .english-title {
   text-align: center;
 }
+
+
