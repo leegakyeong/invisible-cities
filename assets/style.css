@@ -630,7 +630,7 @@ background: linear-gradient(to right, rgb(217, 255, 0), white);
 .invisible-cities-content.textrule{
   word-break: keep-all !important;
   word-wrap: break-word;
-  white-space: pre;
+  white-space: pre-wrap;
   text-overflow:clip;
 }
 
