@@ -259,7 +259,7 @@ loader.load('models/gltf/3d/milk.glb', function(gltf) {
 
         'float sinA = sin( RotF*10.0*uLungPower );',
         'float cosA = cos( RotF*10.0*uLungPower );',
-        'float oneMinusCosA = 1.0f - cosA;',
+        'float oneMinusCosA = 1.0 - cosA;',
         'mat3 rotator =  mat3( (axis.x * axis.x * oneMinusCosA) + cosA, (axis.y * axis.x * oneMinusCosA) - (sinA * axis.z),  (axis.z * axis.x * oneMinusCosA) + (sinA * axis.y), (axis.x * axis.y * oneMinusCosA) + (sinA * axis.z),  (axis.y * axis.y * oneMinusCosA) + cosA,(axis.z * axis.y * oneMinusCosA) - (sinA * axis.x),(axis.x * axis.z * oneMinusCosA) - (sinA * axis.y), (axis.y * axis.z * oneMinusCosA) + (sinA * axis.x),(axis.z * axis.z * oneMinusCosA) + cosA );',
 
         'vNormal = rotator*vNormal  ;',
@@ -570,8 +570,12 @@ function createLabel(gltf, text, margin, url) {
 
 // 3d position to 2d position
 function updateLabelPos({ div, gltf, vector, margin }) {
-  const widthHalf = window.innerWidth / 2;
-  const heightHalf = window.innerHeight / 2;
+  let widthHalf = window.innerWidth / 2;
+  let heightHalf = window.innerHeight / 2;
+  if (navigator.userAgent.toLowerCase().indexOf('android') > -1) { // 근데 innerWidth로 했을 때랑 약간 다르긴 함 ㅜㅜ
+    widthHalf = screen.width / 2;
+    heightHalf = screen.height / 2;
+  }
 
   vector = gltf.scene.position.clone();
   if (margin.x) vector.x += margin.x;
