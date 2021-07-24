@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         slidedown[i].classList.add('hidden');
       }
+      var top =  window.innerHeight/100 * 8 * i; 
+      console.log(top)
+      window.scrollTo(0,top)
+
     });
   }
 });
